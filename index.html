@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catalytic Computing — Routing Is Intelligence</title>
+<meta name="description" content="Open-source AI infrastructure. Local-first model routing, autonomous agents, and behavioral computing. By WayneColt.">
+<meta property="og:title" content="Catalytic Computing — Routing Is Intelligence">
+<meta property="og:description" content="Open-source AI infrastructure. Local-first model routing, autonomous agents, and compound learning systems.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://catalytic-computing.com/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Catalytic Computing — Routing Is Intelligence">
+<meta name="twitter:description" content="Open-source AI infrastructure. Local-first model routing for autonomous agents.">
+<link rel="canonical" href="https://catalytic-computing.com/">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=IBM+Plex+Mono:wght@400;500;700&display=swap');
+:root{--stock:#E8E0D4;--stock-lt:#F0EBE3;--void:#0A0A0C;--optic:#E8450A;--cyan:#00B8D4;--magenta:#C2185B;--chrome:#9E9E9E;--chrome-lt:#BDBDBD;--terminal:#00C853;--line:rgba(10,10,12,0.10);--line-med:rgba(10,10,12,0.18)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{background:var(--stock);color:var(--void);font-family:'IBM Plex Mono',monospace;font-size:13px;line-height:1.5;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;top:0;left:0;right:0;height:4px;z-index:300;background:linear-gradient(90deg,var(--cyan) 0%,var(--cyan) 16.66%,var(--magenta) 16.66%,var(--magenta) 33.33%,var(--optic) 33.33%,var(--optic) 50%,var(--void) 50%,var(--void) 66.66%,var(--terminal) 66.66%,var(--terminal) 83.33%,var(--chrome) 83.33%,var(--chrome) 100%);pointer-events:none}
+body::after{content:'';position:fixed;inset:0;z-index:100;pointer-events:none;background-image:radial-gradient(circle,rgba(10,10,12,0.04) 1px,transparent 1px);background-size:6px 6px}
+a{color:inherit;text-decoration:none}
+
+/* ── HEADER ── */
+.hdr{position:fixed;top:4px;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:14px 40px;background:var(--stock);border-bottom:1px solid var(--line)}
+.hdr-id{font-size:10px;letter-spacing:.18em;color:var(--optic);display:flex;align-items:center;gap:10px}
+.pulse{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--optic);animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+.hdr-nav{display:flex;gap:28px}
+.hdr-nav a{font-size:10px;color:var(--chrome);text-decoration:none;letter-spacing:.12em;text-transform:uppercase;transition:color .15s}
+.hdr-nav a:hover{color:var(--void)}
+
+/* ── HERO ── */
+.hero{min-height:100vh;padding:160px 40px 80px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+.ghost-type{position:absolute;top:50%;right:-40px;transform:translateY(-52%);font-family:'Space Grotesk',sans-serif;font-size:38vw;font-weight:700;color:rgba(0,184,212,0.04);line-height:1;pointer-events:none;letter-spacing:-0.03em;user-select:none}
+.ghost-type-2{position:absolute;top:50%;right:-38px;transform:translateY(-50%);font-family:'Space Grotesk',sans-serif;font-size:38vw;font-weight:700;color:rgba(232,69,10,0.025);line-height:1;pointer-events:none;letter-spacing:-0.03em;user-select:none}
+.eyebrow{display:flex;align-items:center;gap:14px;font-size:10px;letter-spacing:.22em;color:var(--optic);text-transform:uppercase;margin-bottom:28px}
+.eyebrow-line{display:block;height:1px;width:64px;background:var(--optic);opacity:.5}
+.hero-h{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(56px,10vw,140px);line-height:0.9;letter-spacing:-0.025em;text-transform:uppercase}
+.h-solid{display:block;color:var(--void)}
+.h-accent{display:block;color:var(--optic);position:relative}
+.h-accent::after{content:'INTELLIGENCE';position:absolute;top:-2px;left:2px;color:var(--cyan);opacity:0.2;pointer-events:none;z-index:-1}
+.h-ghost{display:block;color:transparent;-webkit-text-stroke:0.5px rgba(10,10,12,0.15)}
+.hero-sub{margin-top:36px;max-width:520px;font-size:12px;line-height:1.8;color:var(--chrome)}
+.hero-sub strong{color:var(--void);font-weight:500}
+.hero-cta{display:flex;gap:16px;margin-top:40px;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;background:var(--optic);color:var(--stock-lt);font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border:1px solid var(--optic);transition:all .2s}
+.btn-primary:hover{background:transparent;color:var(--optic)}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;background:transparent;color:var(--void);font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border:1px solid var(--line-med);transition:all .2s}
+.btn-secondary:hover{border-color:var(--void);background:var(--void);color:var(--stock-lt)}
+
+/* ── STRIP ── */
+.strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0;overflow:hidden;position:relative}
+.strip-inner{display:flex;gap:0;width:max-content;animation:march 24s linear infinite}
+@keyframes march{to{transform:translateX(-50%)}}
+.strip-item{font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--chrome);padding:0 36px;flex-shrink:0}
+.strip-item.hi{color:var(--optic)}
+.strip-sep{color:rgba(232,69,10,0.3);padding:0;font-size:14px;font-family:'Space Grotesk',sans-serif;font-weight:700;flex-shrink:0;align-self:center}
+
+/* ── THESIS ── */
+.thesis{padding:88px 40px;border-top:1px solid var(--line);position:relative}
+.thesis-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0}
+.thesis-block{padding:40px 40px 40px 0;border-right:1px solid var(--line);position:relative}
+.thesis-block:last-child{border-right:none;padding-left:40px}
+.thesis-block:nth-child(2){padding-left:40px}
+.thesis-n{font-family:'Space Grotesk',sans-serif;font-size:64px;font-weight:700;line-height:1;letter-spacing:-.02em;color:var(--optic)}
+.thesis-lbl{font-size:9px;letter-spacing:.16em;color:var(--chrome);text-transform:uppercase;margin-top:8px;margin-bottom:16px}
+.thesis-txt{font-size:11px;line-height:1.7;color:var(--chrome)}
+.thesis-txt strong{color:var(--void);font-weight:500}
+.sec-label{font-size:9px;letter-spacing:.22em;color:var(--chrome);text-transform:uppercase;margin-bottom:52px;display:flex;align-items:center;gap:10px}
+.sec-n{font-size:9px;color:var(--stock-lt);background:var(--void);padding:2px 6px;letter-spacing:.14em}
+
+/* ── PROJECTS ── */
+.projects{padding:88px 40px;background:var(--void);color:var(--stock-lt);position:relative;overflow:hidden}
+.projects::before{content:'';position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(circle,rgba(232,224,212,0.025) 1px,transparent 1px);background-size:5px 5px}
+.proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;position:relative;z-index:1}
+.proj-card{border:1px solid rgba(232,224,212,0.08);padding:40px;position:relative;transition:border-color .2s}
+.proj-card:hover{border-color:rgba(232,69,10,0.3)}
+.proj-card.flagship{border-color:var(--optic);grid-column:1/-1}
+.proj-badge{display:inline-block;font-size:8px;letter-spacing:.18em;text-transform:uppercase;padding:3px 8px;border:1px solid;margin-bottom:16px}
+.proj-badge.oss{color:var(--terminal);border-color:rgba(0,200,83,0.3)}
+.proj-badge.flag{color:var(--optic);border-color:rgba(232,69,10,0.4);background:rgba(232,69,10,0.06)}
+.proj-badge.research{color:var(--cyan);border-color:rgba(0,184,212,0.3)}
+.proj-name{font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;line-height:1.1;letter-spacing:-.01em;margin-bottom:12px}
+.proj-card.flagship .proj-name{font-size:36px}
+.proj-desc{font-size:11px;line-height:1.7;color:var(--chrome-lt);max-width:600px}
+.proj-stats{display:flex;gap:32px;margin-top:20px}
+.proj-stat{display:flex;flex-direction:column}
+.proj-stat-val{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;color:var(--optic)}
+.proj-stat-lbl{font-size:9px;letter-spacing:.10em;color:var(--chrome);text-transform:uppercase;margin-top:2px}
+.proj-link{display:inline-flex;align-items:center;gap:6px;margin-top:20px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--optic);transition:opacity .15s}
+.proj-link:hover{opacity:.7}
+
+/* ── EQUATION ── */
+.equation{padding:64px 40px;border-top:1px solid var(--line);text-align:center}
+.eq-formula{font-family:'Space Grotesk',sans-serif;font-size:clamp(16px,2.5vw,24px);font-weight:700;letter-spacing:.04em;color:var(--void)}
+.eq-formula span.op{color:var(--optic)}
+.eq-formula span.cy{color:var(--cyan)}
+.eq-note{font-size:10px;color:var(--chrome);margin-top:12px;letter-spacing:.06em}
+
+/* ── FOOTER ── */
+.footer{padding:48px 40px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:24px}
+.ft-logo{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--optic);text-transform:uppercase;margin-bottom:12px}
+.ft-disc{font-size:10px;line-height:1.8;color:var(--chrome);max-width:400px}
+.ft-links{display:flex;gap:20px;flex-wrap:wrap}
+.ft-lnk{font-size:10px;color:var(--chrome);letter-spacing:.10em;text-transform:uppercase;text-decoration:none;transition:color .15s}
+.ft-lnk:hover{color:var(--void)}
+.color-bar-bottom{display:flex;height:4px}
+.color-bar-bottom span{flex:1}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .hdr{padding:12px 20px}
+  .hero{padding:120px 20px 60px}
+  .thesis-grid{grid-template-columns:1fr}
+  .thesis-block{border-right:none;border-bottom:1px solid var(--line);padding:24px 0}
+  .thesis-block:last-child{border-bottom:none;padding-left:0}
+  .thesis-block:nth-child(2){padding-left:0}
+  .proj-grid{grid-template-columns:1fr}
+  .proj-card.flagship{grid-column:1}
+  .projects,.thesis,.equation{padding:48px 20px}
+  .footer{padding:32px 20px}
+}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="hdr-id"><span class="pulse"></span> CATALYTIC COMPUTING</div>
+  <nav class="hdr-nav">
+    <a href="#projects">Projects</a>
+    <a href="https://waynecolt.github.io/modelcascade/">ModelCascade</a>
+    <a href="https://github.com/wayneColt">GitHub</a>
+    <a href="https://wayneia.com">Enterprise</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="ghost-type">CC</div>
+  <div class="ghost-type-2">CC</div>
+  <div class="eyebrow"><span class="eyebrow-line"></span> Open-Source AI Infrastructure</div>
+  <h1 class="hero-h">
+    <span class="h-solid">Routing</span>
+    <span class="h-solid">Is</span>
+    <span class="h-accent">Intelligence</span>
+  </h1>
+  <p class="hero-sub">
+    <strong>Data and models are commodity. Routing is intelligence.</strong><br>
+    We build open-source infrastructure for local-first AI routing,
+    autonomous agents, and compound learning systems. Ship models that
+    get smarter overnight without touching a cloud bill.
+  </p>
+  <div class="hero-cta">
+    <a class="btn-primary" href="https://waynecolt.github.io/modelcascade/">ModelCascade &#8599;</a>
+    <a class="btn-secondary" href="https://github.com/wayneColt">View on GitHub</a>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="strip-inner">
+    <span class="strip-item hi">ROUTE LOCAL</span><span class="strip-sep">/</span>
+    <span class="strip-item">ESCALATE SMART</span><span class="strip-sep">/</span>
+    <span class="strip-item">NEVER OVERSPEND</span><span class="strip-sep">/</span>
+    <span class="strip-item hi">COMPOUND NIGHTLY</span><span class="strip-sep">/</span>
+    <span class="strip-item">YOUR KEYS</span><span class="strip-sep">/</span>
+    <span class="strip-item">YOUR HARDWARE</span><span class="strip-sep">/</span>
+    <span class="strip-item hi">OPEN SOURCE</span><span class="strip-sep">/</span>
+    <span class="strip-item">MIT LICENSE</span><span class="strip-sep">/</span>
+    <span class="strip-item hi">ROUTE LOCAL</span><span class="strip-sep">/</span>
+    <span class="strip-item">ESCALATE SMART</span><span class="strip-sep">/</span>
+    <span class="strip-item">NEVER OVERSPEND</span><span class="strip-sep">/</span>
+    <span class="strip-item hi">COMPOUND NIGHTLY</span><span class="strip-sep">/</span>
+    <span class="strip-item">YOUR KEYS</span><span class="strip-sep">/</span>
+    <span class="strip-item">YOUR HARDWARE</span><span class="strip-sep">/</span>
+    <span class="strip-item hi">OPEN SOURCE</span><span class="strip-sep">/</span>
+    <span class="strip-item">MIT LICENSE</span><span class="strip-sep">/</span>
+  </div>
+</div>
+
+<section class="thesis">
+  <div class="sec-label"><span class="sec-n">01</span> Thesis</div>
+  <div class="thesis-grid">
+    <div class="thesis-block">
+      <div class="thesis-n">74%</div>
+      <div class="thesis-lbl">Local Coverage</div>
+      <div class="thesis-txt">
+        <strong>Most requests don't need a cloud model.</strong>
+        A 1.2B parameter model running on consumer hardware handles 74% of
+        agentic requests at $0 cost with sub-100ms latency.
+        The remaining 26% escalate intelligently.
+      </div>
+    </div>
+    <div class="thesis-block">
+      <div class="thesis-n" style="color:var(--cyan)">(1+&#955;)<sup style="font-size:36px">n</sup></div>
+      <div class="thesis-lbl">Compound Learning</div>
+      <div class="thesis-txt">
+        <strong>Every overnight session makes the next one smarter.</strong>
+        Shadow DPO pairs, graph memory, and behavioral distillation
+        create a compounding loop. Small lambda, large n, exponential result.
+      </div>
+    </div>
+    <div class="thesis-block">
+      <div class="thesis-n">0</div>
+      <div class="thesis-lbl">Dependency Tax</div>
+      <div class="thesis-txt">
+        <strong>Your keys. Your hardware. Your data.</strong>
+        No telemetry. No proxy. No API keys shared with a routing service.
+        The core is MIT-licensed. Self-host forever. Paid tiers add
+        operational tooling, not routing capability.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="projects" id="projects">
+  <div class="sec-label" style="color:var(--chrome-lt)"><span class="sec-n" style="background:var(--stock-lt);color:var(--void)">02</span> Projects</div>
+  <div class="proj-grid">
+    <div class="proj-card flagship">
+      <span class="proj-badge flag">Flagship</span>
+      <div class="proj-name">ModelCascade</div>
+      <div class="proj-desc">
+        Open-source multi-model cascade routing for autonomous agents.
+        Route 74% of requests locally at $0. Escalate to cloud only when stuck.
+        Three lines of code. Any framework. BYOK. No telemetry.
+      </div>
+      <div class="proj-stats">
+        <div class="proj-stat">
+          <span class="proj-stat-val">10K+</span>
+          <span class="proj-stat-lbl">Production Dispatches</span>
+        </div>
+        <div class="proj-stat">
+          <span class="proj-stat-val">$0</span>
+          <span class="proj-stat-lbl">Local Tier Cost</span>
+        </div>
+        <div class="proj-stat">
+          <span class="proj-stat-val">6</span>
+          <span class="proj-stat-lbl">Model Backends</span>
+        </div>
+        <div class="proj-stat">
+          <span class="proj-stat-val">MIT</span>
+          <span class="proj-stat-lbl">License</span>
+        </div>
+      </div>
+      <a class="proj-link" href="https://waynecolt.github.io/modelcascade/">View Product Page &#8599;</a>
+    </div>
+    <div class="proj-card">
+      <span class="proj-badge oss">Open Source</span>
+      <div class="proj-name">Local Model Router</div>
+      <div class="proj-desc">
+        Multi-model routing on Linux with AMD and NVIDIA GPUs.
+        GGUF serving, KV cache management, and consumer-hardware
+        inference optimization.
+      </div>
+      <a class="proj-link" href="https://github.com/wayneColt/local-model-router-linux">GitHub &#8599;</a>
+    </div>
+    <div class="proj-card">
+      <span class="proj-badge research">Research</span>
+      <div class="proj-name">Compound Learning</div>
+      <div class="proj-desc">
+        Autonomous overnight training loops. Shadow DPO collection,
+        behavioral distillation, and graph-memory compression for
+        agents that improve while you sleep.
+      </div>
+      <a class="proj-link" href="https://github.com/wayneColt">Coming Soon</a>
+    </div>
+  </div>
+</section>
+
+<section class="equation">
+  <div class="eq-formula">
+    <span class="op">INTELLIGENCE</span>(t) = ROUTING(t)
+    <span class="cy">&times;</span> (1+&#955;)<sup>n</sup>
+    <span class="cy">/</span> DEPENDENCY(t)
+  </div>
+  <div class="eq-note">The Cornstalk Equation — maximize routing, compound learning, minimize dependency</div>
+</section>
+
+<footer class="footer">
+  <div>
+    <div class="ft-logo">Catalytic Computing</div>
+    <div class="ft-disc">
+      Open source AI infrastructure for local-first routing and autonomous agents.<br>
+      Built from 10,000+ production dispatches across 25+ autonomous overnight sessions.<br>
+      Calibration data 2024&ndash;2026. Route responsibly.<br>
+      &copy; 2026 Catalytic Computing &middot; WayneColt
+    </div>
+  </div>
+  <div class="ft-links">
+    <a class="ft-lnk" href="https://github.com/wayneColt">GitHub</a>
+    <a class="ft-lnk" href="https://waynecolt.github.io/modelcascade/">ModelCascade</a>
+    <a class="ft-lnk" href="https://wayneia.com">WayneIA</a>
+  </div>
+</footer>
+<div class="color-bar-bottom">
+  <span style="background:#00B8D4"></span>
+  <span style="background:#C2185B"></span>
+  <span style="background:#E8450A"></span>
+  <span style="background:#0A0A0C"></span>
+  <span style="background:#00C853"></span>
+  <span style="background:#9E9E9E"></span>
+</div>
+
+</body>
+</html>
