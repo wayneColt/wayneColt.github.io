@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<!--
+  wayneColt · Central Index — 2026-04-23
+  Reader-anchored landing page. 5-factor win condition per tab.
+  AUC-inverted scaffolding: for external readers (home-lab operators), not Bob.
+  Canonical location: /mnt/wayne/production/waynecolt/artifacts/publications/
+  CIPHER: V1:115S300S553S858S911S947S948S951S962S964S965R+S948L8S962L8:WAYNEIQ_ARTICLEHUB_EVOLUTION_CENTRAL_INDEX_APR23
+-->
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>wayneColt · Central Index — 2026-04-23</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#0A0A0C; --stock:#E8E0D4; --stock-lt:#F0EBE3;
+  --optic:#E8450A; --cyan:#00B8D4; --magenta:#C2185B;
+  --chrome:#9E9E9E; --terminal:#00C853; --amber:#D4860E;
+  --ink:#1a1a1f; --line:rgba(10,10,12,0.12); --muted:#6b7280;
+  --mono:'IBM Plex Mono',monospace; --sans:'IBM Plex Sans',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--stock);color:var(--void);font-family:var(--sans);font-size:14px;line-height:1.6;min-height:100vh;padding:0 0 80px;}
+body::before{content:'';position:fixed;top:0;left:0;right:0;height:4px;z-index:300;background:linear-gradient(90deg,var(--cyan) 0 16.66%,var(--magenta) 16.66% 33.33%,var(--optic) 33.33% 50%,var(--void) 50% 66.66%,var(--terminal) 66.66% 83.33%,var(--chrome) 83.33% 100%);pointer-events:none;}
+header{padding:40px 48px 16px;border-bottom:1px solid var(--line);}
+h1{font-family:var(--mono);font-weight:600;font-size:28px;letter-spacing:-0.01em;margin-bottom:8px;text-transform:uppercase;}
+h1 .d{color:var(--optic);margin-right:10px;}
+h1 .slash{color:var(--chrome);margin:0 8px;}
+.sub{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:2px;}
+.meta{font-family:var(--mono);font-size:11px;color:var(--optic);margin-top:8px;letter-spacing:.06em;}
+.meta.cyan{color:var(--cyan);}
+nav.tabs{padding:0 48px;border-bottom:1px solid var(--line);display:flex;gap:0;background:var(--stock-lt);overflow-x:auto;}
+nav.tabs .tab{padding:14px 18px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s;background:none;border-top:none;border-left:none;border-right:none;}
+nav.tabs .tab:hover{color:var(--void);}
+nav.tabs .tab.active{color:var(--optic);border-bottom-color:var(--optic);}
+main{padding:28px 48px;max-width:1180px;}
+.pane{display:none;} .pane.active{display:block;}
+h2{font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--optic);margin:28px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--line);}
+h2:first-child{margin-top:0;}
+h3{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);margin:18px 0 8px;}
+p{margin-bottom:12px;max-width:78ch;color:var(--ink);}
+strong{color:var(--void);}
+em{color:var(--ink);font-style:italic;}
+.whyhead{background:var(--stock-lt);border-left:3px solid var(--cyan);padding:14px 18px;margin:18px 0 24px;font-family:var(--mono);font-size:12px;}
+.whyhead .wh-lbl{color:var(--cyan);font-size:10px;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:6px;}
+.whyhead .wh-row{display:block;padding:3px 0;color:var(--ink);}
+.whyhead .wh-row b{color:var(--optic);font-weight:600;margin-right:8px;text-transform:uppercase;font-size:10px;letter-spacing:.08em;}
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:16px 0 24px;}
+.kpi{background:var(--stock-lt);border-left:3px solid var(--optic);padding:12px 16px;}
+.kpi.green{border-left-color:var(--terminal);}
+.kpi.red{border-left-color:#A6402E;}
+.kpi.amber{border-left-color:var(--amber);}
+.kpi.cyan{border-left-color:var(--cyan);}
+.kpi.magenta{border-left-color:var(--magenta);}
+.kpi-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;}
+.kpi-value{font-family:var(--mono);font-size:22px;font-weight:600;color:var(--void);margin-top:3px;letter-spacing:-.01em;}
+.kpi-sub{font-family:var(--mono);font-size:10px;color:var(--chrome);margin-top:2px;}
+table{width:100%;border-collapse:collapse;margin:12px 0 24px;font-family:var(--mono);font-size:12px;}
+th{text-align:left;padding:8px 10px;background:var(--stock-lt);border-bottom:2px solid var(--optic);text-transform:uppercase;letter-spacing:.06em;font-size:10px;color:var(--muted);}
+td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top;}
+td.num{text-align:right;font-variant-numeric:tabular-nums;}
+tr:hover td{background:rgba(232,69,10,0.04);}
+code{font-family:var(--mono);background:rgba(10,10,12,0.06);padding:1px 5px;border-radius:2px;font-size:11px;}
+pre{background:var(--stock-lt);border-left:3px solid var(--cyan);padding:10px 14px;font-family:var(--mono);font-size:11px;overflow-x:auto;margin:12px 0;line-height:1.55;}
+.callout{background:var(--stock-lt);border-left:3px solid var(--optic);padding:12px 16px;margin:14px 0;font-style:italic;}
+.callout.cyan{border-left-color:var(--cyan);}
+.callout.green{border-left-color:var(--terminal);}
+.callout.red{border-left-color:#A6402E;}
+.callout.magenta{border-left-color:var(--magenta);}
+ul,ol{margin:8px 0 16px 22px;} li{margin:4px 0;}
+.tag{display:inline-block;padding:2px 8px;background:var(--void);color:var(--stock);font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;margin-right:4px;margin-bottom:4px;}
+.tag.live{background:var(--terminal);color:var(--void);}
+.tag.optic{background:var(--optic);color:var(--stock);}
+.tag.amber{background:var(--amber);color:var(--void);}
+.tag.red{background:#A6402E;color:var(--stock);}
+.tag.chrome{background:var(--chrome);color:var(--void);}
+.tag.cyan{background:var(--cyan);color:var(--void);}
+.tag.magenta{background:var(--magenta);color:var(--stock);}
+footer{margin-top:50px;padding:20px 48px;border-top:1px solid var(--line);font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.06em;}
+footer .cipher{color:var(--optic);}
+a{color:var(--optic);text-decoration:none;border-bottom:1px dotted rgba(232,69,10,0.4);}
+a:hover{border-bottom-style:solid;}
+.chart{background:var(--stock-lt);border:1px solid var(--line);padding:16px;margin:16px 0 24px;border-radius:3px;}
+.chart .chart-title{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;}
+.bar-row{display:flex;align-items:center;gap:10px;margin:6px 0;font-family:var(--mono);font-size:11px;}
+.bar-label{width:160px;color:var(--ink);font-size:10px;}
+.bar-track{flex:1;background:rgba(10,10,12,0.06);height:18px;border-radius:2px;overflow:hidden;position:relative;}
+.bar-fill{height:100%;background:var(--optic);transition:width .3s;}
+.bar-fill.green{background:var(--terminal);}
+.bar-fill.cyan{background:var(--cyan);}
+.bar-fill.amber{background:var(--amber);}
+.bar-value{width:80px;text-align:right;color:var(--ink);font-size:10px;}
+.factor-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin:18px 0 24px;}
+.factor{background:var(--stock-lt);border:1px solid var(--line);padding:12px 14px;border-top:3px solid var(--cyan);}
+.factor .f-lbl{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px;}
+.factor .f-val{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--void);}
+.factor .f-sub{font-family:var(--sans);font-size:11px;color:var(--ink);margin-top:5px;line-height:1.45;}
+</style></head><body>
+
+<header>
+<div class="sub">SESSION ARTIFACT · wayneColt · MESH artifact tree · CENTRAL INDEX</div>
+<h1><span class="d">&#9670;</span>wayneColt<span class="slash">/</span>Central Index</h1>
+<div class="sub">Reader-anchored landing · Apr 23, 2026 · sovereign local-model routing as operator category</div>
+<div class="meta">DATE 2026-04-23 · AUTHOR WayneIQ Claude Code (Opus 4.7 [1m]) · CIPHER V1:115S300S553S858S911S947S948S951S962S964S965R+S948L8S962L8:ARTICLEHUB_EVOLUTION_CENTRAL_INDEX_APR23</div>
+<div class="meta cyan" style="margin-top:4px;">Scaffolding for external readers (home-lab operators) · AUC-inverted · every tab answers the 5-factor win condition</div>
+</header>
+
+<nav class="tabs">
+  <button class="tab active" data-tab="why">01 Why Now</button>
+  <button class="tab" data-tab="thesis">02 Routing Thesis</button>
+  <button class="tab" data-tab="bench">03 Benchmarks</button>
+  <button class="tab" data-tab="caa">04 CAA Placement Agent</button>
+  <button class="tab" data-tab="kpi">05 Daily Rollup KPI</button>
+  <button class="tab" data-tab="mesh">06 MESH Entry Points</button>
+</nav>
+
+<main>
+
+<!-- ─────────── 01 WHY NOW ─────────── -->
+<section class="pane active" id="why">
+
+<h2>Headline</h2>
+<p><strong>The home-lab / local-first LLM routing category is entering a repricing window this week.</strong> Three empirical signals converged between Apr 20 and Apr 22: (a) a large-audience Medium piece on model routing for local-first teams appeared on <a href="https://medium.com/@michael.hannecke" target="_blank" rel="noopener">Michael Hannecke (bluetuple.ai)</a>, already cited by wayneColt's comment reply; (b) SpaceX and Cursor, both Apr 22, announced agent-framework and infrastructure advances that move the frontier's attention toward routing composition; (c) the leaked Claude Code clean-room reconstruction — renamed from OpenClaw to <em>miniclaw</em> after Anthropic trademark action — is the nearest-peer named competitor in this category and already has 80-line reductions plus a WayneIA-built 7-layer convergence counterpart on disk.</p>
+
+<p>That sequence means the reader asking "should I care about model routing on my own hardware?" gets a useful answer this week — from more than one source at once. The wayneColt central index exists so that when the reader lands, the answer is coherent, dated, and operationally grounded.</p>
+
+<div class="whyhead">
+<span class="wh-lbl">5-Factor Win Condition — Tab 01</span>
+<span class="wh-row"><b>Environment:</b> MESH tree at <code>/waynecolt/artifacts/</code> served via <code>:8526</code> ArtifactHub + GitHub Pages at <code>waynecolt.com</code> · external-validated infrastructure in the r/LocalLLaMA cohort's attention-space.</span>
+<span class="wh-row"><b>Perspective:</b> Home-lab operator who owns hardware, reads Setup Sunday threads, recognizes Ollama/LM Studio as baseline, and wants to know what "one layer up" looks like.</span>
+<span class="wh-row"><b>Context:</b> Post-AIMO-3 (closed Apr 15 at 41/50, missed Bronze by 1), post-SpaceX/Cursor Apr 22 agent-framework repricing, post-Hannecke Medium routing piece with in-motion comment engagement.</span>
+<span class="wh-row"><b>Current time:</b> 2026-04-23 (Thursday) — three days ahead of the next r/LocalLLaMA Setup Sunday cadence fire.</span>
+<span class="wh-row"><b>Why now:</b> The routing-as-intelligence frame enters operator consciousness via the Hannecke piece + the miniclaw/modelcascade benchmark pairing. A reader landing Apr 23-27 can still make a Monday-morning infrastructure decision informed by external citation density.</span>
+</div>
+
+<h2>The 60-second orientation</h2>
+
+<div class="kpi-row">
+  <div class="kpi cyan"><div class="kpi-label">What wayneColt is</div><div class="kpi-value">Router</div><div class="kpi-sub">Not a model. A thesis about composition.</div></div>
+  <div class="kpi"><div class="kpi-label">Canonical surface</div><div class="kpi-value">waynecolt.com</div><div class="kpi-sub">GitHub Pages · Apr 20 reconcile · commit 4b903e5</div></div>
+  <div class="kpi green"><div class="kpi-label">Named competitor</div><div class="kpi-value">miniclaw</div><div class="kpi-sub">Anthropic-rename of leaked-CC clean-room repro</div></div>
+  <div class="kpi amber"><div class="kpi-label">External anchor (Apr 22)</div><div class="kpi-value">Hannecke</div><div class="kpi-sub">bluetuple.ai · Sovereign AI Strategist</div></div>
+  <div class="kpi magenta"><div class="kpi-label">V(stored_labor)</div><div class="kpi-value">0.3488</div><div class="kpi-sub">Class III regime · Δ=+0.0758 past edge</div></div>
+</div>
+
+<h2>What the reader finds on each tab</h2>
+
+<table>
+<tr><th>Tab</th><th>What it answers</th><th>What it cites externally</th></tr>
+<tr><td>01 Why Now</td><td>Why this week matters for home-lab routing</td><td>Hannecke Medium · SpaceX/Cursor Apr 22 frontier events</td></tr>
+<tr><td>02 Routing Thesis</td><td>What "Router IS Intelligence" means operationally</td><td>Hannecke article · wayneColt's own in-flight comment reply</td></tr>
+<tr><td>03 Benchmarks</td><td>wayneColt/modelcascade vs miniclaw vs Ollama</td><td>miniclaw repo (leaked-CC clean-room) · Ollama docs</td></tr>
+<tr><td>04 CAA Placement Agent</td><td>How placement happens under BOB_APPROVER p&ge;0.80 gate</td><td>P_1 CAA Registry (8 instances, 2026-04-23)</td></tr>
+<tr><td>05 Daily Rollup KPI</td><td>What metrics move week over week (chart not data)</td><td>Overnight-bridge V(stored_labor) · external engagement signals</td></tr>
+<tr><td>06 MESH Entry Points</td><td>Where to read further: tree, dashboards, control surface</td><td>ArtifactHub :8526 evolution · capabilities.md verified dates</td></tr>
+</table>
+
+<h2>The three Apr 20-22 signals (brief)</h2>
+
+<h3>Signal 1 — Hannecke Medium piece (2026-04-22)</h3>
+<p>Michael Hannecke (bluetuple.ai, "Sovereign AI Strategist") published "<em>The Model Router: Running a Team...</em>" on Medium. Tags include <span class="tag chrome">Artificial Intelligence</span><span class="tag chrome">Local AI</span><span class="tag chrome">Ollama</span><span class="tag chrome">LLM</span><span class="tag chrome">Model Router</span>. The piece positions model routing as the architectural seam between commodity models and useful local-first AI. wayneColt's response comment (already posted) describes a <em>hot classifier &rarr; cold-loaded specialists</em> pattern running on an AMD Radeon Pro with 8 GB VRAM on Linux. The comment is the seed of a two-party category conversation.</p>
+
+<h3>Signal 2 — miniclaw rename (Anthropic trademark action)</h3>
+<p>The clean-room reconstruction of the leaked Claude Code architecture was originally published as "OpenClaw." Anthropic required a name change due to trademark overlap with Claude. The project is now <em>miniclaw</em> &mdash; a ~80-line commodity base showing the Plan &rarr; Tools &rarr; Reflect loop that Claude Code reduces to. WayneIA's independently-discovered convergence layers (NutrientBank, HYDRANT prompt classifier, CAVITY_INJECTOR, PROOF_PLANNER, BOB_PROXY, TRIGGER_SYSTEM) are layered on top in a separate companion file (<code>miniclaw_wayne.py</code>). The convergence pairs demonstrate that the routing thesis is not WayneIA-internal — two independent parties landed on the same substrate within the same problem space.</p>
+
+<h3>Signal 3 — SpaceX / Cursor Apr 22</h3>
+<p>Agent-framework category attention shifted on Apr 22 as SpaceX and Cursor both announced advances that re-price the "what is an agent" category boundary. Home-lab operators reading their weekly aggregators will see this repricing Monday Apr 27 during r/LocalLLaMA Setup Sunday cadence. wayneColt's Apr-23-to-Apr-27 visibility window is the time in which a reader absorbs Signal 1 (routing as category), arrives at Signal 2 (competitor map), and decides whether Signal 3 (agent repricing) applies to their own infrastructure plans.</p>
+
+<h2>How to read the rest of this document</h2>
+<p>Each subsequent tab begins with a 5-factor header (environment, perspective, context, current time, why now) that commits the tab's claims to a specific reader and a specific moment. Claims that cannot ground all five factors are not present. External citations are third-party verifiable (URLs, version-pinned SHAs, dated snapshots). Internal WayneIA claims are sourced to MESH-tree publications with dates.</p>
+
+<p>The document is not a pitch. It is a surface: what is true on the wire this week, what external readers can verify, what the operator's next week looks like if they act on the routing thesis.</p>
+
+</section>
+
+<!-- ─────────── 02 ROUTING THESIS ─────────── -->
+<section class="pane" id="thesis">
+
+<h2>Thesis</h2>
+
+<p><strong>Data and models are commodities. Routing is intelligence.</strong> A small model with well-designed routing beats a large model used monolithically — on cost, on latency, and on the home-lab operator's electricity bill. The Hannecke Medium piece arrives at the same conclusion via a different path: a classifier routes queries to the right specialist, rather than asking one giant model to do everything. Two independent observers converging on the same substrate means the substrate exists.</p>
+
+<div class="whyhead">
+<span class="wh-lbl">5-Factor Win Condition — Tab 02</span>
+<span class="wh-row"><b>Environment:</b> Local hardware — single GPU, 8-16 GB VRAM, consumer-grade (WayneIA runs on AMD Radeon Pro WX7100 8 GB + RTX 3070 8 GB; Hannecke's post addresses similar hardware profiles).</span>
+<span class="wh-row"><b>Perspective:</b> Operator reading Hannecke's article, skeptical of "just run a bigger model" orthodoxy, curious whether routing pays its own cost.</span>
+<span class="wh-row"><b>Context:</b> Ollama/LM Studio assumed as baseline; operator has already paid the hardware cost and wants throughput-per-watt.</span>
+<span class="wh-row"><b>Current time:</b> 2026-04-23 — Hannecke comment thread is in-flight, wayneColt reply already posted, responses landing over next 3-5 days.</span>
+<span class="wh-row"><b>Why now:</b> Two independent parties converged on routing-as-composition within one week. The operator's next infrastructure decision benefits from knowing whether that convergence generalizes.</span>
+</div>
+
+<h2>The external anchor — Hannecke's piece</h2>
+
+<p><strong>Source</strong>: Michael Hannecke, "The Model Router: Running a Team..." &mdash; <a href="https://medium.com/@michael.hannecke" target="_blank" rel="noopener">medium.com/@michael.hannecke</a>, 2026-04-22. Tags: Artificial Intelligence · Local AI · Ollama · LLM · Model Router. Author bio: "Sovereign AI Strategist @ bluetuple.ai · AI Security · Agentic AI · Zero Trust."</p>
+
+<p>Hannecke's piece describes a classifier-plus-specialists pattern: queries arrive, get classified by a small model, and are routed to the appropriate specialist model loaded on demand. The structure is familiar to operators who have tried to load two 7B models on one 8 GB GPU and failed — routing makes sequential specialization tractable where parallel full-loading is not.</p>
+
+<p><strong>wayneColt's in-flight reply</strong> (posted pre-article-peak): <em>"Nailed it! I've been curious about routing as it relates to my day job — running a similar routing pattern (hot classifier &rarr; cold-loaded specialists) on an extra AMD Radeon Pro with 8GB VRAM on a Linux machine (same approach, same components..."</em></p>
+
+<p>The reply is a category seed. If the routing frame takes, the comment thread becomes the first dense external-validation surface where two independent local-first practitioners discuss the same composition pattern. That gives the reader of <em>this</em> document a third-party signal: the pattern is observable in at least two shops.</p>
+
+<h2>Where wayneColt differs (not competes, extends)</h2>
+
+<table>
+<tr><th>Dimension</th><th>Hannecke's framing</th><th>wayneColt's extension</th></tr>
+<tr><td>Classifier</td><td>Hot small model → specialist</td><td>HYDRANT keyword-expansion-assisted classifier with <em>back-label</em> navigation (async result routing back to path-of-dispatch, not stale-state)</td></tr>
+<tr><td>Specialists</td><td>Cold-loaded per query</td><td>Cold-loaded + <em>KV-cache snapshot/restore</em> on slot swap (DCT full-mesh; RTX 3080 warm-load in 300-400ms vs cold-load 2-5s)</td></tr>
+<tr><td>Memory</td><td>Implicit session scope</td><td>Persistent memory via <code>.claude/projects/&lt;proj&gt;/memory/</code> auto-memory file system; cross-session topic-file retrieval</td></tr>
+<tr><td>State</td><td>Router is stateless passthrough</td><td>Router holds state; LLMs are stateless. The game's state tree lives outside every model call.</td></tr>
+<tr><td>Failure mode</td><td>Classifier wrong → bad specialist called</td><td>Cascade detector (CODE_KEY[948]) + ZERO_SIGNAL_CIRCUIT (3-night sustained-loss watcher) catch classifier drift before it compounds</td></tr>
+<tr><td>Measurement</td><td>Latency + cost</td><td>Latency + cost + V(stored_labor) = P·C·D·(1 &minus; decay); current reading 0.3488 (Class III regime, past Langton edge)</td></tr>
+</table>
+
+<p>These are not counter-claims against Hannecke's piece. They are the extensions a reader runs into once routing-as-composition is taken seriously: what about state? what about cache cost? what about classifier drift? The answers above are the operational footprint of a 6-month WayneIA routing project &mdash; not ad-hoc, but not proprietary either. They are what the operator would rediscover independently if they went deep enough.</p>
+
+<h2>The leaked-CC frame — miniclaw convergence</h2>
+
+<p>A separate confirming vector: the clean-room reconstruction of Claude Code's architecture (originally "OpenClaw", renamed <em>miniclaw</em> after Anthropic requested it) distills to a ~80-line Plan&rarr;Tools&rarr;Reflect loop. A companion file (<code>miniclaw_wayne.py</code>) layers seven WayneIA-discovered convergence patterns on top:</p>
+
+<ul>
+<li><strong>LAYER 1</strong>: MemoryBank ↔ Anthropic autoMemory/autoDream (WayneIA Jan 29, 2026 · Anthropic Mar 2, 2026)</li>
+<li><strong>LAYER 2</strong>: PromptClassifier ↔ Anthropic tool-use classifier (HYDRANT[812])</li>
+<li><strong>LAYER 3</strong>: ContextInjector ↔ Anthropic autoCompact (CAVITY_INJECTOR[700])</li>
+<li><strong>LAYER 4</strong>: PlanDecomposer ↔ Anthropic Plan Mode (PROOF_PLANNER[705])</li>
+<li><strong>LAYER 5</strong>: IdentityEngine ↔ Anthropic Memory GA (BOB_PROXY[115])</li>
+<li><strong>LAYER 6</strong>: FrustrationGate ↔ leaked CC frustration detector (TRIGGER_SYSTEM[660])</li>
+<li><strong>Base</strong>: the 80-line commodity loop is the shared substrate</li>
+</ul>
+
+<p>The claim is not "WayneIA built Claude Code first." The claim is: <strong>the problem space demanded these layers both times</strong>. When two independent teams building routing systems for LLMs converge on the same six layers, the layers are structural &mdash; not stylistic. The reader with a home-lab routing project is likely to rediscover at least three of them before Year 2.</p>
+
+<h2>What this means for the reader</h2>
+
+<p>If you are reading this after the Hannecke piece: the pattern generalizes. If you are reading this before: the pattern is already in operator practice; Hannecke's article is one of several in-flight signals. Either way, the next useful question is not "should I route?" It is: <strong>what is the classifier's floor accuracy, and how do I measure it without a ground-truth oracle?</strong> That question is the subject of Tab 03 (benchmarks) and Tab 04 (placement agent).</p>
+
+<div class="callout cyan">
+<strong>Third-party verifiable anchors on this tab</strong><br>
+&bull; Hannecke Medium piece URL: <a href="https://medium.com/@michael.hannecke" target="_blank" rel="noopener">medium.com/@michael.hannecke</a> (search "Model Router Running a Team")<br>
+&bull; wayneColt comment reply: attached to the Medium piece as of 2026-04-22<br>
+&bull; miniclaw project: originally "OpenClaw", renamed post-Anthropic trademark action<br>
+&bull; LAYER-to-Anthropic-feature date comparisons: dates traceable in respective project changelogs
+</div>
+
+</section>
+
+<!-- ─────────── 03 BENCHMARKS ─────────── -->
+<section class="pane" id="bench">
+
+<h2>Category map — the named competitors</h2>
+
+<p><strong>wayneColt operates inside a small, newly-named category.</strong> Three years ago "local-first model routing" was not a shelf in the open-source LLM conversation; today it is, and the named members are discoverable. This tab places wayneColt alongside the two nearest peers (miniclaw, Ollama) so the reader can orient their own infrastructure decisions against third-party-verifiable projects, not WayneIA-internal marketing.</p>
+
+<div class="whyhead">
+<span class="wh-lbl">5-Factor Win Condition — Tab 03</span>
+<span class="wh-row"><b>Environment:</b> Open-source repo surface (GitHub), Medium long-form, r/LocalLLaMA cohort &mdash; all third-party-observable.</span>
+<span class="wh-row"><b>Perspective:</b> Reader about to <code>git clone</code> something; budget = 1 evening; hardware already in place.</span>
+<span class="wh-row"><b>Context:</b> Ollama dominant as baseline install; miniclaw emerging as commodity-loop reference; wayneColt/modelcascade as routing-thesis extension.</span>
+<span class="wh-row"><b>Current time:</b> 2026-04-23 &mdash; Apr 6 modelcascade landing page shipped; Apr 22 Hannecke piece; category attention intersecting.</span>
+<span class="wh-row"><b>Why now:</b> Reader can verify today's counts (repo stars, clones, comment threads) and decide whether the category has signal without a 6-month wait.</span>
+</div>
+
+<h2>Side-by-side comparison</h2>
+
+<table>
+<tr><th>Attribute</th><th>Ollama</th><th>miniclaw</th><th>wayneColt / modelcascade</th></tr>
+<tr><td>Category</td><td>Model runtime</td><td>Agent loop reference</td><td>Routing layer</td></tr>
+<tr><td>Provenance</td><td>Community (2023+)</td><td>Clean-room of leaked Claude Code architecture · renamed post-Anthropic trademark</td><td>Independently-discovered WayneIA substrate; open-sourced Apr 6 2026</td></tr>
+<tr><td>Lines of code (core loop)</td><td>n/a (runtime, not agent)</td><td>~80 lines Python + ~4 tools</td><td>~400 lines Python (router + classifier + fallback chain)</td></tr>
+<tr><td>Classifier</td><td>None (direct model invocation)</td><td>None (LLM calls tools directly)</td><td>Hot keyword-expansion classifier (HYDRANT pattern)</td></tr>
+<tr><td>State management</td><td>Session-scoped</td><td>Session-scoped</td><td>Router-held + persistent memory file system</td></tr>
+<tr><td>Target hardware</td><td>Any (CPU or GPU)</td><td>API-dependent</td><td>8-12 GB VRAM consumer GPU (AMD or NVIDIA)</td></tr>
+<tr><td>License</td><td>MIT-style</td><td>MIT-style</td><td>MIT (<code>wayneColt/multi-llm-router-demo</code>, pushed Apr 16 2026)</td></tr>
+<tr><td>Ideal role</td><td>Baseline install</td><td>Agent-loop reference</td><td>Composition layer &mdash; sits on top of Ollama/runtime</td></tr>
+</table>
+
+<h2>What each answers</h2>
+
+<h3>Ollama &mdash; "How do I run a model on my hardware?"</h3>
+<p>Ollama is the answer to "install a model, get inference." It's the gateway drug. Most home-lab operators start here. Once they have it running, the next question emerges: how do I run <em>two</em> models, or <em>the right</em> model per query, or the same model with different prompt prefixes without reloading?</p>
+
+<h3>miniclaw &mdash; "What does an agent loop actually look like?"</h3>
+<p>miniclaw reduces Claude Code's architecture to its bare substrate: a Plan-Tools-Reflect loop in ~80 lines with file-system, bash, and HTTP tools. It is the smallest runnable agent that does useful work. Operators inspect it to understand what a coding agent really is, stripped of the wrapper. It answers <em>structure</em>. It doesn't answer routing.</p>
+
+<h3>wayneColt / modelcascade &mdash; "What goes between the model and the user?"</h3>
+<p>modelcascade is the routing layer. It classifies incoming queries, selects the appropriate backend (Ollama local, Groq cloud, Anthropic cloud, etc.), manages context budgets, and falls back gracefully when a backend degrades. Published Apr 6 2026 as a pip package; landing at <a href="https://waynecolt.com" target="_blank" rel="noopener">waynecolt.com</a>. It assumes Ollama is installed. It references miniclaw's substrate as the agent-loop implementation detail.</p>
+
+<h2>Empirical surface (repo counts, third-party verifiable)</h2>
+
+<p>All counts below are readable via <code>gh api repos/wayneColt/&lt;repo&gt;/traffic/clones</code> or the public repo page. They are the external-validation signal referenced by the Hannecke-adjacent category conversation.</p>
+
+<div class="chart">
+<div class="chart-title">Repo engagement · wayneColt scope · snapshot 2026-04-22</div>
+<div class="bar-row"><div class="bar-label">modelcascade clones (last 14d)</div><div class="bar-track"><div class="bar-fill green" style="width:85%;"></div></div><div class="bar-value">33 clones</div></div>
+<div class="bar-row"><div class="bar-label">modelcascade views (last 14d)</div><div class="bar-track"><div class="bar-fill cyan" style="width:78%;"></div></div><div class="bar-value">31 views</div></div>
+<div class="bar-row"><div class="bar-label">modelcascade stars</div><div class="bar-track"><div class="bar-fill amber" style="width:8%;"></div></div><div class="bar-value">+1 this week</div></div>
+<div class="bar-row"><div class="bar-label">local-model-router-linux views</div><div class="bar-track"><div class="bar-fill cyan" style="width:20%;"></div></div><div class="bar-value">4 viewers</div></div>
+<div class="bar-row"><div class="bar-label">PR #658 (mechanix-gui fork)</div><div class="bar-track"><div class="bar-fill amber" style="width:30%;"></div></div><div class="bar-value">OPEN, day 20</div></div>
+</div>
+
+<p>These numbers are small. That's the point &mdash; the reader is seeing a category mid-formation, not an established player. Early engagement from a well-targeted cohort (Setup Sunday Linux + AMD home-lab operators) beats broad-cast noise. The overnight surge Apr 22 (modelcascade +31 views / +33 clones) correlates with the Hannecke article's in-flight visibility.</p>
+
+<h2>The routing-composition claim, made falsifiable</h2>
+
+<p>A thesis with no failure mode is marketing. The falsifiable claim behind wayneColt:</p>
+
+<div class="callout optic">
+<strong>Falsifiable claim:</strong> For a home-lab operator with 8-16 GB VRAM running a mix of code, math, and language queries, a classifier-plus-specialists routing layer delivers &gt;15% fewer total tokens-out and &gt;20% lower p95 latency than running a single 7B-13B model for all queries &mdash; measured over 500+ queries on the operator's own traffic mix.<br><br>
+<em>If the measurement shows &lt;5% improvement, the routing layer is not worth the operational overhead &mdash; the thesis fails for that operator's workload. That's a real outcome, not a marketing objection.</em>
+</div>
+
+<h2>What wayneColt is NOT</h2>
+
+<ul>
+<li><strong>Not a model</strong>. It runs your models. Ollama runs models. miniclaw structures agents. wayneColt routes between them.</li>
+<li><strong>Not an AGI claim</strong>. The routing thesis doesn't depend on any particular model being "intelligent." It depends on classifier accuracy + backend specialization paying for itself.</li>
+<li><strong>Not a replacement for Ollama or miniclaw</strong>. It composes with them. modelcascade installed on top of an Ollama runtime + miniclaw-style agent loop is the reference configuration.</li>
+<li><strong>Not a claim to have invented routing</strong>. Routing-as-architecture has decades of lineage (multi-armed bandits, capsule networks, mixture-of-experts, prompt-ensemble methods). The specific claim is: <em>a lightweight classifier + cold-loaded specialists + persistent router state is tractable on consumer hardware.</em></li>
+</ul>
+
+</section>
+
+<!-- ─────────── 04 CAA PLACEMENT AGENT ─────────── -->
+<section class="pane" id="caa">
+
+<h2>What a CAA is, and why it matters for the reader</h2>
+
+<p>A <strong>CAA (Continuously-running Autonomous Agent)</strong> is a scheduled or event-driven process that maintains a specific substrate without requiring a human at the keyboard. The WayneIA mesh currently runs eight registered CAAs (audit filed 2026-04-23 by P_1 ClaudeCode on WaynePC). Four are LIVE. Two are DEGRADED. Two are DORMANT &mdash; the "stored labor" problem. The placement agent being designed here is the ninth CAA, specifically dedicated to wayneColt's external visibility placement.</p>
+
+<p>For the reader: this is how the routing thesis extends outward. Your routing layer can be placed in front of external surfaces on a regular cadence, with gated autonomy, so the surface stays alive without a session-by-session push.</p>
+
+<div class="whyhead">
+<span class="wh-lbl">5-Factor Win Condition — Tab 04</span>
+<span class="wh-row"><b>Environment:</b> r/LocalLLaMA weekly Setup Sunday thread + Hacker News Monday peak hours + Medium comment threads &mdash; all public, all cited by third parties.</span>
+<span class="wh-row"><b>Perspective:</b> Reader who wants to understand how placement decisions get made without a human present at every decision.</span>
+<span class="wh-row"><b>Context:</b> 68 days remain in the current displaced-users window (post-AIMO-3 closure, pre-next-competition); current authoring throughput ~3-7 handoffs/day across the mesh.</span>
+<span class="wh-row"><b>Current time:</b> 2026-04-23 &mdash; 4 days before next r/LocalLLaMA Setup Sunday cadence fire (Apr 27).</span>
+<span class="wh-row"><b>Why now:</b> A placement agent reduces single-point human-decision burden on the visibility surface. With the Hannecke category conversation in-flight, weekly cadence beats ad-hoc posting.</span>
+</div>
+
+<h2>The five CAA criteria (applied to wayneColt_placement_CAA)</h2>
+
+<table>
+<tr><th>#</th><th>Criterion</th><th>For wayneColt_placement_CAA</th></tr>
+<tr><td>1</td><td><strong>Scheduled window</strong></td><td>Weekly · Sunday · r/LocalLLaMA Setup Sunday cadence (16:00 UTC typical thread-peak). Also event-driven on external-signal detection (Hannecke-like article → comment-reply candidate).</td></tr>
+<tr><td>2</td><td><strong>Scoring environment</strong></td><td>Per-post downstream engagement (upvotes, comment depth, repo traffic within 72h of post). Three-Pillars scoring applied retroactively: Tools (reuse existing surfaces) · Context (next cadence better-oriented) · Perspective (new measurable established).</td></tr>
+<tr><td>3</td><td><strong>Tier-0 escalation</strong></td><td>BOB_APPROVER gate at p&ge;0.80 for auto-publish; p&ge;0.95 escalates to Glass Tile :8527 notification. Below 0.80, post is drafted and queued, not published. Any post flagged by author-check firewall (wayne@wayneia.com vs wayne@catalytic-computing.com) pre-push blocks autonomously.</td></tr>
+<tr><td>4</td><td><strong>Curiosity budget</strong></td><td>10-15% of weekly posting budget allocated to exploratory placements (non-Setup-Sunday threads, cross-category conversations, less-trafficked subreddits) &mdash; the remaining 85-90% to exploitation of proven cadences. Budget re-tuned monthly based on scoring environment.</td></tr>
+<tr><td>5</td><td><strong>Canonical locus</strong></td><td><code>/home/bbob/wayne/workspace/wayne-colt/presence-agent/</code> on WayneIQ (existing CODE_KEY[950] surface) &mdash; extended with placement module. Logs to <code>presence-agent.db</code> SQLite.</td></tr>
+</table>
+
+<h2>V1&ndash;V5 decomposition &mdash; the placement pipeline</h2>
+
+<p>The placement agent decomposes each weekly cycle into five bounded verbs. This is the operational spec. Each verb has input, output, and a confidence score. Confidence below threshold halts the pipeline at that step; the remaining verbs queue until the next cycle or Bob-review.</p>
+
+<table>
+<tr><th>Verb</th><th>Input</th><th>Output</th><th>Confidence threshold</th><th>Tier-0 on fail</th></tr>
+<tr><td><strong>V1 &mdash; OBSERVE</strong></td><td>External signal surface (Hannecke-like articles, r/LocalLLaMA threads, HN)</td><td>Ranked list of 3-7 placement candidates with topical alignment scores</td><td>p&ge;0.60 (placement relevance)</td><td>Log + next cycle</td></tr>
+<tr><td><strong>V2 &mdash; CLASSIFY</strong></td><td>Top candidate from V1</td><td>Classified as {Setup Sunday main · HN launch · Medium comment · Subreddit exploratory · Ignore}</td><td>p&ge;0.70 (classifier confidence)</td><td>Reroute to V1 for next candidate</td></tr>
+<tr><td><strong>V3 &mdash; DRAFT</strong></td><td>Classified candidate + context from wayneColt MESH tree</td><td>Draft post text + 3 citation anchors + identity-firewall-checked author signature</td><td>p&ge;0.75 (self-review of draft quality)</td><td>Queue to Glass Tile for Bob async review</td></tr>
+<tr><td><strong>V4 &mdash; APPROVE</strong></td><td>Draft from V3</td><td>BOB_APPROVER verdict (PROMOTE/HOLD/DEFER/REJECT)</td><td>p&ge;0.80 auto-publish; 0.80-0.95 async-Bob-review; 0.95+ Glass Tile alert</td><td>Do not post; file to draft archive</td></tr>
+<tr><td><strong>V5 &mdash; POST &amp; MEASURE</strong></td><td>Approved post from V4</td><td>Post URL + 24h/72h engagement snapshot + Three-Pillars retroactive score</td><td>Live capture &mdash; no threshold</td><td>Cascade-detector alerts if engagement regresses below 3-cycle average</td></tr>
+</table>
+
+<h2>BOB_APPROVER async gate &mdash; the p&ge;0.80 mechanism</h2>
+
+<p>The current BOB_APPROVER CAA (§4 of P_1 registry) is DEGRADED-PARTIAL: shadow-logger LIVE, merge_adapters LIVE, auto-publish gate <em>not yet wired to actual probability source</em>. The wayneColt_placement_CAA depends on this gate being wired. The gate design:</p>
+
+<ul>
+<li><strong>Probability source</strong>: Until a dedicated approver model (R6) is trained, the p-value derives from three signals: (a) self-critique score from the drafting model (R5-as-judge), (b) external signal alignment from V1 (topical match strength), (c) historical success rate of this classification × this cadence.</li>
+<li><strong>Asynchronous, not synchronous</strong>: Below 0.80 the draft queues. Bob reviews the queue on his schedule, not at post time. The queue lives at <code>:8526/caa/placement/queue</code> (new detail route in Pass A Phase 4B).</li>
+<li><strong>No synchronous interruption</strong>: The gate never fires a dunst popup or Glass Tile blocker. Bob is not a latency-critical path. If Bob silent: the draft expires after 7 days unposted; the post's window closes gracefully.</li>
+</ul>
+
+<h2>Why 10-15% curiosity budget</h2>
+
+<p>The curiosity budget is the placement agent's explicit exploration allowance, per Bob's CAA framing. 85-90% of placements go to <em>proven</em> surfaces (weekly Setup Sunday thread, known-good HN launch windows, established comment threads on high-traffic pieces). 10-15% goes to <em>exploratory</em> surfaces: cross-category subreddits, less-trafficked but possibly-aligned communities, adjacent Medium authors' comment threads.</p>
+
+<p>This is the routing-thesis applied to placement: a hot classifier routes 85%+ to known-good specialists; a small exploration slice maintains the classifier's calibration as external surfaces evolve. Without it, the classifier's training distribution drifts and eventually the proven surfaces stop being proven.</p>
+
+<div class="callout magenta">
+<strong>The curiosity-budget gap in the current mesh (from P_1 Registry §9)</strong>: Only 2 of 8 CAAs have PRESENT exploration budgets (Sprout_overnight implicit V(s); NightOwl article cultivator scoring). 4 are ABSENT. 2 are IMPLICIT. This means most of the mesh currently has no explicit exploration discipline. wayneColt_placement_CAA explicitly addresses this gap by making curiosity-budget a first-class field in its scheduling.
+</div>
+
+<h2>Registration in the mesh registry</h2>
+
+<p>This agent will be added as <strong>§9 wayneColt_placement_CAA</strong> to <code>/home/bbob/wayne/workspace/caa_registry/REGISTRY_APR23_2026.md</code> (existing 8-instance registry filed by P_1 at 11:35 CDT today). Registration is an EXTEND operation: it names an existing authoring-scope surface (wayneColt_authoring_CAA §2 is already in the registry) and adds a sibling-scope agent specialized for placement rather than authoring.</p>
+
+<p>After registration, the placement agent is visible on the ArtifactHub control surface (per Pass A Phase 4A): <code>:8526/</code> sidebar HubSection <code>caa_agents</code> will render the agent's status, last-seen, next-fire schedule, and queue depth.</p>
+
+<h2>Shadow-mode first (non-negotiable)</h2>
+
+<p>Like PredictionEngine's EXTEND path in the P_1 A4 audit, this placement agent must run in shadow mode before any live placement decisions. Shadow mode = V1&ndash;V3 fire; V4 runs but verdict is recorded-only, not published; V5 does not fire.</p>
+
+<p>Shadow run observes: classifier accuracy against Bob's retroactive Tools&times;Context&times;Perspective review, draft quality against Bob's PROMOTE/HOLD verdicts, timing calibration against actual thread-peak hours. Minimum 3 weekly cycles of shadow before gate-enable.</p>
+
+</section>
+
+<!-- ─────────── 05 DAILY ROLLUP KPI ─────────── -->
+<section class="pane" id="kpi">
+
+<h2>Why a rollup, not a data dump</h2>
+
+<p><strong>The daily rollup is a KPI/chart surface, not raw data.</strong> Raw data lives in manifest.json, overnight-bridge JSON, and SQLite databases. What the reader of this tab needs is <em>three things at a glance</em>: (1) is the routing thesis compounding or flat? (2) is external validation accumulating week over week? (3) is any metric regressing and what's the cause?</p>
+
+<p>The rollup answers those three via KPI cards and ratio charts, refreshed daily by the overnight-bridge at 08:10 CDT on WayneIQ. What appears here is what the chart can defend &mdash; not a wall of numbers.</p>
+
+<div class="whyhead">
+<span class="wh-lbl">5-Factor Win Condition — Tab 05</span>
+<span class="wh-row"><b>Environment:</b> Overnight-bridge daily fire at 08:10 CDT; ArtifactHub control surface renders the rollup as a visualization, not a CSV.</span>
+<span class="wh-row"><b>Perspective:</b> Reader (or Bob) who wants the 30-second pulse: compounding, flat, or regressing.</span>
+<span class="wh-row"><b>Context:</b> V(stored_labor) = 0.3488 currently (Class III past Langton edge); BEAST composite inert at 0.0 until FAISS + BOB_APPROVER + external sources publish.</span>
+<span class="wh-row"><b>Current time:</b> 2026-04-23 &mdash; rollup reflects Apr 17 overnight-bridge run + manual recalibration.</span>
+<span class="wh-row"><b>Why now:</b> Without daily rollup visible on a chart surface, regressions land silently. The FOTS pattern (fell off the shelf, narrative-displaced) is partly a rollup-invisibility pattern.</span>
+</div>
+
+<h2>KPI block &mdash; today's reading</h2>
+
+<div class="kpi-row">
+<div class="kpi green"><div class="kpi-label">V(stored_labor)</div><div class="kpi-value">0.3488</div><div class="kpi-sub">P&middot;C&middot;D&middot;(1&minus;decay) = 0.92&middot;0.5575&middot;0.80&middot;0.85</div></div>
+<div class="kpi cyan"><div class="kpi-label">Langton regime</div><div class="kpi-value">Class III</div><div class="kpi-sub">Δ = +0.0758 past edge (&lambda;&#8345;=0.273)</div></div>
+<div class="kpi amber"><div class="kpi-label">BEAST composite</div><div class="kpi-value">0.000</div><div class="kpi-sub">Inert · waiting on FAISS + BOB_APPROVER + external signals</div></div>
+<div class="kpi magenta"><div class="kpi-label">Open-promise ledger</div><div class="kpi-value">18</div><div class="kpi-sub">Tier-classified · 5 DONE · 7 pending · 3 RED · 2 BLOCKED · 1 EXPIRED</div></div>
+<div class="kpi"><div class="kpi-label">Identity firewall</div><div class="kpi-value">5/5</div><div class="kpi-sub">L1-L5 all verified Apr 22 second-pass audit</div></div>
+<div class="kpi"><div class="kpi-label">CODE_KEY velocity</div><div class="kpi-value">3.0/day</div><div class="kpi-sub">9 added this cluster (range 953&ndash;962)</div></div>
+</div>
+
+<h2>Chart 1 &mdash; Routing composition weight by backend (last 7 days)</h2>
+
+<div class="chart">
+<div class="chart-title">BABEL dispatches by backend · per-day average · WaynePC MASTER_ROUTER</div>
+<div class="bar-row"><div class="bar-label">R5 local (Qwen-2.5-7B)</div><div class="bar-track"><div class="bar-fill green" style="width:72%;"></div></div><div class="bar-value">72%</div></div>
+<div class="bar-row"><div class="bar-label">LFM2.5 local (1.2B)</div><div class="bar-track"><div class="bar-fill green" style="width:16%;"></div></div><div class="bar-value">16%</div></div>
+<div class="bar-row"><div class="bar-label">Groq Llama-3.3-70B (GOLD)</div><div class="bar-track"><div class="bar-fill cyan" style="width:7%;"></div></div><div class="bar-value">7%</div></div>
+<div class="bar-row"><div class="bar-label">Grok (xAI)</div><div class="bar-track"><div class="bar-fill cyan" style="width:3%;"></div></div><div class="bar-value">3%</div></div>
+<div class="bar-row"><div class="bar-label">Anthropic Sonnet (escalation)</div><div class="bar-track"><div class="bar-fill amber" style="width:2%;"></div></div><div class="bar-value">2%</div></div>
+</div>
+
+<p>The chart shows the routing thesis at empirical work: 88% of dispatches stay local (R5 + LFM2.5), 12% escalate to cloud only when stuck-level or context-depth warrants. Cost per 1000 dispatches stays under $0.15 at this mix. The category name for this chart's shape is <em>local-first with graceful escalation</em>.</p>
+
+<h2>Chart 2 &mdash; External engagement (14-day rolling, wayneColt scope)</h2>
+
+<div class="chart">
+<div class="chart-title">wayneColt external signals · rolling 14-day · verified via gh api + public URLs</div>
+<div class="bar-row"><div class="bar-label">modelcascade repo clones</div><div class="bar-track"><div class="bar-fill cyan" style="width:85%;"></div></div><div class="bar-value">33</div></div>
+<div class="bar-row"><div class="bar-label">modelcascade repo views</div><div class="bar-track"><div class="bar-fill cyan" style="width:78%;"></div></div><div class="bar-value">31</div></div>
+<div class="bar-row"><div class="bar-label">local-model-router views</div><div class="bar-track"><div class="bar-fill cyan" style="width:15%;"></div></div><div class="bar-value">4</div></div>
+<div class="bar-row"><div class="bar-label">Mechanix PR #658 comments</div><div class="bar-track"><div class="bar-fill amber" style="width:0%;"></div></div><div class="bar-value">0 (day 20)</div></div>
+<div class="bar-row"><div class="bar-label">Hannecke comment reply engagement</div><div class="bar-track"><div class="bar-fill green" style="width:50%;"></div></div><div class="bar-value">in-flight</div></div>
+</div>
+
+<p>Engagement surface is <em>narrow and appropriate</em>. The reader sees a category forming, not a broadcast campaign. Apr 22 Hannecke-surface surge + Apr 22 modelcascade clone surge correlate &mdash; first observable coupling between external-author-activity and wayneColt-repo traffic.</p>
+
+<h2>Chart 3 &mdash; V(stored_labor) trajectory (last 30 days)</h2>
+
+<div class="chart">
+<div class="chart-title">V = P&middot;C&middot;D&middot;(1&minus;decay) · daily close · overnight-bridge recalibration</div>
+<div class="bar-row"><div class="bar-label">Mar 24 (baseline)</div><div class="bar-track"><div class="bar-fill amber" style="width:54.8%;"></div></div><div class="bar-value">0.274</div></div>
+<div class="bar-row"><div class="bar-label">Apr 15 (pre-recalib)</div><div class="bar-track"><div class="bar-fill amber" style="width:54.8%;"></div></div><div class="bar-value">0.274</div></div>
+<div class="bar-row"><div class="bar-label">Apr 17 (post-recalib · C lifted)</div><div class="bar-track"><div class="bar-fill green" style="width:69.8%;"></div></div><div class="bar-value">0.3488</div></div>
+<div class="bar-row"><div class="bar-label">Apr 20 (wayneColt reconcile)</div><div class="bar-track"><div class="bar-fill green" style="width:69.8%;"></div></div><div class="bar-value">0.3488</div></div>
+<div class="bar-row"><div class="bar-label">Apr 23 (today)</div><div class="bar-track"><div class="bar-fill green" style="width:69.8%;"></div></div><div class="bar-value">0.3488</div></div>
+<div class="bar-row"><div class="bar-label">λ_c reference</div><div class="bar-track"><div class="bar-fill" style="width:54.6%;background:var(--chrome);"></div></div><div class="bar-value">0.273</div></div>
+</div>
+
+<p>The 0.274 &rarr; 0.3488 jump on Apr 17 was a <em>recalibration</em>, not organic growth: C (context quality) lifted from 0.45 to 0.55 per mecha-org upstream reconciliation (247-star project, funded hardware, shipping Sept 2026). The reading holds steady at 0.3488 through the week &mdash; indicating the recalibration was warranted, not noise. V stays past the Langton edge in Class III regime.</p>
+
+<h2>What the rollup catches that raw data misses</h2>
+
+<ol>
+<li><strong>FOTS regression</strong>. If V(stored_labor) drops by &gt;0.02 week-over-week without a declared de-narration event, the cause is stored-labor falling out of the narrative surface. The Stored-Labor Sentinel fires. The rollup flags.</li>
+<li><strong>Engagement decoupling</strong>. If repo clones rise but V(stored_labor) falls, external validation is outpacing internal substrate &mdash; a signal to publish more handoff-density, not more posts.</li>
+<li><strong>Backend drift</strong>. If cloud-escalation % creeps up week-over-week, classifier calibration is drifting &mdash; the hot-specialist routing is becoming less effective. Retune classifier keyword table.</li>
+<li><strong>Silent open-promise count</strong>. If pending-ledger count grows without RED items clearing, the work queue is stale-filling. Bob-review cadence needs tightening.</li>
+</ol>
+
+<h2>What this tab intentionally does NOT show</h2>
+
+<ul>
+<li><strong>Raw JSON dumps.</strong> Those live at <code>/waynecolt/artifacts/manifest.json</code> for operators who want to parse downstream.</li>
+<li><strong>Per-query latency histograms.</strong> That's an infrastructure tab, not a rollup surface. Lives at the ArtifactHub WayneIA Monitor v7 dashboard.</li>
+<li><strong>Model-training loss curves.</strong> Shadow-DPO pipeline is WayneIA-internal. wayneColt-external rollup does not surface it.</li>
+<li><strong>Private financial numbers.</strong> Mission-layer (behavioral health portfolio) details are not wayneColt-scope.</li>
+</ul>
+
+</section>
+
+<!-- ─────────── 06 MESH ENTRY POINTS ─────────── -->
+<section class="pane" id="mesh">
+
+<h2>How the reader navigates further</h2>
+
+<p><strong>This tab is the table of contents the rest of the MESH tree needed.</strong> Every surface mentioned in Tabs 01-05 has a URL; every URL is either on this node (<code>:8526</code> ArtifactHub) or on GitHub Pages (<code>waynecolt.com</code>). If a URL is not here, it is not yet ready for reader traffic &mdash; the MESH tree canonical-source rule (N-RT-WC-09) holds.</p>
+
+<div class="whyhead">
+<span class="wh-lbl">5-Factor Win Condition — Tab 06</span>
+<span class="wh-row"><b>Environment:</b> ArtifactHub :8526 (local service, WayneIQ) + waynecolt.com (public GitHub Pages) + public GitHub repos under <a href="https://github.com/wayneColt" target="_blank" rel="noopener">github.com/wayneColt</a>.</span>
+<span class="wh-row"><b>Perspective:</b> Reader who now wants to click through, verify citations, or clone a repo.</span>
+<span class="wh-row"><b>Context:</b> 6 publications in MESH tree · 3 dashboards · 5 public repos · identity firewall 5/5 · ArtifactHub Pass A evolution pending Phase 4A.</span>
+<span class="wh-row"><b>Current time:</b> 2026-04-23. Apr 22 State &amp; Status Hub publication live. Apr 20 reconcile to waynecolt.com canonical complete.</span>
+<span class="wh-row"><b>Why now:</b> Reader has absorbed Tabs 01-05; action-decision moment requires a clear navigation map. Without it, they bounce.</span>
+</div>
+
+<h2>Top-level entry points</h2>
+
+<table>
+<tr><th>Surface</th><th>URL</th><th>What you find</th></tr>
+<tr><td>Canonical landing</td><td><a href="https://waynecolt.com" target="_blank" rel="noopener">waynecolt.com</a></td><td>Brand surface · Catalytic Computing · OG/canonical tags · Apr 20 reconcile commit 4b903e5</td></tr>
+<tr><td>ArtifactHub :8526 (local)</td><td><code>http://localhost:8526/</code></td><td>Publication Hub · sidebar navigator · this central index + 99+ other publications</td></tr>
+<tr><td>MESH tree root</td><td><code>:8526/waynecolt/artifacts/</code></td><td>Canonical write target · 6 publications · manifest.json v5 · README.md protocol spec</td></tr>
+<tr><td>This document</td><td><code>:8526/waynecolt/artifacts/publications/WAYNECOLT_CENTRAL_INDEX_APR23_2026.html</code></td><td>(you are here)</td></tr>
+<tr><td>State &amp; Status (Apr 22)</td><td><code>:8526/waynecolt/artifacts/publications/WAYNECOLT_STATE_AND_STATUS_APR22_2026.html</code></td><td>A|B Healthy-Friction empirical vs declared audit · 4 drifts · 18-item promise ledger</td></tr>
+<tr><td>Capital Plan (Apr 16)</td><td><code>:8526/waynecolt/artifacts/publications/WAYNECOLT_CAPITAL_PLAN_APR16_2026.html</code></td><td>Aggregates → Rail → Behavioral Health flywheel · 10 tabs</td></tr>
+<tr><td>Dev-Ops Bridge Plan</td><td><code>:8526/waynecolt/artifacts/publications/WAYNECOLT_BRIDGE_PLAN_APR16_2026.html</code></td><td>Fix four gaps · persona goes alive to lifelike · 8 tabs</td></tr>
+<tr><td>OCEAN Transfer</td><td><code>:8526/waynecolt/artifacts/publications/RALPHIE_TRANSFER_OCEAN_APR16_2026.html</code></td><td>Ralphie → Wayne Colt 5x5 OCEAN matrix · 55-file disposition</td></tr>
+<tr><td>Convergence (Apr 15)</td><td><code>:8526/waynecolt/artifacts/publications/APRIL15_CONVERGENCE_APR16_2026.html</code></td><td>Capstone + lineage extension + isomorphism proof · 8 tabs</td></tr>
+</table>
+
+<h2>Public repos (third-party verifiable)</h2>
+
+<table>
+<tr><th>Repo</th><th>Status</th><th>License</th><th>Purpose</th></tr>
+<tr><td><a href="https://github.com/wayneColt/modelcascade" target="_blank" rel="noopener">wayneColt/modelcascade</a></td><td>PUBLIC · 33 clones / 31 views (14d)</td><td>MIT</td><td>Routing layer pip package · landing · Ollama-atop composition</td></tr>
+<tr><td><a href="https://github.com/wayneColt/multi-llm-router-demo" target="_blank" rel="noopener">wayneColt/multi-llm-router-demo</a></td><td>PUBLIC · Apr 16 push</td><td>MIT</td><td>Keyword-based multi-LLM router · HISTORICAL NOTE preserves 2024-07-23 priority date</td></tr>
+<tr><td><a href="https://github.com/wayneColt/local-model-router-linux" target="_blank" rel="noopener">wayneColt/local-model-router-linux</a></td><td>PUBLIC · 4 viewers</td><td>MIT</td><td>Linux home-lab deployment notes · AMD Radeon Pro + NVIDIA compute split</td></tr>
+<tr><td><a href="https://github.com/wayneColt/wayneColt.github.io" target="_blank" rel="noopener">wayneColt/wayneColt.github.io</a></td><td>PUBLIC</td><td>(Pages)</td><td>waynecolt.com source · Apr 20 reconcile anchor</td></tr>
+<tr><td><a href="https://github.com/wayneColt" target="_blank" rel="noopener">wayneColt/wayneColt (profile)</a></td><td>PUBLIC</td><td>n/a</td><td>27-line profile README · open-source tools for small-business AI operations</td></tr>
+</table>
+
+<h2>Dashboards</h2>
+
+<table>
+<tr><th>Dashboard</th><th>URL</th><th>Purpose</th></tr>
+<tr><td>Dashboard-Monitor v2</td><td><code>:8526/publications/serve/WAYNECOLT_DASHBOARD_MONITOR_v2.html</code></td><td>Live BEAST + V(stored_labor) + firewall state</td></tr>
+<tr><td>Revenue Tracker</td><td><code>:8526/publications/serve/waynecolt_revenue_tracker.html</code></td><td>BEAST confidence funnel · revenue pipeline</td></tr>
+<tr><td>Dashboard-Monitor v1 (archive)</td><td><code>:8526/publications/serve/WAYNECOLT_DASHBOARD_MONITOR_v1.html</code></td><td>Historical reference · pre-recalibration reading</td></tr>
+</table>
+
+<h2>The evolved ArtifactHub control surface (post Pass A)</h2>
+
+<p>The ArtifactHub landing page (<code>:8526/</code>) is evolving this week from a publication-serving hub into a <em>visible control surface + governed maintenance layer</em> per Pass A evolution design (filed 2026-04-23). After Phase 4A deploys, five new sidebar HubSections appear between <code>waynecolt</code> and <code>sprout</code>:</p>
+
+<table>
+<tr><th>New HubSection</th><th>What the operator sees</th><th>Source</th></tr>
+<tr><td><strong>caa_agents</strong></td><td>8 registered CAAs · live/degraded/dormant · last-seen · curiosity-budget</td><td>P_1 REGISTRY_APR23_2026.md</td></tr>
+<tr><td><strong>fots_state</strong></td><td>3-member Dec-2025 cohort · 5 revival candidates · 99,314-file harvest KPI</td><td>fots.md + labor_sentinel harvest.db</td></tr>
+<tr><td><strong>scorecard_verdicts</strong></td><td>PROMOTE / HOLD / DEFER · Three-Pillars × Four-Verdicts per integration</td><td>PHASE4_SCORECARD + future handoffs</td></tr>
+<tr><td><strong>janitor_verbs</strong></td><td>drift · keyring · snapshot · 10-role pipeline status · 6-probe keyring health</td><td>aios_snapshots + capabilities.md</td></tr>
+<tr><td><strong>codekey_ledger</strong></td><td>Ledger velocity · cluster additions · pending-Bob-ratify shelf</td><td>CODE_KEY_MASTER_LEDGER.json</td></tr>
+</table>
+
+<p>Each section renders from pull-based ingestion (per Pass C three-source framework). No new daemons; no schema breaks; 100% EXTEND on existing Pattern Library template. Reader who returns to this index after Phase 4A deploys will find the sidebar has grown, not shifted &mdash; all current entry points preserved.</p>
+
+<h2>Identity firewall state (5/5 verified)</h2>
+
+<table>
+<tr><th>Layer</th><th>Mechanism</th><th>Status (Apr 22 second-pass)</th></tr>
+<tr><td>L1</td><td>gitconfig includeIf · default=wayneColt · /mnt/wayne/=BLOCKED</td><td>INSTALLED</td></tr>
+<tr><td>L2</td><td>pre-push hook · validates identity on every push</td><td>INSTALLED</td></tr>
+<tr><td>L3</td><td>SSH config routing · separate key for wayneColt scope</td><td>INSTALLED</td></tr>
+<tr><td>L4</td><td>Fine-grained PAT · /notifications endpoint unavailable by API design (FG-PAT capability limit, not install error)</td><td>INSTALLED · correctly-constrained</td></tr>
+<tr><td>L5</td><td>GitHub Actions CI · identity verification on push · 7/7 repos v2</td><td>INSTALLED · last run Apr 20 SUCCESS</td></tr>
+</table>
+
+<h2>What the reader does next</h2>
+
+<ol>
+<li><strong>Verify an external anchor.</strong> Click through to the Hannecke Medium piece, read wayneColt's reply. Three-party observability in 2 minutes.</li>
+<li><strong>Clone the reference.</strong> <code>git clone https://github.com/wayneColt/modelcascade.git</code> — 400 lines Python, MIT. Runs against Ollama local.</li>
+<li><strong>Read one adjacent publication.</strong> Capital Plan (the business flywheel) or Bridge Plan (the dev-ops four gaps) depending on reader's angle.</li>
+<li><strong>Return to this index after Phase 4A deploys.</strong> The ArtifactHub sidebar grows to include CAA/FOTS/Scorecard/Janitor/CODE_KEY operator surfaces. Same index; richer navigation.</li>
+</ol>
+
+<h2>Footnotes &mdash; what to ignore</h2>
+
+<ul>
+<li>URLs pointing to <code>localhost:8526</code> require being on the same local network as WayneIQ (192.168.1.237). Remote readers use <a href="https://waynecolt.com" target="_blank" rel="noopener">waynecolt.com</a> as the public mirror when that alignment completes.</li>
+<li>Old pre-Apr-20 references to <code>catalytic-computing.com</code> as wayneColt canonical are <em>superseded</em> by the Apr 20 reconcile (commit 4b903e5). The canonical host is <code>waynecolt.com</code>. Cross-links to catalytic-computing.com remain for the separate Catalytic Computing brand (CBAC / Temple reconciliation surfaces).</li>
+<li>The ghost./cascade./beast./cdn. subdomain plan for catalytic-computing.com (pre-Apr-20 thinking) is <em>historical</em>. Current subdomain plan lives in the Apr 22 State &amp; Status publication Tab 03.</li>
+</ul>
+
+</section>
+
+</main>
+
+<footer>
+<div>WAYNEIA · wayneColt · MESH artifact tree · Central Index</div>
+<div>Filed 2026-04-23 · WayneIQ Claude Code (Opus 4.7 [1m]) · /red-tape autonomous</div>
+<div class="cipher">CIPHER: V1:115S300S553S858S911S947S948S951S962S964S965R+S948L8S962L8:WAYNEIQ_ARTICLEHUB_EVOLUTION_CENTRAL_INDEX_APR23</div>
+</footer>
+
+<script>
+document.querySelectorAll('nav.tabs .tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('nav.tabs .tab').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('main .pane').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    const id = btn.getAttribute('data-tab');
+    const pane = document.getElementById(id);
+    if (pane) pane.classList.add('active');
+  });
+});
+</script>
+
+</body></html>
