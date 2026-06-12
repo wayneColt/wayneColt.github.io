@@ -11,6 +11,7 @@
 <meta property="og:url" content="https://waynecolt.com/solutions/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://waynecolt.com/solutions/">
+<link rel="stylesheet" href="/assets/splitflap.css">
 <style>@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=IBM+Plex+Mono:wght@400;500;700&display=swap');
 :root{--stock:#E8E0D4;--stock-lt:#F0EBE3;--void:#0A0A0C;--optic:#E8450A;--cyan:#00B8D4;--magenta:#C2185B;--chrome:#9E9E9E;--terminal:#00C853;--line:rgba(10,10,12,0.10);--line-med:rgba(10,10,12,0.18)}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -62,7 +63,10 @@ h1.page-h{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp
 <main>
 <div class="crumb"><a href="/">waynecolt.com</a> / solutions</div>
 <div class="eyebrow"><span class="eyebrow-line"></span> The Directory</div>
-<h1 class="page-h">Solutions</h1>
+<h1 id="sf-h-solutions" class="page-h">Solutions</h1>
+<div class="sf-mount sf-host-solutions" data-sf-reveal>
+  <div class="sf-host" data-sf-word="SOLUTIONS" data-sf-heading="#sf-h-solutions"></div>
+</div>
 <p class="page-sub">Routing-first AI infrastructure, read honestly. Each entry below is an artifact — an essay, paper, article, or report — on cascade routing, local-first inference economics, and small specialized models.</p>
 
 <div class="flap-stage">
@@ -71,7 +75,8 @@ h1.page-h{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp
 </div>
 
 <div class="tree">
-<a class="row" href="/convergent-invention/"><span class="row-top"><span class="tree-glyph">&#9492;&#9472;</span><span class="row-badge b-essay">ESSAY</span><span class="row-title">Routing-First Local LLM Architecture</span><span class="row-date">2026-06-12</span></span><div class="row-desc">Eight papers, three years, one kernel: a convergent-invention reading of the 2024-2026 cascade-routing literature.</div></a>
+<a class="row" href="/convergent-invention/"><span class="row-top"><span class="tree-glyph">&#9500;&#9472;</span><span class="row-badge b-essay">ESSAY</span><span class="row-title">Routing-First Local LLM Architecture</span><span class="row-date">2026-06-12</span></span><div class="row-desc">Eight papers, three years, one kernel: a convergent-invention reading of the 2024-2026 cascade-routing literature.</div></a>
+<a class="row" href="/solutions/forced-consolidation/"><span class="row-top"><span class="tree-glyph">&#9492;&#9472;</span><span class="row-badge b-paper">PAPER</span><span class="row-title">Forced Consolidation: How a Federal Definition Rewrite Reshapes the Texas Hemp Market</span><span class="row-date">2026-06-12</span></span><div class="row-desc">A corridor operator&#x27;s empirical read: the same PE capital is running Texas hemp consolidation and behavioral-health consolidation on the same I-35 labor shed — with statistics, court records, and the Bradford Health bridge as public-record evidence.</div></a>
 </div>
 
 <div class="foot">Autonomous, continuous publications by WayneColt + the marketing pipeline. Every entry is artifact-backed.</div>
@@ -127,5 +132,6 @@ h1.page-h{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp
   setInterval(function(){ idx=(idx+1)%EQ.length; flipTo(EQ[idx]); }, 4000);
 })();
 </script>
+<script src="/assets/splitflap.js" defer></script>
 </body>
 </html>
