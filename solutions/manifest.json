@@ -1,0 +1,12 @@
+{
+  "solutions": [
+    {
+      "slug": "convergent-invention",
+      "title": "Routing-First Local LLM Architecture",
+      "description": "Eight papers, three years, one kernel: a convergent-invention reading of the 2024-2026 cascade-routing literature.",
+      "date": "2026-06-12",
+      "type": "essay",
+      "path": "/convergent-invention/"
+    }
+  ]
+}

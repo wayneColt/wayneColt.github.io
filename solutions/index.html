@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solutions | Catalytic Computing</title>
+<meta name="description" content="Autonomous, continuous, artifact-backed publications by WayneColt — on cascade routing, local-first inference economics, small specialized models, and confidence-guided routing.">
+<meta property="og:title" content="Solutions — Catalytic Computing">
+<meta property="og:description" content="Autonomous, continuous, artifact-backed publications by WayneColt on cascade routing and local-first AI infrastructure.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://waynecolt.com/solutions/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://waynecolt.com/solutions/">
+<style>@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=IBM+Plex+Mono:wght@400;500;700&display=swap');
+:root{--stock:#E8E0D4;--stock-lt:#F0EBE3;--void:#0A0A0C;--optic:#E8450A;--cyan:#00B8D4;--magenta:#C2185B;--chrome:#9E9E9E;--terminal:#00C853;--line:rgba(10,10,12,0.10);--line-med:rgba(10,10,12,0.18)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--stock);color:var(--void);font-family:'IBM Plex Mono',monospace;font-size:14px;line-height:1.65;-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;top:0;left:0;right:0;height:4px;z-index:300;background:linear-gradient(90deg,var(--cyan) 0%,var(--cyan) 16.66%,var(--magenta) 16.66%,var(--magenta) 33.33%,var(--optic) 33.33%,var(--optic) 50%,var(--void) 50%,var(--void) 66.66%,var(--terminal) 66.66%,var(--terminal) 83.33%,var(--chrome) 83.33%,var(--chrome) 100%)}
+a{color:inherit}
+.hdr{display:flex;justify-content:space-between;align-items:center;padding:18px 40px;border-bottom:1px solid var(--line)}
+.hdr-id{font-size:10px;letter-spacing:.18em;color:var(--optic)}
+.hdr a{font-size:10px;color:var(--chrome);text-decoration:none;letter-spacing:.12em;text-transform:uppercase}
+.hdr a:hover{color:var(--void)}
+main{max-width:880px;margin:0 auto;padding:48px 24px 100px}
+.crumb{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--chrome);margin-bottom:30px}
+.crumb a{color:var(--optic);text-decoration:none}
+.eyebrow{display:flex;align-items:center;gap:12px;font-size:9px;letter-spacing:.22em;color:var(--optic);text-transform:uppercase;margin-bottom:22px}
+.eyebrow-line{height:1px;width:48px;background:var(--optic);opacity:.5}
+h1.page-h{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(34px,6vw,60px);line-height:.95;letter-spacing:-.02em;text-transform:uppercase;margin-bottom:8px}
+.page-sub{font-size:11px;color:var(--chrome);max-width:560px;line-height:1.8;margin-bottom:40px}
+/* ── SPLIT-FLAP ── */
+.flap-stage{margin:8px 0 48px;padding:26px 18px;background:var(--void);border:1px solid var(--line-med);overflow-x:auto}
+.flap-row{display:flex;gap:3px;justify-content:center;min-height:46px;flex-wrap:nowrap}
+.flap{position:relative;width:24px;height:38px;perspective:140px;flex-shrink:0}
+.flap-char{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#0A0A0C;color:var(--stock);font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:20px;border:1px solid rgba(232,224,212,0.10);border-radius:2px;box-shadow:inset 0 -1px 0 rgba(0,0,0,0.6);transform-origin:center;backface-visibility:hidden;transition:transform .28s ease-in}
+.flap-char.flipping{animation:flapflip .42s ease-in}
+@keyframes flapflip{0%{transform:rotateX(0deg)}48%{transform:rotateX(-90deg)}52%{transform:rotateX(90deg)}100%{transform:rotateX(0deg)}}
+.flap::after{content:'';position:absolute;left:2px;right:2px;top:50%;height:1px;background:rgba(0,0,0,0.55);z-index:2;pointer-events:none}
+.flap-char.optic{color:var(--optic)}
+.flap-note{text-align:center;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--chrome);margin-top:18px}
+/* ── DIRECTORY TREE ── */
+.tree{border-top:1px solid var(--line);margin-top:8px}
+.row{display:block;padding:20px 0;border-bottom:1px solid var(--line);text-decoration:none;color:inherit;transition:background .15s}
+.row:hover{background:var(--stock-lt)}
+.row-top{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.tree-glyph{font-family:'IBM Plex Mono',monospace;color:var(--chrome);font-size:13px;flex-shrink:0}
+.row-badge{font-size:8px;letter-spacing:.16em;text-transform:uppercase;padding:2px 7px;border:1px solid;flex-shrink:0}
+.b-essay{color:var(--cyan);border-color:rgba(0,184,212,0.4)}
+.b-article{color:var(--terminal);border-color:rgba(0,200,83,0.4)}
+.b-paper{color:var(--magenta);border-color:rgba(194,24,91,0.4)}
+.b-report{color:var(--optic);border-color:rgba(232,69,10,0.4)}
+.b-note{color:var(--chrome);border-color:var(--line-med)}
+.row-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:19px;letter-spacing:-.01em;color:var(--void)}
+.row-date{font-size:9px;letter-spacing:.10em;color:var(--chrome);margin-left:auto}
+.row-desc{font-size:11px;line-height:1.7;color:var(--chrome);margin-top:8px;padding-left:24px;max-width:680px}
+.empty{padding:40px 0;color:var(--chrome);font-size:12px}
+.foot{border-top:1px solid var(--line);margin-top:52px;padding-top:22px;font-size:10px;line-height:1.8;color:var(--chrome)}
+@media(max-width:768px){main{padding:32px 20px 80px}.flap{width:18px;height:30px}.flap-char{font-size:15px}.row-date{margin-left:0;width:100%}}</style>
+</head>
+<body>
+<header class="hdr"><div class="hdr-id">● CATALYTIC COMPUTING</div><a href="/">← waynecolt.com</a></header>
+<main>
+<div class="crumb"><a href="/">waynecolt.com</a> / solutions</div>
+<div class="eyebrow"><span class="eyebrow-line"></span> The Directory</div>
+<h1 class="page-h">Solutions</h1>
+<p class="page-sub">Routing-first AI infrastructure, read honestly. Each entry below is an artifact — an essay, paper, article, or report — on cascade routing, local-first inference economics, and small specialized models.</p>
+
+<div class="flap-stage">
+  <div class="flap-row" id="flapRow"></div>
+  <div class="flap-note">The kernel, four ways</div>
+</div>
+
+<div class="tree">
+<a class="row" href="/convergent-invention/"><span class="row-top"><span class="tree-glyph">&#9492;&#9472;</span><span class="row-badge b-essay">ESSAY</span><span class="row-title">Routing-First Local LLM Architecture</span><span class="row-date">2026-06-12</span></span><div class="row-desc">Eight papers, three years, one kernel: a convergent-invention reading of the 2024-2026 cascade-routing literature.</div></a>
+</div>
+
+<div class="foot">Autonomous, continuous publications by WayneColt + the marketing pipeline. Every entry is artifact-backed.</div>
+</main>
+<div class="color-bar-bottom" style="display:flex;height:4px">
+  <span style="flex:1;background:#00B8D4"></span><span style="flex:1;background:#C2185B"></span><span style="flex:1;background:#E8450A"></span><span style="flex:1;background:#0A0A0C"></span><span style="flex:1;background:#00C853"></span><span style="flex:1;background:#9E9E9E"></span>
+</div>
+
+<script>
+(function(){
+  var EQ = ["R = 1 \u2212 \u220f(1 \u2212 p\u1d62)", "X(t) = X\u2080 \u00b7 \u03a0(1 + \u03bb\u1d62)", "ROUTING \u00d7 SPECIALIZATION > RAW SIZE", "demand = log(1+vol)\u00b7(1+vel)\u00b7fit"];
+  var stage = document.getElementById('flapRow');
+  if(!stage) return;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var WIDTH = 0;
+  EQ.forEach(function(s){ if(s.length>WIDTH) WIDTH=s.length; });
+  var cells = [];
+  for(var i=0;i<WIDTH;i++){
+    var f=document.createElement('span'); f.className='flap';
+    var c=document.createElement('span'); c.className='flap-char';
+    c.textContent=' ';
+    f.appendChild(c); stage.appendChild(f); cells.push(c);
+  }
+  function pad(s){ while(s.length<WIDTH) s+=' '; return s; }
+  var idx=0;
+  function paint(str){
+    var p=pad(str);
+    for(var i=0;i<WIDTH;i++){
+      var ch=p[i];
+      cells[i].textContent=ch===' '?'\u00a0':ch;
+      var op = /[\u00d7\u220f\u03a0\u03bb=<>]/.test(ch);
+      cells[i].className='flap-char'+(op?' optic':'');
+    }
+  }
+  function flipTo(str){
+    var p=pad(str);
+    for(var i=0;i<WIDTH;i++){
+      (function(cell,ch){
+        cell.classList.remove('flipping');
+        void cell.offsetWidth;
+        cell.classList.add('flipping');
+        setTimeout(function(){
+          cell.textContent=ch===' '?'\u00a0':ch;
+          var op=/[\u00d7\u220f\u03a0\u03bb=<>]/.test(ch);
+          cell.className='flap-char'+(op?' optic':'')+' flipping';
+        }, 200);
+      })(cells[i], p[i]);
+    }
+  }
+  paint(EQ[0]);
+  if(reduce) return;
+  idx=0;
+  setInterval(function(){ idx=(idx+1)%EQ.length; flipTo(EQ[idx]); }, 4000);
+})();
+</script>
+</body>
+</html>
