@@ -23,6 +23,14 @@
       "date": "2026-06-14",
       "type": "article",
       "path": "/solutions/digworld-empty-malls-toolbelt/"
+    },
+    {
+      "slug": "the-number-that-was-never-measured",
+      "title": "The Number That Was Never Measured",
+      "description": "A learned estimator cannot tell \"the instrument reported zero\" from \"the instrument reported nothing\" \u2014 measured across two neural codecs, a classical control that killed the first version of the claim, and a hidden-mask drift test where ensemble uncertainty scores below chance.",
+      "date": "2026-08-24",
+      "type": "paper",
+      "path": "/solutions/the-number-that-was-never-measured/"
     }
   ]
 }
