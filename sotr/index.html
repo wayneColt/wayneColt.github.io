@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>State of the Roadmap — Catalytic Computing</title>
+<meta name="description" content="Editorial scrollytelling SOTR deck: local-first routing measured on an 8 GB workstation, published as ModelCascade.">
+<meta name="author" content="Wayne Colt">
+<link rel="canonical" href="https://waynecolt.com/sotr/">
+<meta property="og:title" content="State of the Roadmap — Catalytic Computing">
+<meta property="og:description" content="A measured year of local-first routing. Origin, crucible, horizon.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://waynecolt.com/sotr/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;1,14..32,400&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════════════════
+   SOTR deck · design tokens (handoff spec, 2026-09-02)
+   Palette is restrained editorial monochrome with one signal accent.
+   Type: Newsreader (display) · Inter (narrative) · JetBrains Mono (telemetry)
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root {
+  --canvas-bg: #0d0f12;
+  --surface-bg: #15191e;
+  --surface-border: #262c35;
+  --text-primary: #f0f3f6;
+  --text-secondary: #9aa3b0;
+  --text-tertiary: #5f6876;
+  --accent-primary: #38bdf8;
+  --accent-glow: rgba(56, 189, 248, 0.12);
+
+  --font-display: "Newsreader", "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-body: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, monospace;
+
+  --header-h: 3.25rem;
+  --stage-share: 1.2fr;
+  --narrative-share: 0.88fr;
+  --gutter: clamp(1.1rem, 2.4vw, 2.4rem);
+  --radius: 2px;
+  --focus: 0 0 0 2px var(--canvas-bg), 0 0 0 4px var(--accent-primary);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  background: var(--canvas-bg);
+  color: var(--text-primary);
+}
+body {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  background:
+    radial-gradient(1200px 600px at 12% -10%, var(--accent-glow), transparent 55%),
+    var(--canvas-bg);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+:focus-visible { outline: none; box-shadow: var(--focus); }
+a { color: var(--accent-primary); text-underline-offset: 0.18em; }
+code, .mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+/* ── DeckHeader ─────────────────────────────────────────────────────────── */
+.deck-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 40;
+  height: var(--header-h);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 var(--gutter);
+  background: color-mix(in srgb, var(--canvas-bg) 82%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--surface-border);
+}
+.deck-title {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.deck-title b { color: var(--text-primary); font-weight: 500; }
+.deck-acts {
+  display: flex;
+  gap: 0.35rem;
+  justify-content: center;
+}
+.act-chip {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  color: var(--text-tertiary);
+  padding: 0.28rem 0.55rem;
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+.act-chip.is-current {
+  color: var(--accent-primary);
+  border-color: color-mix(in srgb, var(--accent-primary) 45%, var(--surface-border));
+  background: var(--accent-glow);
+}
+.deck-progress {
+  justify-self: end;
+  width: min(11rem, 28vw);
+  height: 2px;
+  background: var(--surface-border);
+  position: relative;
+}
+.deck-progress > span {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0%;
+  background: var(--accent-primary);
+  box-shadow: 0 0 12px var(--accent-primary);
+}
+
+/* ── Slides / dual-mode snap ────────────────────────────────────────────── */
+.slide {
+  min-height: 100vh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  scroll-margin-top: 0;
+}
+.cover, .close {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: calc(var(--header-h) + 3.5rem) var(--gutter) 3.2rem;
+  position: relative;
+}
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  color: var(--accent-primary);
+  margin: 0 0 1.1rem;
+}
+.cover h1 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2.6rem, 7vw, 5.6rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.4rem;
+  max-width: 14ch;
+}
+.cover h1 em { font-style: italic; font-weight: 400; color: var(--text-secondary); }
+.lede {
+  max-width: 46ch;
+  color: var(--text-secondary);
+  font-size: 1.08rem;
+  margin: 0 0 2.2rem;
+}
+.hint {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-tertiary);
+  letter-spacing: 0.08em;
+}
+
+/* ── Stage & Narrative grid ─────────────────────────────────────────────── */
+.chapter {
+  display: grid;
+  grid-template-columns: var(--stage-share) var(--narrative-share);
+  min-height: 100vh;
+}
+.stage {
+  position: sticky;
+  top: var(--header-h);
+  height: calc(100vh - var(--header-h));
+  align-self: start;
+  padding: 1.6rem var(--gutter) 1.6rem;
+  border-right: 1px solid var(--surface-border);
+  background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--surface-bg) 55%, transparent));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.stage-label {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.16em;
+  color: var(--text-tertiary);
+  margin-bottom: 0.8rem;
+}
+.stage-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+  font-weight: 500;
+  line-height: 1.15;
+  margin: 0 0 0.35rem;
+}
+.stage-title em { font-style: italic; color: var(--text-secondary); }
+.stage-copy {
+  color: var(--text-secondary);
+  max-width: 42ch;
+  margin: 0 0 1.6rem;
+  font-size: 0.98rem;
+}
+
+/* ── StageCanvas (SVG schematic) ────────────────────────────────────────── */
+.stage-canvas {
+  width: 100%;
+  max-width: 36rem;
+}
+.stage-canvas svg { width: 100%; height: auto; display: block; }
+.node-core {
+  fill: var(--surface-bg);
+  stroke: var(--surface-border);
+  stroke-width: 1.5;
+  transition: fill 280ms ease, stroke 280ms ease;
+}
+.node-core.is-lit {
+  fill: var(--accent-glow);
+  stroke: var(--accent-primary);
+}
+.node-pulse {
+  fill: none;
+  stroke: var(--accent-primary);
+  stroke-width: 1;
+  opacity: 0;
+}
+.node-core.is-lit + .node-pulse { opacity: 0.55; }
+.rail {
+  fill: none;
+  stroke: var(--surface-border);
+  stroke-width: 1.25;
+}
+.rail.is-lit { stroke: var(--accent-primary); }
+.node-cap {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  fill: var(--text-tertiary);
+  letter-spacing: 0.12em;
+}
+.node-cap.is-lit { fill: var(--accent-primary); }
+.tick {
+  fill: var(--surface-border);
+  transition: fill 200ms ease;
+}
+.tick.is-lit { fill: var(--accent-primary); }
+
+.narrative {
+  container-type: inline-size;
+  container-name: narrative;
+  padding: 0;
+}
+.step-card {
+  min-height: calc(100vh - var(--header-h));
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  scroll-margin-top: var(--header-h);
+  padding: 2.4rem var(--gutter) 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-bottom: 1px solid var(--surface-border);
+}
+.card-shell {
+  background: color-mix(in srgb, var(--surface-bg) 78%, transparent);
+  border: 1px solid var(--surface-border);
+  border-left: 2px solid var(--surface-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 1.45rem 1.4rem 1.35rem;
+  max-width: 38rem;
+  transition: border-color 220ms ease, background 220ms ease;
+}
+.step-card.is-active .card-shell {
+  border-left-color: var(--accent-primary);
+  background: color-mix(in srgb, var(--surface-bg) 88%, var(--accent-glow));
+}
+.stamp {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--text-tertiary);
+  margin: 0 0 0.7rem;
+}
+.step-card h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.55rem;
+  line-height: 1.2;
+  margin: 0 0 0.75rem;
+}
+.step-card p {
+  margin: 0 0 0.7rem;
+  color: var(--text-secondary);
+  max-width: 62ch;
+}
+.step-card p:last-of-type { margin-bottom: 1.15rem; }
+
+/* ── MetricDelta ────────────────────────────────────────────────────────── */
+.metric {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.35rem 1.1rem;
+  align-items: baseline;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--surface-border);
+}
+.metric-figure {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 1.85rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1;
+  grid-row: 1 / span 2;
+}
+.metric-badge {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.72rem;
+  color: var(--accent-primary);
+  letter-spacing: 0.04em;
+}
+.metric-base {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-tertiary);
+}
+
+/* ── HistoricalCallout ──────────────────────────────────────────────────── */
+.callout {
+  margin: 0 0 1.15rem;
+  padding: 0.2rem 0 0.2rem 1rem;
+  border-left: 2px solid var(--accent-primary);
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.18rem;
+  line-height: 1.45;
+}
+.callout cite {
+  display: block;
+  margin-top: 0.55rem;
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: var(--text-tertiary);
+}
+
+.close h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  margin: 0 0 1rem;
+  max-width: 16ch;
+}
+.close .lede { margin-bottom: 1.6rem; }
+.links { display: flex; flex-wrap: wrap; gap: 0.6rem 1.1rem; margin-bottom: 2rem; }
+.links a {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--accent-primary) 40%, transparent);
+  padding-bottom: 0.12rem;
+}
+.colophon {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-tertiary);
+  line-height: 1.85;
+  max-width: 62ch;
+}
+
+@container narrative (max-width: 28rem) {
+  .metric { grid-template-columns: 1fr; }
+  .metric-figure { grid-row: auto; margin-bottom: 0.25rem; }
+}
+
+@media (max-width: 900px) {
+  .deck-header { grid-template-columns: 1fr auto; }
+  .deck-progress { display: none; }
+  .chapter { grid-template-columns: 1fr; }
+  .stage {
+    position: sticky;
+    top: var(--header-h);
+    height: auto;
+    z-index: 8;
+    border-right: 0;
+    border-bottom: 1px solid var(--surface-border);
+    background: color-mix(in srgb, var(--canvas-bg) 88%, transparent);
+    backdrop-filter: blur(12px);
+    padding: 0.85rem var(--gutter) 0.7rem;
+  }
+  .stage-copy { display: none; }
+  .stage-title { font-size: 1.25rem; margin: 0; }
+  .stage-canvas { max-width: 100%; }
+  .step-card { min-height: auto; padding: 1.4rem var(--gutter) 2rem; }
+  .cover h1 { max-width: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; scroll-snap-type: y proximity; }
+  .node-core, .tick, .card-shell, .deck-progress > span { transition: none; }
+  .node-pulse { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- DeckHeader: telemetry bar. Chapter chips are also skip-links. -->
+<header class="deck-header" role="banner">
+  <div class="deck-title">SOTR · <b>Catalytic Computing</b></div>
+  <nav class="deck-acts" aria-label="Acts">
+    <button type="button" class="act-chip is-current" data-jump="#cover">00 / Open</button>
+    <button type="button" class="act-chip" data-jump="#origin">01 / Origin</button>
+    <button type="button" class="act-chip" data-jump="#crucible">02 / Crucible</button>
+    <button type="button" class="act-chip" data-jump="#horizon">03 / Horizon</button>
+  </nav>
+  <div class="deck-progress" aria-hidden="true"><span id="progress-fill"></span></div>
+</header>
+
+<!-- Cover · full-viewport opener -->
+<section class="slide cover" id="cover" data-step data-act="00 / OPEN" data-node="0">
+  <p class="kicker">State of the Roadmap · 2026</p>
+  <h1>The machine was already on. <em>Routing is the rest.</em></h1>
+  <p class="lede">
+    An executive walk through Catalytic Computing: what was measured on an
+    8&nbsp;GB AMD workstation, what shipped as open-source cascade routing,
+    and what compounds next. Presenter keys: ↓ ↑. Trackpad works.
+  </p>
+  <p class="hint">Scroll · or press Page Down</p>
+</section>
+
+<!-- 01 ORIGIN ──────────────────────────────────────────────────────────── -->
+<section class="chapter" id="origin" data-act="01 / ORIGIN" data-chapter-node="1">
+  <aside class="stage" aria-label="Origin stage">
+    <p class="stage-label">Stage · 01</p>
+    <h2 class="stage-title">Origin <em>— the budget is physical</em></h2>
+    <p class="stage-copy">A Polaris-class card driving a desktop does not get a second VRAM pool. Routing starts as a hardware fact.</p>
+    <div class="stage-canvas" data-canvas="origin"><!-- SVG injected once, cloned conceptually via shared markup --></div>
+  </aside>
+  <div class="narrative">
+
+    <article class="step-card" data-step data-node="1" data-tick="0">
+      <div class="card-shell">
+        <p class="stamp">[2026-03-22 — BENCH]</p>
+        <h3>Eight gigabytes is the whole argument</h3>
+        <p>The published Vulkan bench on an AMD Radeon Pro WX&nbsp;7100 records 8&nbsp;192&nbsp;MB total and 2&nbsp;974&nbsp;MB already gone before any specialist loads — compositor and resident services, not a footnote.</p>
+        <p>Plan inference from what is left. Spec-sheet VRAM is a marketing number; the JSON is the instrument.</p>
+        <div class="metric">
+          <div class="metric-figure">2.97 GB</div>
+          <div class="metric-badge">baseline used · 8 192 MB card</div>
+          <div class="metric-base">Base: wx7100_vulkan.json · 2026-03-22</div>
+        </div>
+      </div>
+    </article>
+
+    <article class="step-card" data-step data-node="1" data-tick="1">
+      <div class="card-shell">
+        <p class="stamp">[2026-03-22 — CLASSIFIER]</p>
+        <h3>Classify first, spend second</h3>
+        <p>SmolLM2-1.7B Q8 sits hot at ~1.78&nbsp;GB. Median classification is 90&nbsp;ms (mean 110, min 78). That is the cost of knowing which specialist is worth a cold load.</p>
+        <p>On this card, an 8B reasoner crawls at 1.8 tok/s. The 1.2B Q8 specialists hold ~102 tok/s. The routing decision is the product.</p>
+        <div class="metric">
+          <div class="metric-figure">90 ms</div>
+          <div class="metric-badge">p50 classify · 78–193 ms envelope</div>
+          <div class="metric-base">Base: SmolLM2-1.7B Q8 · Vulkan RADV</div>
+        </div>
+      </div>
+    </article>
+
+    <article class="step-card" data-step data-node="1" data-tick="2">
+      <div class="card-shell">
+        <p class="stamp">[FIELD NOTE — MARGINAL COST]</p>
+        <blockquote class="callout">
+          The real comparison isn’t cost per query — it’s whether the machine is already on.
+          <cite>Local Model Router for Linux · public README</cite>
+        </blockquote>
+        <p>Against that bench, hosted GPT-4o is tabled at about $10 per 1K queries. The router’s line is $0.00 — electricity the workstation was drawing anyway.</p>
+        <div class="metric">
+          <div class="metric-figure">$0</div>
+          <div class="metric-badge">vs ~$10 / 1K · GPT-4o table</div>
+          <div class="metric-base">Base: cost comparison in the public router README</div>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- 02 CRUCIBLE ────────────────────────────────────────────────────────── -->
+<section class="chapter" id="crucible" data-act="02 / CRUCIBLE" data-chapter-node="2">
+  <aside class="stage" aria-label="Crucible stage">
+    <p class="stage-label">Stage · 02</p>
+    <h2 class="stage-title">Crucible <em>— publish the cascade</em></h2>
+    <p class="stage-copy">The workstation result becomes a three-tier product: local first, escalate only when stuck, keys stay with the operator.</p>
+    <div class="stage-canvas" data-canvas="crucible"></div>
+  </aside>
+  <div class="narrative">
+
+    <article class="step-card" data-step data-node="2" data-tick="0">
+      <div class="card-shell">
+        <p class="stamp">[2026-04 — MODELCASCADE]</p>
+        <h3>Three tiers, one fail-cheap path</h3>
+        <p>ModelCascade ships LOCAL (Ollama / llama.cpp / vLLM at $0), FAST (hosted small), CAPABLE (frontier). Coverage as published: 74% / +18% / +8%.</p>
+        <p>Those percentages are the product’s stated split, not a new measurement from this sitting. The cascade is the schematic; the bench JSON remains the metal.</p>
+        <div class="metric">
+          <div class="metric-figure">74%</div>
+          <div class="metric-badge">LOCAL published share · +18% FAST</div>
+          <div class="metric-base">Base: ModelCascade README · waynecolt.com</div>
+        </div>
+      </div>
+    </article>
+
+    <article class="step-card" data-step data-node="2" data-tick="1">
+      <div class="card-shell">
+        <p class="stamp">[LICENSE — MIT]</p>
+        <h3>Your keys. No telemetry line.</h3>
+        <p>The public contract is BYOK and self-host. Paid tiers, if any, add operational tooling — they do not rent the routing decision. Core is MIT.</p>
+        <blockquote class="callout">
+          Data and models are commodity. Routing is intelligence.
+          <cite>waynecolt.com · live masthead</cite>
+        </blockquote>
+        <div class="metric">
+          <div class="metric-figure">MIT</div>
+          <div class="metric-badge">core license · BYOK · no proxy</div>
+          <div class="metric-base">Base: github.com/wayneColt/modelcascade</div>
+        </div>
+      </div>
+    </article>
+
+    <article class="step-card" data-step data-node="2" data-tick="2">
+      <div class="card-shell">
+        <p class="stamp">[THROUGHPUT — 1.2B Q8]</p>
+        <h3>Polaris has a sweet spot, and it is small</h3>
+        <p>Code specialist TERMINAL-LFM2.5-1.2B Q8: 102.0 tok/s, 12&nbsp;s cold load. General LFM2.5-1.2B Q8: 101.7 tok/s. The 8B Q4 reasoner is documented as impractical on GCN at 1.8 tok/s.</p>
+        <p>That is why the cascade exists as a product rather than a bigger local model. Hardware refused the heroic path; the schematic accepted it.</p>
+        <div class="metric">
+          <div class="metric-figure">102 t/s</div>
+          <div class="metric-badge">1.2B Q8 · 1.8 t/s at 8B Q4</div>
+          <div class="metric-base">Base: wx7100_vulkan.json specialists.code</div>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- 03 HORIZON ─────────────────────────────────────────────────────────── -->
+<section class="chapter" id="horizon" data-act="03 / HORIZON" data-chapter-node="3">
+  <aside class="stage" aria-label="Horizon stage">
+    <p class="stage-label">Stage · 03</p>
+    <h2 class="stage-title">Horizon <em>— compound, don’t rent</em></h2>
+    <p class="stage-copy">Overnight sessions are the intended n in (1+λ)ⁿ. The public site names the loop; this deck does not invent its yield.</p>
+    <div class="stage-canvas" data-canvas="horizon"></div>
+  </aside>
+  <div class="narrative">
+
+    <article class="step-card" data-step data-node="3" data-tick="0">
+      <div class="card-shell">
+        <p class="stamp">[EQUATION — LIVE SITE]</p>
+        <h3>Intelligence as routing over dependency</h3>
+        <p>waynecolt.com publishes INTELLIGENCE(t) = ROUTING(t) × (1+λ)ⁿ / DEPENDENCY(t). The move is to raise routing quality and session count, not to add another vendor in the denominator.</p>
+        <p>Compound learning — shadow pairs, distillation, graph memory — is listed as research on the homepage, not as a finished meter in this file.</p>
+        <div class="metric">
+          <div class="metric-figure">(1+λ)ⁿ</div>
+          <div class="metric-badge">n = overnight sessions · λ unclaimed here</div>
+          <div class="metric-base">Base: waynecolt.com equation strip</div>
+        </div>
+      </div>
+    </article>
+
+    <article class="step-card" data-step data-node="3" data-tick="1">
+      <div class="card-shell">
+        <p class="stamp">[OPEN — OPERATOR]</p>
+        <h3>What this deck will not do</h3>
+        <p>It will not backfill a year-over-year percentage that was not measured. It will not treat a homepage round-number as a lab result. Where a figure is published product copy, the card says so.</p>
+        <blockquote class="callout">
+          The arbitrage was always going to close. Route responsibly.
+          <cite>ModelCascade · closing line</cite>
+        </blockquote>
+        <div class="metric">
+          <div class="metric-figure">3</div>
+          <div class="metric-badge">acts · Origin / Crucible / Horizon</div>
+          <div class="metric-base">Base: this deck’s own structure</div>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- Close -->
+<section class="slide close" id="close" data-step data-act="03 / HORIZON" data-node="3">
+  <p class="kicker">Close · continue on the public rails</p>
+  <h2>Read the metal. Then read the product.</h2>
+  <p class="lede">
+    Benchmark JSON on GitHub is the origin. ModelCascade is the published cascade.
+    This file is the executive walk between them — one HTML document, no framework.
+  </p>
+  <p class="links">
+    <a href="https://waynecolt.com">waynecolt.com</a>
+    <a href="https://github.com/wayneColt">github.com/wayneColt</a>
+    <a href="https://github.com/wayneColt/local-model-router-linux">local-model-router-linux</a>
+    <a href="https://github.com/wayneColt/modelcascade">modelcascade</a>
+  </p>
+  <p class="colophon">
+    Catalytic Computing · Wayne Colt · 2026<br>
+    Keys: ArrowDown / PageDown / Space advance · ArrowUp / PageUp reverse · Home / End<br>
+    Figures tagged “JSON” are from the 2026-03-22 WX&nbsp;7100 Vulkan bench. Figures tagged “published” are the live product copy. λ is named, not numbered.
+  </p>
+</section>
+
+<script>
+(function () {
+  "use strict";
+
+  /* Shared 3-act schematic. Highlighted node follows the active narrative step. */
+  var svg = [
+    '<svg viewBox="0 0 560 168" role="img" aria-label="Three-act routing schematic">',
+    '<path class="rail rail-12" d="M78 84 H224"/>',
+    '<path class="rail rail-23" d="M280 84 H426"/>',
+    '<g data-svg-node="1">',
+    '  <circle class="node-core" cx="64" cy="84" r="14"/>',
+    '  <circle class="node-pulse" cx="64" cy="84" r="22"/>',
+    '  <text class="node-cap" x="64" y="128" text-anchor="middle">ORIGIN</text>',
+    '  <circle class="tick" data-tick="0" cx="48" cy="54" r="3"/>',
+    '  <circle class="tick" data-tick="1" cx="64" cy="46" r="3"/>',
+    '  <circle class="tick" data-tick="2" cx="80" cy="54" r="3"/>',
+    '</g>',
+    '<g data-svg-node="2">',
+    '  <circle class="node-core" cx="252" cy="84" r="14"/>',
+    '  <circle class="node-pulse" cx="252" cy="84" r="22"/>',
+    '  <text class="node-cap" x="252" y="128" text-anchor="middle">CRUCIBLE</text>',
+    '  <circle class="tick" data-tick="0" cx="236" cy="54" r="3"/>',
+    '  <circle class="tick" data-tick="1" cx="252" cy="46" r="3"/>',
+    '  <circle class="tick" data-tick="2" cx="268" cy="54" r="3"/>',
+    '</g>',
+    '<g data-svg-node="3">',
+    '  <circle class="node-core" cx="440" cy="84" r="14"/>',
+    '  <circle class="node-pulse" cx="440" cy="84" r="22"/>',
+    '  <text class="node-cap" x="440" y="128" text-anchor="middle">HORIZON</text>',
+    '  <circle class="tick" data-tick="0" cx="428" cy="50" r="3"/>',
+    '  <circle class="tick" data-tick="1" cx="452" cy="50" r="3"/>',
+    '</g>',
+    '</svg>'
+  ].join("");
+
+  document.querySelectorAll(".stage-canvas").forEach(function (el) {
+    el.innerHTML = svg;
+  });
+
+  var steps = Array.prototype.slice.call(document.querySelectorAll("[data-step]"));
+  var chips = Array.prototype.slice.call(document.querySelectorAll(".act-chip"));
+  var fill = document.getElementById("progress-fill");
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var activeIndex = 0;
+
+  function actFrom(el) {
+    if (el.hasAttribute("data-act") && !el.classList.contains("chapter")) return el.getAttribute("data-act");
+    var ch = el.closest("[data-act]");
+    return ch ? ch.getAttribute("data-act") : "00 / OPEN";
+  }
+
+  function paint(index) {
+    activeIndex = Math.max(0, Math.min(steps.length - 1, index));
+    var el = steps[activeIndex];
+    steps.forEach(function (s, i) { s.classList.toggle("is-active", i === activeIndex); });
+
+    var node = el.getAttribute("data-node") || "0";
+    var tick = el.getAttribute("data-tick");
+    document.querySelectorAll("[data-svg-node]").forEach(function (g) {
+      var lit = g.getAttribute("data-svg-node") === node;
+      g.querySelector(".node-core").classList.toggle("is-lit", lit);
+      g.querySelector(".node-cap").classList.toggle("is-lit", lit);
+      g.querySelectorAll(".tick").forEach(function (t) {
+        t.classList.toggle("is-lit", lit && tick != null && t.getAttribute("data-tick") === tick);
+      });
+    });
+    document.querySelectorAll(".rail-12").forEach(function (r) {
+      r.classList.toggle("is-lit", Number(node) >= 2);
+    });
+    document.querySelectorAll(".rail-23").forEach(function (r) {
+      r.classList.toggle("is-lit", Number(node) >= 3);
+    });
+
+    var act = actFrom(el);
+    chips.forEach(function (c) {
+      var target = (c.getAttribute("data-jump") || "").replace("#", "");
+      var on = false;
+      if (target === "cover") on = act.indexOf("OPEN") !== -1;
+      else if (target === "origin") on = act.indexOf("ORIGIN") !== -1;
+      else if (target === "crucible") on = act.indexOf("CRUCIBLE") !== -1;
+      else if (target === "horizon") on = act.indexOf("HORIZON") !== -1;
+      c.classList.toggle("is-current", on);
+    });
+    if (fill) fill.style.width = ((activeIndex + 1) / steps.length * 100).toFixed(1) + "%";
+  }
+
+  function go(delta) {
+    var next = activeIndex + delta;
+    if (next < 0 || next >= steps.length) return;
+    steps[next].scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  }
+
+  var io = new IntersectionObserver(function (entries) {
+    var best = null;
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      if (!best || e.intersectionRatio > best.intersectionRatio) best = e;
+    });
+    if (!best) return;
+    var i = steps.indexOf(best.target);
+    if (i >= 0) paint(i);
+  }, { threshold: [0.35, 0.55, 0.75], rootMargin: "-12% 0px -28% 0px" });
+
+  steps.forEach(function (s) { io.observe(s); });
+  paint(0);
+
+  window.addEventListener("keydown", function (ev) {
+    var tag = (ev.target && ev.target.tagName) || "";
+    if (tag === "INPUT" || tag === "TEXTAREA" || ev.target.isContentEditable) return;
+    if (ev.key === "ArrowDown" || ev.key === "PageDown" || (ev.key === " " && !ev.shiftKey)) {
+      ev.preventDefault(); go(1);
+    } else if (ev.key === "ArrowUp" || ev.key === "PageUp" || (ev.key === " " && ev.shiftKey)) {
+      ev.preventDefault(); go(-1);
+    } else if (ev.key === "Home") {
+      ev.preventDefault(); steps[0].scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
+    } else if (ev.key === "End") {
+      ev.preventDefault(); steps[steps.length - 1].scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
+    }
+  });
+
+  chips.forEach(function (c) {
+    c.addEventListener("click", function () {
+      var sel = c.getAttribute("data-jump");
+      var target = sel && document.querySelector(sel);
+      if (target) target.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+    });
+  });
+})();
+</script>
+</body>
+</html>
