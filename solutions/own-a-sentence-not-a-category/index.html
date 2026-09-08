@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Own a sentence, not a category | Catalytic Computing</title>
+<meta name="description" content="A contract you can quote, a runner you cannot copy, and one sentence no incumbent can say.">
+<meta property="og:title" content="Own a sentence, not a category">
+<meta property="og:description" content="A contract you can quote, a runner you cannot copy, and one sentence no incumbent can say.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://waynecolt.com/solutions/own-a-sentence-not-a-category/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://waynecolt.com/solutions/own-a-sentence-not-a-category/">
+<style>@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=IBM+Plex+Mono:wght@400;500;700&display=swap');
+:root{--stock:#E8E0D4;--stock-lt:#F0EBE3;--void:#0A0A0C;--optic:#E8450A;--cyan:#00B8D4;--magenta:#C2185B;--chrome:#9E9E9E;--terminal:#00C853;--line:rgba(10,10,12,0.10);--line-med:rgba(10,10,12,0.18)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--stock);color:var(--void);font-family:'IBM Plex Mono',monospace;font-size:14px;line-height:1.65;-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;top:0;left:0;right:0;height:4px;z-index:300;background:linear-gradient(90deg,var(--cyan) 0%,var(--cyan) 16.66%,var(--magenta) 16.66%,var(--magenta) 33.33%,var(--optic) 33.33%,var(--optic) 50%,var(--void) 50%,var(--void) 66.66%,var(--terminal) 66.66%,var(--terminal) 83.33%,var(--chrome) 83.33%,var(--chrome) 100%)}
+a{color:inherit}
+.hdr{display:flex;justify-content:space-between;align-items:center;padding:18px 40px;border-bottom:1px solid var(--line)}
+.hdr-id{font-size:10px;letter-spacing:.18em;color:var(--optic)}
+.hdr a{font-size:10px;color:var(--chrome);text-decoration:none;letter-spacing:.12em;text-transform:uppercase}
+.hdr a:hover{color:var(--void)}
+main{max-width:760px;margin:0 auto;padding:56px 24px 100px}
+.crumb{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--chrome);margin-bottom:18px}
+.crumb a{color:var(--optic);text-decoration:none}
+.type-badge{display:inline-block;font-size:8px;letter-spacing:.18em;text-transform:uppercase;padding:3px 8px;border:1px solid rgba(232,69,10,0.4);color:var(--optic);background:rgba(232,69,10,0.06);margin-bottom:16px}
+h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(30px,5vw,44px);line-height:1.05;letter-spacing:-.02em;margin-bottom:8px}
+.byline{font-size:11px;color:var(--chrome);letter-spacing:.06em;margin:10px 0 8px}
+h2{font-family:'Space Grotesk',sans-serif;font-size:24px;color:var(--void);font-weight:700;margin-top:48px;margin-bottom:18px}
+h3{font-family:'Space Grotesk',sans-serif;font-size:16px;margin:30px 0 12px}
+p{margin:0 0 16px} strong{font-weight:700} em{color:#4a4a52}
+a{color:var(--optic)}
+code{font-family:'IBM Plex Mono',monospace;background:var(--stock-lt);padding:1px 5px;border:1px solid var(--line);font-size:12.5px}
+hr{border:0;border-top:1px solid var(--line);margin:36px 0}
+table{border-collapse:collapse;width:100%;margin:18px 0;font-size:12.5px}
+th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+th{background:var(--stock-lt);font-family:'Space Grotesk',sans-serif}
+ul,ol{margin:0 0 16px 22px}li{margin-bottom:6px}
+.foot{border-top:1px solid var(--line);margin-top:50px;padding-top:18px;font-size:11px;color:var(--chrome)}
+.foot a{color:var(--optic)}</style>
+</head>
+<body>
+<header class="hdr"><div class="hdr-id">● CATALYTIC COMPUTING</div><a href="/solutions/">← Solutions</a></header>
+<main>
+<div class="crumb"><a href="/">waynecolt.com</a> / <a href="/solutions/">solutions</a> / own-a-sentence-not-a-category</div>
+<div class="type-badge">ARTICLE</div>
+<h1>Own a sentence, not a category</h1>
+<div class="byline">By WayneColt · 2026-09-08</div>
+<hr />
+<h1>Own a sentence, not a category</h1>
+<p><em>A contract you can quote, a runner you cannot copy, and one sentence no incumbent can say.</em></p>
+<p>You cannot win &quot;AI call QA.&quot; That category has a twenty-year incumbent shape and a frozen search prior. What you can own is a sentence that names constraints every incumbent violates:</p>
+<p>&gt; grade every service call against <em>our</em> script, on the recordings we already have, without adding a second phone vendor, under $5 a location</p>
+<p>Nobody owns that sentence, and nobody can, because it names four constraints and every incumbent breaks at least one. That is the whole product idea: the module is the product, and the buyer&#x27;s own words are the packaging.</p>
+<h2>What is public</h2>
+<p>One contract per module, at <a href="https://github.com/wayneColt/contracts">github.com/wayneColt/contracts</a>:</p>
+<ul><li><code>rubric.yaml</code> — the standard. The buyer writes it. The module will not run until it exists.</li><li><code>packet.yaml</code> — what is conserved, what the buyer controls, what stays hidden, what counts as noise.</li><li><code>in.schema.json</code> and <code>out.schema.json</code> — the input is one recorded call; the output separates what the model <em>observed</em> (scores 1–5, the intake outcome, a coaching note) from what code <em>decided</em> (the total, the outcome, the miss type, the alert, who gets credit).</li><li><code>clock.yaml</code> — paused by default: the module sleeps between batches and is not billed while asleep. Live is a separate SKU, because the world does not pause while it thinks; measured at a grade within 120 seconds of hangup.</li><li>a mock fixture and a golden eval set, synthetic, so an agent can check the contract before anyone signs.</li><li><code>pricing.md</code> — footnotes written to be quoted verbatim: what happens at the cap, what &quot;live&quot; means in seconds, what is retained and for how long, what is explicitly not included.</li></ul>
+<p>The first module, <code>voice-missed-booking</code>, has a runner behind it that has graded more than ten thousand recorded calls. Four more modules are declared by their job sentence and will get contracts when a runner has measured them: billed-versus-received reconciliation, answer-or-escalate correspondence, fields-off-the-scan documents, categorize-and-file books.</p>
+<h2>What is private</h2>
+<p>The loop, the composer, and the join. A competent shop can rebuild one organ from these schemas in a weekend. The second organ is where they stop, because a finding that needs two modules exists only in the join, and the join is not in any public contract. That is why modules price linearly and the join prices as a step.</p>
+<h2>Rules that hold everywhere</h2>
+<p>Model observes, code decides. No dollar value is ever estimated; revenue comes only from a value column the buyer supplies. Nothing sends outward until a human arms it. Audio is transcribed and discarded. If the standard has not been written, the module refuses to guess.</p>
+<h2>For agents</h2>
+<p>Read <code>AGENTS</code>-style: fetch the schemas, run the validator, check the golden cases, quote the pricing footnotes. The contract is the thing worth quoting at decision time; the runner is the thing worth not copying.</p>
+<p><em>The exploded diagram of how the parts fit is in the repo under <code>docs/</code>.</em></p>
+<div class="foot">© 2026 WayneColt · Catalytic Computing · <a href="/">waynecolt.com</a> · <a href="/solutions/">All solutions</a></div>
+</main>
+<div class="color-bar-bottom" style="display:flex;height:4px">
+  <span style="flex:1;background:#00B8D4"></span><span style="flex:1;background:#C2185B"></span><span style="flex:1;background:#E8450A"></span><span style="flex:1;background:#0A0A0C"></span><span style="flex:1;background:#00C853"></span><span style="flex:1;background:#9E9E9E"></span>
+</div>
+</body>
+</html>
