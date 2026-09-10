@@ -39,6 +39,14 @@
       "date": "2026-09-08",
       "type": "article",
       "path": "/solutions/own-a-sentence-not-a-category/"
+    },
+    {
+      "slug": "retrieval-over-generation",
+      "title": "Retrieval over generation",
+      "description": "What did we do the last time we saw this, and did the car come back? A question a shop can answer from its own records, without a model in the loop.",
+      "date": "2026-09-09",
+      "type": "article",
+      "path": "/solutions/retrieval-over-generation/"
     }
   ]
 }

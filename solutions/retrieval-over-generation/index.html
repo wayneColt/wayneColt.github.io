@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retrieval over generation | Catalytic Computing</title>
+<meta name="description" content="What did we do the last time we saw this, and did the car come back? A question a shop can answer from its own records, without a model in the loop.">
+<meta property="og:title" content="Retrieval over generation">
+<meta property="og:description" content="What did we do the last time we saw this, and did the car come back? A question a shop can answer from its own records, without a model in the loop.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://waynecolt.com/solutions/retrieval-over-generation/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://waynecolt.com/solutions/retrieval-over-generation/">
+<style>@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=IBM+Plex+Mono:wght@400;500;700&display=swap');
+:root{--stock:#E8E0D4;--stock-lt:#F0EBE3;--void:#0A0A0C;--optic:#E8450A;--cyan:#00B8D4;--magenta:#C2185B;--chrome:#9E9E9E;--terminal:#00C853;--line:rgba(10,10,12,0.10);--line-med:rgba(10,10,12,0.18)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--stock);color:var(--void);font-family:'IBM Plex Mono',monospace;font-size:14px;line-height:1.65;-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;top:0;left:0;right:0;height:4px;z-index:300;background:linear-gradient(90deg,var(--cyan) 0%,var(--cyan) 16.66%,var(--magenta) 16.66%,var(--magenta) 33.33%,var(--optic) 33.33%,var(--optic) 50%,var(--void) 50%,var(--void) 66.66%,var(--terminal) 66.66%,var(--terminal) 83.33%,var(--chrome) 83.33%,var(--chrome) 100%)}
+a{color:inherit}
+.hdr{display:flex;justify-content:space-between;align-items:center;padding:18px 40px;border-bottom:1px solid var(--line)}
+.hdr-id{font-size:10px;letter-spacing:.18em;color:var(--optic)}
+.hdr a{font-size:10px;color:var(--chrome);text-decoration:none;letter-spacing:.12em;text-transform:uppercase}
+.hdr a:hover{color:var(--void)}
+main{max-width:760px;margin:0 auto;padding:56px 24px 100px}
+.crumb{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--chrome);margin-bottom:18px}
+.crumb a{color:var(--optic);text-decoration:none}
+.type-badge{display:inline-block;font-size:8px;letter-spacing:.18em;text-transform:uppercase;padding:3px 8px;border:1px solid rgba(232,69,10,0.4);color:var(--optic);background:rgba(232,69,10,0.06);margin-bottom:16px}
+h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(30px,5vw,44px);line-height:1.05;letter-spacing:-.02em;margin-bottom:8px}
+.byline{font-size:11px;color:var(--chrome);letter-spacing:.06em;margin:10px 0 8px}
+h2{font-family:'Space Grotesk',sans-serif;font-size:24px;color:var(--void);font-weight:700;margin-top:48px;margin-bottom:18px}
+h3{font-family:'Space Grotesk',sans-serif;font-size:16px;margin:30px 0 12px}
+p{margin:0 0 16px} strong{font-weight:700} em{color:#4a4a52}
+a{color:var(--optic)}
+code{font-family:'IBM Plex Mono',monospace;background:var(--stock-lt);padding:1px 5px;border:1px solid var(--line);font-size:12.5px}
+hr{border:0;border-top:1px solid var(--line);margin:36px 0}
+table{border-collapse:collapse;width:100%;margin:18px 0;font-size:12.5px}
+th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+th{background:var(--stock-lt);font-family:'Space Grotesk',sans-serif}
+ul,ol{margin:0 0 16px 22px}li{margin-bottom:6px}
+.foot{border-top:1px solid var(--line);margin-top:50px;padding-top:18px;font-size:11px;color:var(--chrome)}
+.foot a{color:var(--optic)}</style>
+</head>
+<body>
+<header class="hdr"><div class="hdr-id">● CATALYTIC COMPUTING</div><a href="/solutions/">← Solutions</a></header>
+<main>
+<div class="crumb"><a href="/">waynecolt.com</a> / <a href="/solutions/">solutions</a> / retrieval-over-generation</div>
+<div class="type-badge">ARTICLE</div>
+<h1>Retrieval over generation</h1>
+<div class="byline">By WayneColt · 2026-09-09</div>
+<hr />
+<h1>Retrieval over generation</h1>
+<p><em>What did we do the last time we saw this, and did the car come back? A question a shop can answer from its own records, without a model in the loop.</em></p>
+<p>Every service bay has a memory problem. The shop has fixed this complaint before, on this platform, maybe on this exact vehicle, and the record of what was done is sitting in a closed repair order that nobody opens. The technician starts from zero. The industry&#x27;s answer is a diagnostic assistant: a model that reads the symptom and proposes a cause. That answer has a defect it cannot fix. A proposed cause is not checkable. The technician either trusts it or ignores it, and neither is a repair.</p>
+<p>The second contract in <a href="https://github.com/wayneColt/contracts">github.com/wayneColt/contracts</a> takes the other road. It owns this sentence:</p>
+<p>&gt; search our own completed repair orders by symptom and get back what we actually did and whether the car came back, from the export we already have, with no model in the loop, in under a tenth of a second</p>
+<p>Every clause is a constraint an incumbent violates. It searches <em>our</em> records, not a national corpus. It returns what was <em>done</em>, not what might be wrong. It reads the export the shop already has. No model runs, so there is nothing to hallucinate and nothing to license. And it answers in 77 milliseconds, measured on the deployed runner at the edge.</p>
+<h2>What comes back</h2>
+<p>A ranked list of the shop&#x27;s own repair orders. For each one: the job line as written, its category, the technician&#x27;s note, the flag hours, labor and parts as the export wrote them, and two facts that cost nothing to compute and are worth more than the ranking: how many times that vehicle has closed a repair order since, and whether it came back at all. A return is not proof the first repair was wrong. It is a pair worth opening. The contract says so, in the output, every time.</p>
+<p>Relevance is term rarity over the rows supplied, so a word that appears in every job carries no weight and a word that appears once carries a lot. That is deliberately ordinary. What is not ordinary is the discipline around it.</p>
+<h2>What the contract refuses</h2>
+<ul><li><strong>No standard, no run.</strong> The buyer writes the rubric: which field is the repair order number, which is the vehicle key, what counts as a comeback, which shop jargon to ignore. Without a named standard the module answers <code>NO_SIGNAL</code> and asks for one.</li><li><strong>No data at rest.</strong> The module is stateless. The repair orders travel with the question and are discarded with the answer.</li><li><strong>Nothing leaves unredacted.</strong> Technician notes are written mid-repair and carry phone numbers, emails and VINs. Every note is scrubbed before it is echoed, and the validator in the public repo fails any golden case whose note is not.</li><li><strong>No diagnosis.</strong> It retrieves prior work. It cannot know whether a past repair was correct, only that it was performed and whether the vehicle returned. That line is what makes every hit checkable.</li><li><strong>No risk score.</strong> Below three hundred labelled pairs the comeback label is a list to read, not a model to fit. A classifier at that size would be confident and wrong.</li></ul>
+<h2>What is public and what is not</h2>
+<p>The contract is public: the rubric shape, the packet, both schemas, a mock fixture, seven golden cases computed by the runner, and pricing footnotes written to be quoted verbatim. The runner that answers the question is not in the repository. That split is the whole model: the buyer can read exactly what they are buying and verify every promise against the golden set, and the thing that does the work stays the thing you pay for.</p>
+<p>Retrieval over generation is not a smaller ambition than a diagnostic assistant. It is the ambition with the receipts attached.</p>
+<div class="foot">© 2026 WayneColt · Catalytic Computing · <a href="/">waynecolt.com</a> · <a href="/solutions/">All solutions</a></div>
+</main>
+<div class="color-bar-bottom" style="display:flex;height:4px">
+  <span style="flex:1;background:#00B8D4"></span><span style="flex:1;background:#C2185B"></span><span style="flex:1;background:#E8450A"></span><span style="flex:1;background:#0A0A0C"></span><span style="flex:1;background:#00C853"></span><span style="flex:1;background:#9E9E9E"></span>
+</div>
+</body>
+</html>
