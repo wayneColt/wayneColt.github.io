@@ -1,0 +1,19 @@
+{
+  "name": "MURTY",
+  "short_name": "MURTY",
+  "description": "fidget · language of AI",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#050505",
+  "theme_color": "#000000",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "64x64",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

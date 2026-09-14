@@ -1,0 +1,701 @@
+{
+  "name": "murty",
+  "version": "1.1.0",
+  "title": "MURTY",
+  "subtitle": "fidget · language of AI",
+  "seconds_default": 80,
+  "timezone": "America/Chicago",
+  "drills": [
+    {
+      "id": "eval-schema-closed",
+      "stage": "evaluator/contracts",
+      "atom": "schema.closed",
+      "title": "Closed JSON Schema",
+      "seconds": 80,
+      "prompt": "Write a JSON Schema for an object {name: string, tokens: integer} that REJECTS extra properties. Valid JSON only. Object schemas must set additionalProperties to false.",
+      "assertions": [
+        { "op": "json_valid" },
+        { "op": "schema_closed" },
+        { "op": "json_path", "path": "type", "equals": "object" },
+        { "op": "json_path", "path": "additionalProperties", "equals": false },
+        { "op": "json_path", "path": "properties.name.type", "equals": "string" },
+        { "op": "json_path", "path": "properties.tokens.type", "equals": "integer" },
+        { "op": "json_path", "path": "required", "includes": "name" },
+        { "op": "json_path", "path": "required", "includes": "tokens" }
+      ],
+      "reveal": "Object schemas that omit additionalProperties: false accept unknown keys. The evaluator is a closed door.",
+      "good": [
+        "{\n  \"type\": \"object\",\n  \"additionalProperties\": false,\n  \"required\": [\"name\", \"tokens\"],\n  \"properties\": {\n    \"name\": { \"type\": \"string\" },\n    \"tokens\": { \"type\": \"integer\" }\n  }\n}"
+      ]
+    },
+    {
+      "id": "eval-tool-def",
+      "stage": "evaluator/contracts",
+      "atom": "tool.def",
+      "title": "Tool definition, closed parameters",
+      "seconds": 90,
+      "prompt": "Write an OpenAI-style tool definition named grade_atom. parameters is a closed object schema. Required: atom_id (string), pass (boolean). additionalProperties must be false on the parameters object.",
+      "assertions": [
+        { "op": "json_valid" },
+        { "op": "schema_closed" },
+        { "op": "contains", "value": "grade_atom" },
+        { "op": "json_path", "path": "function.name", "equals": "grade_atom" },
+        { "op": "json_path", "path": "function.parameters.additionalProperties", "equals": false },
+        { "op": "json_path", "path": "function.parameters.required", "includes": "atom_id" },
+        { "op": "json_path", "path": "function.parameters.required", "includes": "pass" },
+        { "op": "json_path", "path": "function.parameters.properties.atom_id.type", "equals": "string" },
+        { "op": "json_path", "path": "function.parameters.properties.pass.type", "equals": "boolean" }
+      ],
+      "reveal": "A tool without a closed parameters schema is an injection surface. Name, required, additionalProperties: false.",
+      "good": [
+        "{\n  \"type\": \"function\",\n  \"function\": {\n    \"name\": \"grade_atom\",\n    \"parameters\": {\n      \"type\": \"object\",\n      \"additionalProperties\": false,\n      \"required\": [\"atom_id\", \"pass\"],\n      \"properties\": {\n        \"atom_id\": { \"type\": \"string\" },\n        \"pass\": { \"type\": \"boolean\" }\n      }\n    }\n  }\n}"
+      ]
+    },
+    {
+      "id": "eval-required-fields",
+      "stage": "evaluator/contracts",
+      "atom": "schema.required",
+      "title": "Required route fields",
+      "seconds": 80,
+      "prompt": "Write a closed JSON Schema for a route row. Required: method, path, handler. method enum is GET and POST. No extra keys.",
+      "assertions": [
+        { "op": "json_valid" },
+        { "op": "schema_closed" },
+        { "op": "json_path", "path": "required", "includes": "method" },
+        { "op": "json_path", "path": "required", "includes": "path" },
+        { "op": "json_path", "path": "required", "includes": "handler" },
+        { "op": "json_path", "path": "properties.method.enum", "includes": "GET" },
+        { "op": "json_path", "path": "properties.method.enum", "includes": "POST" },
+        { "op": "json_path", "path": "additionalProperties", "equals": false }
+      ],
+      "reveal": "required[] is the contract. enum is the closed set. additionalProperties: false is the latch.",
+      "good": [
+        "{\n  \"type\": \"object\",\n  \"additionalProperties\": false,\n  \"required\": [\"method\", \"path\", \"handler\"],\n  \"properties\": {\n    \"method\": { \"type\": \"string\", \"enum\": [\"GET\", \"POST\"] },\n    \"path\": { \"type\": \"string\" },\n    \"handler\": { \"type\": \"string\" }\n  }\n}"
+      ]
+    },
+    {
+      "id": "eval-closed-rule",
+      "stage": "evaluator/contracts",
+      "atom": "schema.additionalProperties",
+      "title": "House rule: closed tool schemas",
+      "seconds": 70,
+      "prompt": "Write the grader house-rule as JSON (not a schema): {rule, matcher, fail_if_missing, required_value}. rule is tool_schema_must_be_closed. matcher is additionalProperties. fail_if_missing is true. required_value is false.",
+      "assertions": [
+        { "op": "json_valid" },
+        { "op": "json_path", "path": "rule", "equals": "tool_schema_must_be_closed" },
+        { "op": "json_path", "path": "matcher", "equals": "additionalProperties" },
+        { "op": "json_path", "path": "fail_if_missing", "equals": true },
+        { "op": "json_path", "path": "required_value", "equals": false },
+        { "op": "contains", "value": "additionalProperties" }
+      ],
+      "reveal": "Tool schemas without additionalProperties: false fail. That is a house rule, not a vibe.",
+      "good": [
+        "{\n  \"rule\": \"tool_schema_must_be_closed\",\n  \"matcher\": \"additionalProperties\",\n  \"fail_if_missing\": true,\n  \"required_value\": false\n}"
+      ]
+    },
+    {
+      "id": "eval-grade-request",
+      "stage": "evaluator/contracts",
+      "atom": "schema.grade_request",
+      "title": "Grade request schema",
+      "seconds": 80,
+      "prompt": "Write a closed JSON Schema for POST /api/grade. Required: drill_id, answer. Optional: chicago_day (string). Reject extra properties.",
+      "assertions": [
+        { "op": "json_valid" },
+        { "op": "schema_closed" },
+        { "op": "json_path", "path": "required", "includes": "drill_id" },
+        { "op": "json_path", "path": "required", "includes": "answer" },
+        { "op": "json_path", "path": "properties.chicago_day.type", "equals": "string" },
+        { "op": "json_path", "path": "additionalProperties", "equals": false },
+        { "op": "not_contains", "value": "please" }
+      ],
+      "reveal": "The grade endpoint consumes a closed request. Optional fields live in properties, not in required.",
+      "good": [
+        "{\n  \"type\": \"object\",\n  \"additionalProperties\": false,\n  \"required\": [\"drill_id\", \"answer\"],\n  \"properties\": {\n    \"drill_id\": { \"type\": \"string\" },\n    \"answer\": { \"type\": \"string\" },\n    \"chicago_day\": { \"type\": \"string\" }\n  }\n}"
+      ]
+    },
+    {
+      "id": "steer-no-consumer-register",
+      "stage": "language-of-AI",
+      "atom": "steer.register",
+      "title": "No consumer register",
+      "seconds": 80,
+      "prompt": "Write a SYSTEM prompt that steers a model to emit ONLY a JSON object {pass: boolean, failures: string[]}. No consumer register: do not write please, act as, or nice table. Contracts, not manners.",
+      "assertions": [
+        { "op": "no_consumer_register" },
+        { "op": "contains", "value": "pass" },
+        { "op": "contains", "value": "failures" },
+        { "op": "contains", "value": "JSON" },
+        { "op": "not_contains", "value": "please" },
+        { "op": "not_contains", "value": "act as" },
+        { "op": "not_contains", "value": "nice table" },
+        { "op": "token_max", "value": 80 }
+      ],
+      "reveal": "please / act as / nice table is consumer register. It fails steering drills. Emit the contract.",
+      "good": [
+        "SYSTEM: Emit only a JSON object with keys pass (boolean) and failures (array of string). Closed object. Empty answers fail. No consumer register."
+      ]
+    },
+    {
+      "id": "steer-contracts-not-vibes",
+      "stage": "language-of-AI",
+      "atom": "steer.contract",
+      "title": "Contracts, not vibes",
+      "seconds": 70,
+      "prompt": "Replace vibe instructions with a contract. Output JSON: {invariants: string[], grader, forbidden: string[]}. grader must be deterministic. forbidden must include vibes and consumer_register. Do not use please / act as / nice table.",
+      "assertions": [
+        { "op": "json_valid" },
+        { "op": "no_consumer_register" },
+        { "op": "json_path", "path": "grader", "equals": "deterministic" },
+        { "op": "json_path", "path": "forbidden", "includes": "vibes" },
+        { "op": "json_path", "path": "forbidden", "includes": "consumer_register" },
+        { "op": "contains", "value": "invariants" }
+      ],
+      "reveal": "A deterministic grader is the product. Vibes are not a predicate.",
+      "good": [
+        "{\n  \"invariants\": [\"empty answers fail\", \"streak moves only on pass===true\"],\n  \"grader\": \"deterministic\",\n  \"forbidden\": [\"vibes\", \"consumer_register\", \"mascots\"]\n}"
+      ]
+    },
+    {
+      "id": "steer-token-budget",
+      "stage": "language-of-AI",
+      "atom": "steer.tokens",
+      "title": "Token budget",
+      "seconds": 60,
+      "prompt": "Write a prompt-steer contract as JSON: {max_tokens, completion, stop}. max_tokens must be 256. completion must be json. stop is an array including ```.",
+      "assertions": [
+        { "op": "json_valid" },
+        { "op": "no_consumer_register" },
+        { "op": "json_path", "path": "max_tokens", "equals": 256 },
+        { "op": "json_path", "path": "completion", "equals": "json" },
+        { "op": "json_path", "path": "stop", "includes": "```" },
+        { "op": "token_max", "value": 60 }
+      ],
+      "reveal": "Budget is a number. Completion format is a closed enum. Stop sequences cut the tail.",
+      "good": [
+        "{\"max_tokens\":256,\"completion\":\"json\",\"stop\":[\"```\",\"\\n\\n\\n\"]}"
+      ]
+    },
+    {
+      "id": "steer-system-vs-user",
+      "stage": "language-of-AI",
+      "atom": "steer.roles",
+      "title": "System vs user",
+      "seconds": 80,
+      "prompt": "Write a two-message transcript as a JSON array. Index 0 role=system with invariants. Index 1 role=user with payload only. System content must contain the word invariants. User content must contain payload.",
+      "assertions": [
+        { "op": "json_valid" },
+        { "op": "no_consumer_register" },
+        { "op": "json_path", "path": "0.role", "equals": "system" },
+        { "op": "json_path", "path": "1.role", "equals": "user" },
+        { "op": "json_path", "path": "0.content", "includes": "invariants" },
+        { "op": "json_path", "path": "1.content", "includes": "payload" },
+        { "op": "not_contains", "value": "act as" }
+      ],
+      "reveal": "Invariants live in system. Payload lives in user. Mixing them is a steering leak.",
+      "good": [
+        "[\n  {\"role\":\"system\",\"content\":\"invariants: closed JSON; empty fails; no consumer register.\"},\n  {\"role\":\"user\",\"content\":\"payload: {\\\"drill_id\\\":\\\"steer-system-vs-user\\\"}\"}\n]"
+      ]
+    },
+    {
+      "id": "steer-token-unit",
+      "stage": "language-of-AI",
+      "atom": "steer.token_unit",
+      "title": "Token unit for the grader",
+      "seconds": 60,
+      "prompt": "Write the token-budget house rule as JSON: {unit, count, fail_when, max}. unit is whitespace_split. count is tokens. fail_when is gt_max. max is 256.",
+      "assertions": [
+        { "op": "json_valid" },
+        { "op": "no_consumer_register" },
+        { "op": "json_path", "path": "unit", "equals": "whitespace_split" },
+        { "op": "json_path", "path": "count", "equals": "tokens" },
+        { "op": "json_path", "path": "fail_when", "equals": "gt_max" },
+        { "op": "json_path", "path": "max", "equals": 256 }
+      ],
+      "reveal": "The grader splits on whitespace. Numbers, not feelings.",
+      "good": [
+        "{\"unit\":\"whitespace_split\",\"count\":\"tokens\",\"fail_when\":\"gt_max\",\"max\":256}"
+      ]
+    },
+    {
+      "id": "edge-workers-routes",
+      "stage": "edge",
+      "atom": "edge.routes",
+      "title": "Workers routes",
+      "seconds": 80,
+      "prompt": "Write a JSON array of {method, path, handler} for the Murty worker. Must include GET /api/health, GET /api/drills, POST /api/grade. Do not add an inference route.",
+      "assertions": [
+        { "op": "json_valid" },
+        { "op": "contains", "value": "/api/health" },
+        { "op": "contains", "value": "/api/drills" },
+        { "op": "contains", "value": "/api/grade" },
+        { "op": "contains", "value": "GET" },
+        { "op": "contains", "value": "POST" },
+        { "op": "not_contains", "value": "/api/infer" },
+        { "op": "not_contains", "value": "/api/complete" }
+      ],
+      "reveal": "Three routes. Health, drills, grade. No inference on the first-paint path.",
+      "good": [
+        "[\n  {\"method\":\"GET\",\"path\":\"/api/health\",\"handler\":\"health\"},\n  {\"method\":\"GET\",\"path\":\"/api/drills\",\"handler\":\"drills\"},\n  {\"method\":\"POST\",\"path\":\"/api/grade\",\"handler\":\"grade\"}\n]"
+      ]
+    },
+    {
+      "id": "edge-wrangler-assets",
+      "stage": "edge",
+      "atom": "edge.wrangler",
+      "title": "wrangler.jsonc assets",
+      "seconds": 70,
+      "prompt": "Write the wrangler config as JSON (no comments): name murty-fidget, main src/index.js, assets.directory ./public, observability.enabled true, compatibility_date 2026-09-14.",
+      "assertions": [
+        { "op": "json_valid" },
+        { "op": "json_path", "path": "name", "equals": "murty-fidget" },
+        { "op": "json_path", "path": "main", "equals": "src/index.js" },
+        { "op": "json_path", "path": "assets.directory", "equals": "./public" },
+        { "op": "json_path", "path": "observability.enabled", "equals": true },
+        { "op": "json_path", "path": "compatibility_date", "equals": "2026-09-14" }
+      ],
+      "reveal": "HUD is assets. Worker is main. First paint is a static file, not a worker round-trip.",
+      "good": [
+        "{\n  \"name\": \"murty-fidget\",\n  \"main\": \"src/index.js\",\n  \"compatibility_date\": \"2026-09-14\",\n  \"assets\": { \"directory\": \"./public\" },\n  \"observability\": { \"enabled\": true }\n}"
+      ]
+    },
+    {
+      "id": "edge-cache-headers",
+      "stage": "edge",
+      "atom": "edge.cache",
+      "title": "Cache headers",
+      "seconds": 80,
+      "prompt": "Write Cache-Control lines for three paths. index.html: no-store. drills.json: public, max-age=60. POST /api/grade: no-store. Include the header name Cache-Control on each.",
+      "assertions": [
+        { "op": "contains", "value": "Cache-Control" },
+        { "op": "contains", "value": "no-store" },
+        { "op": "contains", "value": "max-age=60" },
+        { "op": "contains", "value": "drills.json" },
+        { "op": "contains", "value": "index.html" },
+        { "op": "contains", "value": "/api/grade" },
+        { "op": "regex", "value": "Cache-Control:\\s*no-store" }
+      ],
+      "reveal": "HTML is no-store so the fidget does not lie about the clock. drills.json may cache briefly. Grade is never cached.",
+      "good": [
+        "GET /index.html\nCache-Control: no-store\n\nGET /drills.json\nCache-Control: public, max-age=60\n\nPOST /api/grade\nCache-Control: no-store"
+      ]
+    },
+    {
+      "id": "edge-no-first-paint-llm",
+      "stage": "edge",
+      "atom": "edge.first_paint",
+      "title": "No first-paint fetch to LLM",
+      "seconds": 60,
+      "prompt": "Write the first-paint law as JSON: {fetch_llm, pyodide, drills, worker_required}. fetch_llm false, pyodide false, drills static, worker_required false.",
+      "assertions": [
+        { "op": "json_valid" },
+        { "op": "json_path", "path": "fetch_llm", "equals": false },
+        { "op": "json_path", "path": "pyodide", "equals": false },
+        { "op": "json_path", "path": "drills", "equals": "static" },
+        { "op": "json_path", "path": "worker_required", "equals": false },
+        { "op": "not_contains", "value": "openai" },
+        { "op": "not_contains", "value": "anthropic" }
+      ],
+      "reveal": "First paint is HTML + CSS + JS + an inlined bootstrap drill. The worker is optional. No inference.",
+      "good": [
+        "{\"fetch_llm\":false,\"pyodide\":false,\"drills\":\"static\",\"worker_required\":false}"
+      ]
+    },
+    {
+      "id": "deliver-pwa-sw",
+      "stage": "delivery",
+      "atom": "delivery.pwa",
+      "title": "PWA / service worker",
+      "seconds": 90,
+      "prompt": "Write a service-worker install handler in JS. Cache name murty-v1. Precache /, /index.html, /app.js, /grader.js, /drills.json, /style.css. Use addEventListener('install', ...).",
+      "assertions": [
+        { "op": "contains", "value": "murty-v1" },
+        { "op": "contains", "value": "/drills.json" },
+        { "op": "contains", "value": "/grader.js" },
+        { "op": "contains", "value": "addEventListener" },
+        { "op": "contains", "value": "install" },
+        { "op": "contains", "value": "caches.open" },
+        { "op": "not_contains", "value": "pyodide" }
+      ],
+      "reveal": "The SW is a cache, not a brain. Precache the HUD. Never fetch a model on install.",
+      "good": [
+        "const CACHE = 'murty-v1';\nconst PRECACHE = ['/', '/index.html', '/app.js', '/grader.js', '/drills.json', '/style.css'];\nself.addEventListener('install', (e) => {\n  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(PRECACHE)));\n});"
+      ]
+    },
+    {
+      "id": "deliver-first-paint-budget",
+      "stage": "delivery",
+      "atom": "delivery.budget",
+      "title": "First-paint budget",
+      "seconds": 60,
+      "prompt": "Write first-paint budget JSON: {max_ms, blocking_scripts, inference, pyodide}. max_ms is 100. blocking_scripts is 0. inference false. pyodide false.",
+      "assertions": [
+        { "op": "json_valid" },
+        { "op": "json_path", "path": "max_ms", "equals": 100 },
+        { "op": "json_path", "path": "blocking_scripts", "equals": 0 },
+        { "op": "json_path", "path": "inference", "equals": false },
+        { "op": "json_path", "path": "pyodide", "equals": false }
+      ],
+      "reveal": "100ms is the budget. Zero blocking scripts. Zero inference. Zero Pyodide.",
+      "good": [
+        "{\"max_ms\":100,\"blocking_scripts\":0,\"inference\":false,\"pyodide\":false}"
+      ]
+    },
+    {
+      "id": "deliver-no-pyodide",
+      "stage": "delivery",
+      "atom": "delivery.runtime",
+      "title": "No Python runtime on first paint",
+      "seconds": 60,
+      "prompt": "Write the runtime allowlist as JSON: {first_paint: [html, css, js], forbid: [pyodide, python, wasm-python]}.",
+      "assertions": [
+        { "op": "json_valid" },
+        { "op": "json_path", "path": "first_paint", "includes": "html" },
+        { "op": "json_path", "path": "first_paint", "includes": "css" },
+        { "op": "json_path", "path": "first_paint", "includes": "js" },
+        { "op": "json_path", "path": "forbid", "includes": "pyodide" },
+        { "op": "json_path", "path": "forbid", "includes": "python" },
+        { "op": "not_contains", "value": "loadPyodide" }
+      ],
+      "reveal": "Jobsite Spanish does not boot a Python interpreter to say hola. Neither does Murty.",
+      "good": [
+        "{\"first_paint\":[\"html\",\"css\",\"js\"],\"forbid\":[\"pyodide\",\"python\",\"wasm-python\"]}"
+      ]
+    },
+    {
+      "id": "deliver-ctrl-enter-streak",
+      "stage": "delivery",
+      "atom": "delivery.streak",
+      "title": "Ctrl+Enter and streak invariant",
+      "seconds": 70,
+      "prompt": "Write the HUD keybind + streak invariant as JSON: {run, reveal_increments_streak, streak_moves_on, timezone}. run is Ctrl+Enter. reveal_increments_streak is false. streak_moves_on is pass===true. timezone is America/Chicago.",
+      "assertions": [
+        { "op": "json_valid" },
+        { "op": "json_path", "path": "run", "equals": "Ctrl+Enter" },
+        { "op": "json_path", "path": "reveal_increments_streak", "equals": false },
+        { "op": "json_path", "path": "streak_moves_on", "equals": "pass===true" },
+        { "op": "json_path", "path": "timezone", "equals": "America/Chicago" }
+      ],
+      "reveal": "Ctrl+Enter runs assertions. Reveal does not increment streak. Streak is a Chicago calendar, not a dopamine counter.",
+      "good": [
+        "{\"run\":\"Ctrl+Enter\",\"reveal_increments_streak\":false,\"streak_moves_on\":\"pass===true\",\"timezone\":\"America/Chicago\"}"
+      ]
+    },
+    {
+      "id": "b2-broadcast",
+      "stage": "B2",
+      "atom": "torch.broadcast",
+      "title": "Broadcast must be explicit",
+      "seconds": 90,
+      "prompt": "WRITE THE CONTRACT. JSON: {op, shapes_must, fail_if, fix, assert}. op is broadcast. shapes_must is explicit. fail_if is silent_expand. fix is view_or_expand_as. assert must mention shape.",
+      "assertions": [
+        { "op": "json_valid" },
+        { "op": "json_path", "path": "op", "equals": "broadcast" },
+        { "op": "json_path", "path": "shapes_must", "equals": "explicit" },
+        { "op": "json_path", "path": "fail_if", "equals": "silent_expand" },
+        { "op": "json_path", "path": "fix", "equals": "view_or_expand_as" },
+        { "op": "contains", "value": "shape" }
+      ],
+      "reveal": "Silent broadcast is a shape bug with a green loss. Expand on purpose or fail.",
+      "good": [
+        "{\n  \"op\": \"broadcast\",\n  \"shapes_must\": \"explicit\",\n  \"fail_if\": \"silent_expand\",\n  \"fix\": \"view_or_expand_as\",\n  \"assert\": \"a.shape == b.shape or torch.broadcast_shapes is documented\"\n}"
+      ]
+    },
+    {
+      "id": "b2-no-grad-leak",
+      "stage": "B2",
+      "atom": "torch.no_grad",
+      "title": "no_grad leak",
+      "seconds": 90,
+      "prompt": "WRITE THE CONTRACT. Inference tensors must not leak into the graph. JSON: {context, leak_if, train_step_must, eval_forward}. context is torch.no_grad. leak_if is require_grad=True. train_step_must is enable_grad. eval_forward must contain torch.no_grad.",
+      "assertions": [
+        { "op": "json_valid" },
+        { "op": "json_path", "path": "context", "equals": "torch.no_grad" },
+        { "op": "json_path", "path": "leak_if", "equals": "require_grad=True" },
+        { "op": "json_path", "path": "train_step_must", "equals": "enable_grad" },
+        { "op": "contains", "value": "torch.no_grad" },
+        { "op": "contains", "value": "require_grad" }
+      ],
+      "reveal": "Eval under no_grad. Train under enable_grad. A leaked require_grad=True is a memory fire.",
+      "good": [
+        "{\n  \"context\": \"torch.no_grad\",\n  \"leak_if\": \"require_grad=True\",\n  \"train_step_must\": \"enable_grad\",\n  \"eval_forward\": \"with torch.no_grad(): logits = model(x)\"\n}"
+      ]
+    },
+    {
+      "id": "b2-train-eval",
+      "stage": "B2",
+      "atom": "torch.train_eval",
+      "title": "train/eval mismatch",
+      "seconds": 80,
+      "prompt": "WRITE THE CONTRACT. Dropout and BatchNorm must match the phase. JSON: {train, eval, fail_if, bn}. train is model.train(). eval is model.eval(). fail_if is dropout_on_at_eval. bn is running_stats_frozen_in_eval.",
+      "assertions": [
+        { "op": "json_valid" },
+        { "op": "json_path", "path": "train", "equals": "model.train()" },
+        { "op": "json_path", "path": "eval", "equals": "model.eval()" },
+        { "op": "json_path", "path": "fail_if", "equals": "dropout_on_at_eval" },
+        { "op": "json_path", "path": "bn", "equals": "running_stats_frozen_in_eval" }
+      ],
+      "reveal": "model.eval() is not optional. Measuring dropout noise is not a metric.",
+      "good": [
+        "{\n  \"train\": \"model.train()\",\n  \"eval\": \"model.eval()\",\n  \"fail_if\": \"dropout_on_at_eval\",\n  \"bn\": \"running_stats_frozen_in_eval\"\n}"
+      ]
+    },
+    {
+      "id": "b2-detach",
+      "stage": "B2",
+      "atom": "torch.detach",
+      "title": "detach",
+      "seconds": 80,
+      "prompt": "WRITE THE CONTRACT. When a tensor must leave the graph. JSON: {op, use, never, example}. op is detach. use is targets_and_metrics. never is parameters_path. example must contain detach.",
+      "assertions": [
+        { "op": "json_valid" },
+        { "op": "json_path", "path": "op", "equals": "detach" },
+        { "op": "json_path", "path": "use", "equals": "targets_and_metrics" },
+        { "op": "json_path", "path": "never", "equals": "parameters_path" },
+        { "op": "contains", "value": "detach" }
+      ],
+      "reveal": "Log with loss.detach().item(). Never detach the parameter path you still need to train.",
+      "good": [
+        "{\n  \"op\": \"detach\",\n  \"use\": \"targets_and_metrics\",\n  \"never\": \"parameters_path\",\n  \"example\": \"loss_log = loss.detach().item()\"\n}"
+      ]
+    },
+    {
+      "id": "b2-inplace",
+      "stage": "B2",
+      "atom": "torch.inplace",
+      "title": "In-place vs out-of-place",
+      "seconds": 90,
+      "prompt": "WRITE THE CONTRACT. JSON: {forbid, reason, use, ok}. forbid is an array including add_ and relu_. reason is autograd_version_counter. use is out_of_place. ok includes add and relu.",
+      "assertions": [
+        { "op": "json_valid" },
+        { "op": "json_path", "path": "forbid", "includes": "add_" },
+        { "op": "json_path", "path": "forbid", "includes": "relu_" },
+        { "op": "json_path", "path": "reason", "equals": "autograd_version_counter" },
+        { "op": "json_path", "path": "use", "equals": "out_of_place" },
+        { "op": "json_path", "path": "ok", "includes": "add" },
+        { "op": "json_path", "path": "ok", "includes": "relu" }
+      ],
+      "reveal": "In-place ops bump the version counter and break the graph. Prefer out-of-place.",
+      "good": [
+        "{\n  \"forbid\": [\"add_\", \"relu_\", \"mul_\"],\n  \"reason\": \"autograd_version_counter\",\n  \"use\": \"out_of_place\",\n  \"ok\": [\"add\", \"relu\", \"mul\"]\n}"
+      ]
+    },
+    {
+      "id": "b2-retain-graph",
+      "stage": "B2",
+      "atom": "torch.retain_graph",
+      "title": "Autograd graph retain",
+      "seconds": 90,
+      "prompt": "WRITE THE CONTRACT. JSON: {backward_once, retain_graph_default, allow_when, second_backward}. backward_once true. retain_graph_default false. allow_when is two_heads_one_graph. second_backward must contain retain_graph.",
+      "assertions": [
+        { "op": "json_valid" },
+        { "op": "json_path", "path": "backward_once", "equals": true },
+        { "op": "json_path", "path": "retain_graph_default", "equals": false },
+        { "op": "json_path", "path": "allow_when", "equals": "two_heads_one_graph" },
+        { "op": "contains", "value": "retain_graph" }
+      ],
+      "reveal": "Default is one backward, graph freed. retain_graph=True is a special case, then free.",
+      "good": [
+        "{\n  \"backward_once\": true,\n  \"retain_graph_default\": false,\n  \"allow_when\": \"two_heads_one_graph\",\n  \"second_backward\": \"retain_graph=True then free\"\n}"
+      ]
+    },
+    {
+      "id": "b2-amp-scaler",
+      "stage": "B2",
+      "atom": "torch.amp",
+      "title": "AMP / GradScaler order",
+      "seconds": 100,
+      "prompt": "WRITE THE CONTRACT. JSON: {autocast, scaler, order}. autocast is torch.cuda.amp.autocast. scaler is GradScaler. order is the array [autocast_forward, scaler.scale(loss).backward(), scaler.step(opt), scaler.update()].",
+      "assertions": [
+        { "op": "json_valid" },
+        { "op": "json_path", "path": "autocast", "equals": "torch.cuda.amp.autocast" },
+        { "op": "json_path", "path": "scaler", "equals": "GradScaler" },
+        { "op": "json_path", "path": "order", "includes": "autocast_forward" },
+        { "op": "json_path", "path": "order", "includes": "scaler.scale(loss).backward()" },
+        { "op": "json_path", "path": "order", "includes": "scaler.step(opt)" },
+        { "op": "json_path", "path": "order", "includes": "scaler.update()" }
+      ],
+      "reveal": "Forward under autocast. Backward through scaler.scale. step, then update. Skip the scaler and you skip the unscale.",
+      "good": [
+        "{\n  \"autocast\": \"torch.cuda.amp.autocast\",\n  \"scaler\": \"GradScaler\",\n  \"order\": [\"autocast_forward\", \"scaler.scale(loss).backward()\", \"scaler.step(opt)\", \"scaler.update()\"]\n}"
+      ]
+    },
+    {
+      "id": "b2-ddp-device",
+      "stage": "B2",
+      "atom": "torch.ddp",
+      "title": "DataParallel vs DDP device",
+      "seconds": 90,
+      "prompt": "WRITE THE CONTRACT. JSON: {prefer, avoid, device, init}. prefer is DistributedDataParallel. avoid is DataParallel. device is cuda:local_rank. init is init_process_group.",
+      "assertions": [
+        { "op": "json_valid" },
+        { "op": "json_path", "path": "prefer", "equals": "DistributedDataParallel" },
+        { "op": "json_path", "path": "avoid", "equals": "DataParallel" },
+        { "op": "json_path", "path": "device", "equals": "cuda:local_rank" },
+        { "op": "json_path", "path": "init", "equals": "init_process_group" }
+      ],
+      "reveal": "DataParallel scatters from cuda:0 and lies about device. DDP binds cuda:local_rank after init_process_group.",
+      "good": [
+        "{\n  \"prefer\": \"DistributedDataParallel\",\n  \"avoid\": \"DataParallel\",\n  \"device\": \"cuda:local_rank\",\n  \"init\": \"init_process_group\",\n  \"never\": \"module.to('cuda') then DataParallel scatter surprise\"\n}"
+      ]
+    },
+    {
+      "id": "agent-retry-budget",
+      "stage": "C1",
+      "atom": "agent.retry",
+      "title": "Retry budget",
+      "seconds": 80,
+      "prompt": "WRITE THE CONTRACT. JSON: {max_retries, backoff_ms, retry_on, no_retry_on}. max_retries is 3. backoff_ms is [200, 800, 2000]. retry_on includes timeout and 429. no_retry_on includes 400 and schema_fail.",
+      "assertions": [
+        { "op": "json_valid" },
+        { "op": "json_path", "path": "max_retries", "equals": 3 },
+        { "op": "json_path", "path": "backoff_ms", "includes": 200 },
+        { "op": "json_path", "path": "retry_on", "includes": "timeout" },
+        { "op": "json_path", "path": "retry_on", "includes": "429" },
+        { "op": "json_path", "path": "no_retry_on", "includes": "400" },
+        { "op": "json_path", "path": "no_retry_on", "includes": "schema_fail" }
+      ],
+      "reveal": "Retry is a budget, not hope. Schema failures and 400s do not get another throw.",
+      "good": [
+        "{\n  \"max_retries\": 3,\n  \"backoff_ms\": [200, 800, 2000],\n  \"retry_on\": [\"timeout\", \"429\", \"503\"],\n  \"no_retry_on\": [\"400\", \"schema_fail\"]\n}"
+      ]
+    },
+    {
+      "id": "agent-tool-arg-injection",
+      "stage": "C1",
+      "atom": "agent.injection",
+      "title": "Tool-arg injection",
+      "seconds": 90,
+      "prompt": "WRITE THE CONTRACT. Tool args are untrusted. JSON: {parse, additionalProperties, reject, never_concat}. parse is json_schema. additionalProperties is false. reject includes path_traversal. never_concat is untrusted_observation_into_argv.",
+      "assertions": [
+        { "op": "json_valid" },
+        { "op": "json_path", "path": "parse", "equals": "json_schema" },
+        { "op": "json_path", "path": "additionalProperties", "equals": false },
+        { "op": "json_path", "path": "reject", "includes": "path_traversal" },
+        { "op": "json_path", "path": "never_concat", "equals": "untrusted_observation_into_argv" }
+      ],
+      "reveal": "Validate against a closed schema before the call. Never concatenate an observation into argv.",
+      "good": [
+        "{\n  \"parse\": \"json_schema\",\n  \"additionalProperties\": false,\n  \"reject\": [\"$ref_escape\", \"prototype_pollution\", \"path_traversal\"],\n  \"never_concat\": \"untrusted_observation_into_argv\"\n}"
+      ]
+    },
+    {
+      "id": "agent-eval-harness",
+      "stage": "C1",
+      "atom": "agent.eval",
+      "title": "Eval harness",
+      "seconds": 80,
+      "prompt": "WRITE THE CONTRACT. JSON: {gold, metric, split, n, forbid}. gold is frozen. metric is exact_match. split is held_out. n is 34. forbid is train_on_test.",
+      "assertions": [
+        { "op": "json_valid" },
+        { "op": "json_path", "path": "gold", "equals": "frozen" },
+        { "op": "json_path", "path": "metric", "equals": "exact_match" },
+        { "op": "json_path", "path": "split", "equals": "held_out" },
+        { "op": "json_path", "path": "n", "equals": 34 },
+        { "op": "json_path", "path": "forbid", "equals": "train_on_test" }
+      ],
+      "reveal": "34 frozen golds. exact_match. held_out. Training on the test set is not intelligence.",
+      "good": [
+        "{\n  \"gold\": \"frozen\",\n  \"metric\": \"exact_match\",\n  \"split\": \"held_out\",\n  \"n\": 34,\n  \"forbid\": \"train_on_test\"\n}"
+      ]
+    },
+    {
+      "id": "agent-timeout-vs-retry",
+      "stage": "C1",
+      "atom": "agent.timeout",
+      "title": "Timeout vs retry",
+      "seconds": 80,
+      "prompt": "WRITE THE CONTRACT. Timeout caps retry. JSON: {timeout_ms, retry_budget, xor, clock, rule}. timeout_ms is 8000. retry_budget is 3. xor is do not retry after deadline. clock is monotonic. rule is timeout_caps_retry.",
+      "assertions": [
+        { "op": "json_valid" },
+        { "op": "json_path", "path": "timeout_ms", "equals": 8000 },
+        { "op": "json_path", "path": "retry_budget", "equals": 3 },
+        { "op": "json_path", "path": "xor", "equals": "do not retry after deadline" },
+        { "op": "json_path", "path": "clock", "equals": "monotonic" },
+        { "op": "json_path", "path": "rule", "equals": "timeout_caps_retry" }
+      ],
+      "reveal": "A retry after the deadline is a new request pretending to be the old one. Monotonic clock. XOR.",
+      "good": [
+        "{\n  \"timeout_ms\": 8000,\n  \"retry_budget\": 3,\n  \"xor\": \"do not retry after deadline\",\n  \"clock\": \"monotonic\",\n  \"rule\": \"timeout_caps_retry\"\n}"
+      ]
+    },
+    {
+      "id": "agent-idempotency-key",
+      "stage": "C1",
+      "atom": "agent.idempotency",
+      "title": "Idempotency key",
+      "seconds": 80,
+      "prompt": "WRITE THE CONTRACT. Mutating tool calls need an idempotency key. JSON: {header, key, replay, store}. header is Idempotency-Key. key is hash(drill_id+attempt_scope). replay is same_key_same_effect. store is ledger_only_on_pass.",
+      "assertions": [
+        { "op": "json_valid" },
+        { "op": "json_path", "path": "header", "equals": "Idempotency-Key" },
+        { "op": "json_path", "path": "key", "equals": "hash(drill_id+attempt_scope)" },
+        { "op": "json_path", "path": "replay", "equals": "same_key_same_effect" },
+        { "op": "json_path", "path": "store", "equals": "ledger_only_on_pass" }
+      ],
+      "reveal": "Same key, same effect. Ledger writes only on pass. Retries must not double-mutate.",
+      "good": [
+        "{\n  \"header\": \"Idempotency-Key\",\n  \"key\": \"hash(drill_id+attempt_scope)\",\n  \"replay\": \"same_key_same_effect\",\n  \"store\": \"ledger_only_on_pass\"\n}"
+      ]
+    },
+    {
+      "id": "agent-schema-before-call",
+      "stage": "C1",
+      "atom": "agent.schema",
+      "title": "Schema before call",
+      "seconds": 80,
+      "prompt": "WRITE THE CONTRACT. JSON: {order, additionalProperties, skip_call_on}. order is [load_tool_schema, validate_args, call]. additionalProperties is false. skip_call_on is schema_fail.",
+      "assertions": [
+        { "op": "json_valid" },
+        { "op": "json_path", "path": "order", "includes": "load_tool_schema" },
+        { "op": "json_path", "path": "order", "includes": "validate_args" },
+        { "op": "json_path", "path": "order", "includes": "call" },
+        { "op": "json_path", "path": "additionalProperties", "equals": false },
+        { "op": "json_path", "path": "skip_call_on", "equals": "schema_fail" }
+      ],
+      "reveal": "Load schema, validate args, then call. Schema fail skips the call. additionalProperties: false.",
+      "good": [
+        "{\n  \"order\": [\"load_tool_schema\", \"validate_args\", \"call\"],\n  \"additionalProperties\": false,\n  \"skip_call_on\": \"schema_fail\"\n}"
+      ]
+    },
+    {
+      "id": "agent-observation-vs-thought",
+      "stage": "C1",
+      "atom": "agent.observe",
+      "title": "Observation vs thought",
+      "seconds": 80,
+      "prompt": "WRITE THE CONTRACT. JSON: {thought, observation, never, format}. thought is private. observation is tool_result_only. never is tool_result_inside_thought_unlabeled. format must contain Observation.",
+      "assertions": [
+        { "op": "json_valid" },
+        { "op": "json_path", "path": "thought", "equals": "private" },
+        { "op": "json_path", "path": "observation", "equals": "tool_result_only" },
+        { "op": "json_path", "path": "never", "equals": "tool_result_inside_thought_unlabeled" },
+        { "op": "contains", "value": "Observation" }
+      ],
+      "reveal": "Thought is private. Observation is the tool result, labeled. Unlabeled tool text inside thought is a lie.",
+      "good": [
+        "{\n  \"thought\": \"private\",\n  \"observation\": \"tool_result_only\",\n  \"never\": \"tool_result_inside_thought_unlabeled\",\n  \"format\": \"Thought: ...\\nObservation: ...\"\n}"
+      ]
+    },
+    {
+      "id": "agent-stop-condition",
+      "stage": "C1",
+      "atom": "agent.stop",
+      "title": "Stop condition",
+      "seconds": 70,
+      "prompt": "WRITE THE CONTRACT. JSON: {stop_when, max_steps, no_infinite}. stop_when includes pass===true, budget_exhausted, stop_token. max_steps is 8. no_infinite is true.",
+      "assertions": [
+        { "op": "json_valid" },
+        { "op": "json_path", "path": "stop_when", "includes": "pass===true" },
+        { "op": "json_path", "path": "stop_when", "includes": "budget_exhausted" },
+        { "op": "json_path", "path": "stop_when", "includes": "stop_token" },
+        { "op": "json_path", "path": "max_steps", "equals": 8 },
+        { "op": "json_path", "path": "no_infinite", "equals": true }
+      ],
+      "reveal": "Stop on pass, budget, or stop_token. max_steps 8. Infinite loops are not tenacity.",
+      "good": [
+        "{\n  \"stop_when\": [\"pass===true\", \"budget_exhausted\", \"stop_token\"],\n  \"max_steps\": 8,\n  \"no_infinite\": true\n}"
+      ]
+    }
+  ]
+}

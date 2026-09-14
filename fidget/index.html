@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MURTY · fidget</title>
+    <meta name="description" content="fidget · language of AI" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <script>
+      window.__MURTY_BOOTSTRAP__ = {
+        id: "eval-schema-closed",
+        stage: "evaluator/contracts",
+        atom: "schema.closed",
+        title: "Closed JSON Schema",
+        seconds: 80,
+        prompt:
+          "Write a JSON Schema for an object {name: string, tokens: integer} that REJECTS extra properties. Valid JSON only. Object schemas must set additionalProperties to false.",
+        assertions: [
+          { op: "json_valid" },
+          { op: "schema_closed" },
+          { op: "json_path", path: "type", equals: "object" },
+          { op: "json_path", path: "additionalProperties", equals: false },
+          { op: "json_path", path: "properties.name.type", equals: "string" },
+          { op: "json_path", path: "properties.tokens.type", equals: "integer" },
+          { op: "json_path", path: "required", includes: "name" },
+          { op: "json_path", path: "required", includes: "tokens" }
+        ],
+        reveal:
+          "Object schemas that omit additionalProperties: false accept unknown keys. The evaluator is a closed door.",
+        good: [
+          '{\n  "type": "object",\n  "additionalProperties": false,\n  "required": ["name", "tokens"],\n  "properties": {\n    "name": { "type": "string" },\n    "tokens": { "type": "integer" }\n  }\n}'
+        ]
+      };
+    </script>
+  </head>
+  <body>
+    <div class="ticker" aria-hidden="true">
+      <span class="ticker-track" id="ticker-track">ROUTING IS INTELLIGENCE · LANGUAGE OF AI · CLOCK ON</span>
+    </div>
+    <header class="top">
+      <div class="brand">
+        <h1>MURTY</h1>
+        <div class="sub">fidget · language of AI</div>
+      </div>
+      <div class="clock">
+        <div class="time" id="time">01:20</div>
+        <div class="cap">
+          <label class="range">
+            <span id="seconds-label">80</span>s
+            <input id="seconds-range" type="range" min="60" max="100" value="80" />
+          </label>
+        </div>
+      </div>
+      <div class="meta">
+        <div class="stats">
+          <div class="stat"><span class="k">streak</span><span class="v" id="streak">0</span></div>
+          <div class="stat"><span class="k">due</span><span class="v" id="due">0</span></div>
+          <div class="stat"><span class="k">bank</span><span class="v" id="bank">1</span></div>
+        </div>
+        <div>chicago <b id="day">—</b></div>
+      </div>
+    </header>
+    <main>
+      <section class="col">
+        <div class="title-row">
+          <div>
+            <div class="kicker"><span id="stage">evaluator/contracts</span> · <span id="atom">schema.closed</span></div>
+            <h2 id="title">Closed JSON Schema</h2>
+          </div>
+        </div>
+        <div class="kicker">prompt</div>
+        <div class="prompt" id="prompt"></div>
+        <div class="reveal-box" id="reveal-box"></div>
+      </section>
+      <section class="col">
+        <div class="kicker">answer</div>
+        <textarea id="answer" spellcheck="false" autocomplete="off" autocapitalize="off" placeholder="write the contract"></textarea>
+        <div class="row">
+          <button type="button" id="run">Run</button>
+          <button type="button" id="reveal" class="ghost">Reveal</button>
+          <button type="button" id="next" class="ghost">Next due</button>
+          <span class="hint"><kbd>Ctrl</kbd>+<kbd>Enter</kbd> runs assertions</span>
+        </div>
+        <div class="kicker" style="margin-top:16px">verdict</div>
+        <div class="verdict" id="verdict">idle</div>
+        <div class="kicker" style="margin-top:16px">diff</div>
+        <div class="diff" id="diff"></div>
+        <div class="kicker" style="margin-top:16px">incidents</div>
+        <div class="incidents" id="incidents"></div>
+      </section>
+    </main>
+    <footer>
+      <span>routing is intelligence</span>
+      <span>ledger writes only on pass · reveal does not increment streak</span>
+    </footer>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
