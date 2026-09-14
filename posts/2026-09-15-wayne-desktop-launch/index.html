@@ -1,0 +1,81 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>The Wayne Desktop: a keystroke that can be refused · waynecolt.com</title>
+<meta name="description" content="A signed desktop surface where your device mints intents and the host admits or refuses them at 14 named doors — live at desktop.waynecolt.com">
+<meta property="og:title" content="The Wayne Desktop: a keystroke that can be refused">
+<meta property="og:description" content="A signed desktop surface where your device mints intents and the host admits or refuses them at 14 named doors — live at desktop.waynecolt.com">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://waynecolt.com/posts/2026-09-15-wayne-desktop-launch/">
+<link rel="canonical" href="https://waynecolt.com/posts/2026-09-15-wayne-desktop-launch/">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+Pro:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--stock:#faf8f3;--void:#1a1a1a;--mut:#6b6b6b;--line:#e2ddd2;--acc:#8a4b2d;--sans:'IBM Plex Sans',sans-serif;--serif:'Source Serif Pro',Georgia,serif;--mono:'IBM Plex Mono',monospace}
+*{box-sizing:border-box}
+body{background:var(--stock);color:var(--void);font-family:var(--serif);font-size:18px;line-height:1.7;margin:0;padding:0 0 90px}
+.wrap{max-width:680px;margin:0 auto;padding:0 22px}
+header{border-bottom:1px solid var(--line);padding:26px 0 18px;margin-bottom:34px}
+.brand{font-family:var(--mono);font-size:13px;color:var(--acc);letter-spacing:.04em;text-transform:uppercase}
+.brand a{color:var(--acc);text-decoration:none}
+h1{font-family:var(--sans);font-weight:600;font-size:29px;line-height:1.25;margin:18px 0 6px}
+h2{font-family:var(--sans);font-weight:600;font-size:20px;line-height:1.3;margin:38px 0 10px}
+.meta{font-family:var(--mono);font-size:12.5px;color:var(--mut)}
+article p{margin:0 0 20px}
+article p:first-of-type{font-size:20px}
+article ul{margin:0 0 20px;padding-left:22px}
+article li{margin:0 0 8px}
+.receiptbox{background:#fff;border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:8px;padding:18px 20px;margin:34px 0}
+.receiptbox .lbl{font-family:var(--mono);font-size:12px;color:var(--acc);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
+.receipt{display:block;font-family:var(--mono);font-size:14.5px;color:var(--void);text-decoration:none;border-bottom:1px dashed var(--line);padding:5px 0}
+.receipt:hover{color:var(--acc)}
+.prov{font-family:var(--mono);font-size:12px;color:var(--mut);border-top:1px solid var(--line);margin-top:40px;padding-top:16px}
+a{color:var(--acc)}
+</style></head><body><div class="wrap">
+<header>
+<div class="brand"><a href="https://waynecolt.com/">Catalytic Computing</a> &middot; Routing Is Intelligence</div>
+<h1>The Wayne Desktop: a keystroke that can be refused</h1>
+<div class="meta">2026-09-15 &middot; the Wayne Desktop is live</div>
+</header>
+<article><p>The Wayne Desktop is live at <a href="https://desktop.waynecolt.com/">desktop.waynecolt.com</a>. It is a desktop surface with one
+unusual property: a keystroke on it does not run anything. Your device signs it, the host admits or refuses it through
+fourteen named doors, and an admitted intent is a decision on the record &mdash; never an effect in the world.</p>
+
+<h2>1 &middot; The surface proves itself before you trust it</h2>
+<p>The host signs the manifest of the bundle it serves, as an Ed25519 closure over every file. The desktop then
+re-fetches each listed file with caching disabled, re-hashes it in your browser, and compares. Open the Closure window
+and you can watch it happen. One changed byte is REFUSED &mdash; not warned about, not quietly tolerated &mdash; and the
+same check runs from a command line and inside the delivery pipeline.</p>
+
+<h2>2 &middot; A keystroke becomes a refusable object</h2>
+<p>Your device holds a signing key generated inside the browser, with its private half non-extractable. Clicking a
+control mints a signed, content-addressed, short-lived intent. The host runs it past fourteen doors in a fixed order,
+and every refusal names the door that refused and the question that would clear it: pair this device, reload the
+surface, re-mint with a shorter window, name the setting instead of the command. An executable, a path or a command
+line anywhere in an intent's parameters is refused by design &mdash; the surface mints, it does not run.</p>
+<p>Pairing is an operator act. A new device shows a six-character code and waits for a person on the desk; no
+automated seat can approve it, and a revoked key can neither mint nor read.</p>
+
+<h2>3 &middot; Skins, and what is deliberately missing</h2>
+<p>A skin repaints the entire surface and names the operating contract it carries into every intent &mdash; a reference
+the host records with the decision, never an executable. Three ship: the default look, a dense slate HUD for running a
+small business (its leading line states the number: net dollars, or hours per week), and a documented template to copy.
+All three are signed in the same bundle as the code, so an unsigned skin is a 404.</p>
+<p>What is missing is stated on the surface itself, in a window built for the purpose:</p>
+<ul>
+<li><strong>Admitted is not applied.</strong> No accept path exists below the host. Nothing minted here has run.</li>
+<li><strong>No local agent, no system-wide hotkey, no screen reading.</strong> It is a web surface; its shortcuts work
+while it has focus. A local agent is specified and unbuilt &mdash; roadmap, not feature.</li>
+<li><strong>No model answers inside it.</strong> Generation intents are refused at the spend door, because this
+release admits no metered spend at all.</li>
+</ul>
+<p>That list is the point rather than an apology for it. A surface that cannot say what it has not established is a
+surface whose successes you cannot check either.</p>
+
+<div class="receiptbox">
+<div class="lbl">The Receipt &mdash; open it and check for yourself</div>
+<a class="receipt" href="https://desktop.waynecolt.com/" rel="noopener">desktop.waynecolt.com &mdash; the live surface (open the Closure window)</a>
+<a class="receipt" href="https://waynecolt.com/solutions/wayne-desktop/" rel="noopener">waynecolt.com/solutions/wayne-desktop &mdash; the specifications, and what is not established</a>
+</div>
+</article>
+<div class="prov">Published by the WayneColt machine &middot; every claim above rests on a surface you can open and a check you can
+run, not on assertion &middot; VERIFIED &oplus; NO_SIGNAL &middot; fabricated:false</div>
+</div></body></html>
