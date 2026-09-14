@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Wayne Desktop: a keystroke that can be refused | Catalytic Computing</title>
+<meta name="description" content="A signed desktop surface: your device mints intents, the host admits or refuses them at 14 named doors, and admitted is never applied.">
+<meta property="og:title" content="The Wayne Desktop: a keystroke that can be refused">
+<meta property="og:description" content="A signed desktop surface: your device mints intents, the host admits or refuses them at 14 named doors, and admitted is never applied.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://waynecolt.com/solutions/wayne-desktop/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://waynecolt.com/solutions/wayne-desktop/">
+<style>@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=IBM+Plex+Mono:wght@400;500;700&display=swap');
+:root{--stock:#E8E0D4;--stock-lt:#F0EBE3;--void:#0A0A0C;--optic:#E8450A;--cyan:#00B8D4;--magenta:#C2185B;--chrome:#9E9E9E;--terminal:#00C853;--line:rgba(10,10,12,0.10);--line-med:rgba(10,10,12,0.18)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--stock);color:var(--void);font-family:'IBM Plex Mono',monospace;font-size:14px;line-height:1.65;-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;top:0;left:0;right:0;height:4px;z-index:300;background:linear-gradient(90deg,var(--cyan) 0%,var(--cyan) 16.66%,var(--magenta) 16.66%,var(--magenta) 33.33%,var(--optic) 33.33%,var(--optic) 50%,var(--void) 50%,var(--void) 66.66%,var(--terminal) 66.66%,var(--terminal) 83.33%,var(--chrome) 83.33%,var(--chrome) 100%)}
+a{color:inherit}
+.hdr{display:flex;justify-content:space-between;align-items:center;padding:18px 40px;border-bottom:1px solid var(--line)}
+.hdr-id{font-size:10px;letter-spacing:.18em;color:var(--optic)}
+.hdr a{font-size:10px;color:var(--chrome);text-decoration:none;letter-spacing:.12em;text-transform:uppercase}
+.hdr a:hover{color:var(--void)}
+main{max-width:760px;margin:0 auto;padding:56px 24px 100px}
+.crumb{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--chrome);margin-bottom:18px}
+.crumb a{color:var(--optic);text-decoration:none}
+.type-badge{display:inline-block;font-size:8px;letter-spacing:.18em;text-transform:uppercase;padding:3px 8px;border:1px solid rgba(232,69,10,0.4);color:var(--optic);background:rgba(232,69,10,0.06);margin-bottom:16px}
+h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(30px,5vw,44px);line-height:1.05;letter-spacing:-.02em;margin-bottom:8px}
+.byline{font-size:11px;color:var(--chrome);letter-spacing:.06em;margin:10px 0 8px}
+h2{font-family:'Space Grotesk',sans-serif;font-size:24px;color:var(--void);font-weight:700;margin-top:48px;margin-bottom:18px}
+h3{font-family:'Space Grotesk',sans-serif;font-size:16px;margin:30px 0 12px}
+p{margin:0 0 16px} strong{font-weight:700} em{color:#4a4a52}
+a{color:var(--optic)}
+code{font-family:'IBM Plex Mono',monospace;background:var(--stock-lt);padding:1px 5px;border:1px solid var(--line);font-size:12.5px}
+hr{border:0;border-top:1px solid var(--line);margin:36px 0}
+table{border-collapse:collapse;width:100%;margin:18px 0;font-size:12.5px}
+th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+th{background:var(--stock-lt);font-family:'Space Grotesk',sans-serif}
+ul,ol{margin:0 0 16px 22px}li{margin-bottom:6px}
+.foot{border-top:1px solid var(--line);margin-top:50px;padding-top:18px;font-size:11px;color:var(--chrome)}
+.foot a{color:var(--optic)}</style>
+</head>
+<body>
+<header class="hdr"><div class="hdr-id">● CATALYTIC COMPUTING</div><a href="/solutions/">← Solutions</a></header>
+<main>
+<div class="crumb"><a href="/">waynecolt.com</a> / <a href="/solutions/">solutions</a> / wayne-desktop</div>
+<div class="type-badge">ARTICLE</div>
+<h1>The Wayne Desktop: a keystroke that can be refused</h1>
+<div class="byline">By WayneColt · 2026-09-15</div>
+<hr />
+<h1>The Wayne Desktop: a keystroke that can be refused</h1>
+<h2>The operational problem</h2>
+<p>Most software answers a click by doing the thing. The click is the authorisation, the action is the receipt, and by the time anyone asks what happened, the only record is the effect itself. That is tolerable when the act is small and reversible. It stops being tolerable the moment a click can spend money, change a running configuration, or reach a machine that someone else depends on.</p>
+<p>The usual fixes make it worse. An approval queue bolted onto the side becomes a second place where state lives. A dashboard that can only read is honest but inert — it cannot be the surface where work is authorised. And a surface that quietly retries, queues, or &quot;optimistically&quot; shows an action as done has told its operator something that was not measured.</p>
+<p>The question underneath is narrow: <strong>what does a keystroke become?</strong></p>
+<h2>The Wayne intervention</h2>
+<p>It becomes an envelope. Your device holds a signing key that never leaves it — generated non-extractable inside the browser. Clicking a control does not run anything; it mints a signed, content-addressed, short-lived object that says who minted it, from which surface, for what, and until when. The host then admits or refuses that object through a fixed wall of named doors, and every refusal carries the question that would clear it.</p>
+<p>Two properties follow, and both are checkable rather than promised:</p>
+<p><strong>The surface proves itself.</strong> The host signs the manifest of the bundle it is serving. The desktop re-fetches every listed file, re-hashes it in the browser, and compares. A single changed byte is REFUSED — not warned about, not ignored. The same check runs from the command line and in CI.</p>
+<p><strong>Admitted is not applied.</strong> An admitted intent is a decision on the record, not an effect in the world. Nothing minted on this surface has run anywhere, and the desktop says so in its own Membrane window rather than leaving the reader to assume otherwise.</p>
+<p>Skins sit on top of that: a skin repaints the whole surface and names the operating contract it carries into every intent — a reference the host records with the decision, never an executable. One ships the default look, one is a dense HUD for running a small business (the leading line states the number: net dollars, or hours per week), and one is a documented template to copy. All three are signed in the same bundle as the code, so an unsigned skin is a 404.</p>
+<h2>Engine specifications</h2>
+<ul><li><strong>Surface:</strong> an installable progressive web app served by one edge worker. Nothing is installed on</li></ul>
+<p>the operator&#x27;s machine; it verifies itself on arrival.</p>
+<ul><li><strong>Device identity:</strong> Ed25519, generated in the browser, private half non-extractable, stored in the</li></ul>
+<p>browser&#x27;s own key store. Pairing is an operator act on the desk — an automated seat cannot pair a device, and a revoked key can neither mint nor read.</p>
+<ul><li><strong>Intent envelope:</strong> canonical JSON, content-addressed by SHA-256 over the act, single-use nonce,</li></ul>
+<p>explicit expiry with a 24-hour ceiling — an intent with no expiry is a standing grant, and standing grants are how out-of-band authority returns.</p>
+<ul><li><strong>Admission:</strong> fourteen named doors in a fixed order (parse, kind, disposition, required fields,</li></ul>
+<p>enums, time, nonce, address, device, signature, origin, params, classification, spend). Every refusal returns the door that refused and a populated question.</p>
+<ul><li><strong>Bundle integrity:</strong> an Ed25519 closure over the manifest of every served file, re-hashed in the</li></ul>
+<p>browser and by a command-line verifier; one mutated byte exits non-zero.</p>
+<ul><li><strong>Refusals that are features:</strong> an executable, a path or a command line anywhere in an intent&#x27;s</li></ul>
+<p>parameters is refused; a replayed nonce is refused; an intent minted by a stale bundle is refused with &quot;reload the surface&quot;; anything with a budget is refused as NEEDS_HUMAN.</p>
+<ul><li><strong>Delivery:</strong> continuous integration on a self-hosted runner — identity firewall, unit and contract</li></ul>
+<p>tests, a scan for anything that should not ship, then staging, an end-to-end suite against the live staging deployment, then production and a smoke check. No API token is stored anywhere in the pipeline.</p>
+<h2>What has not been established</h2>
+<ul><li><strong>No intent has ever been applied.</strong> There is no accept path below the host. Every claim about</li></ul>
+<p>effects is therefore NO_SIGNAL, and the surface prints that rather than implying otherwise.</p>
+<ul><li><strong>No local agent, no operating-system-wide hotkey, no screen OCR.</strong> The desktop is a web surface: its</li></ul>
+<p>accelerators work while it has focus, and it reads the screen never. A local agent that would serve the identical bytes at loopback is specified and unbuilt — roadmap, not feature.</p>
+<ul><li><strong>No model answers inside the desktop.</strong> Generation intents are refused at the spend door by design,</li></ul>
+<p>because this release admits no metered spend at all.</p>
+<ul><li><strong>No second factor.</strong> An intent classified for the largest lane must declare a human key, and the</li></ul>
+<p>host then refuses it as NEEDS_HUMAN, because that factor is not deployed.</p>
+<ul><li><strong>Browser coverage is measured, not assumed.</strong> Ed25519 in the browser is feature-detected at runtime;</li></ul>
+<p>where it is missing the surface refuses to mint rather than substituting a weaker signature.</p>
+<p>Receipt: the desktop itself, at https://desktop.waynecolt.com/ — open it, then open its Closure window and watch it re-hash the bytes it is made of.</p>
+<div class="foot">© 2026 WayneColt · Catalytic Computing · <a href="/">waynecolt.com</a> · <a href="/solutions/">All solutions</a></div>
+</main>
+<div class="color-bar-bottom" style="display:flex;height:4px">
+  <span style="flex:1;background:#00B8D4"></span><span style="flex:1;background:#C2185B"></span><span style="flex:1;background:#E8450A"></span><span style="flex:1;background:#0A0A0C"></span><span style="flex:1;background:#00C853"></span><span style="flex:1;background:#9E9E9E"></span>
+</div>
+</body>
+</html>

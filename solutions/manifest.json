@@ -47,6 +47,14 @@
       "date": "2026-09-09",
       "type": "article",
       "path": "/solutions/retrieval-over-generation/"
+    },
+    {
+      "slug": "wayne-desktop",
+      "title": "The Wayne Desktop: a keystroke that can be refused",
+      "description": "A signed desktop surface: your device mints intents, the host admits or refuses them at 14 named doors, and admitted is never applied.",
+      "date": "2026-09-15",
+      "type": "article",
+      "path": "/solutions/wayne-desktop/"
     }
   ]
 }
