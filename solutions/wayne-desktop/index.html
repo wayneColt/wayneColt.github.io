@@ -74,11 +74,20 @@ ul,ol{margin:0 0 16px 22px}li{margin-bottom:6px}
 <p>parameters is refused; a replayed nonce is refused; an intent minted by a stale bundle is refused with &quot;reload the surface&quot;; anything with a budget is refused as NEEDS_HUMAN.</p>
 <ul><li><strong>Delivery:</strong> continuous integration on a self-hosted runner — identity firewall, unit and contract</li></ul>
 <p>tests, a scan for anything that should not ship, then staging, an end-to-end suite against the live staging deployment, then production and a smoke check. No API token is stored anywhere in the pipeline.</p>
+<h2>What is now established (2026-09-15)</h2>
+<ul><li><strong>A local agent serves the identical bytes at loopback.</strong> <code>http://127.0.0.1:8560</code> mirrors the same</li></ul>
+<p>signed root as the primary — VERIFIED by <code>closure_verify</code>, 28/28 files.</p>
+<ul><li><strong>The agent holds an Ed25519 device key in a WayneVault-compatible vault.</strong> The machinery is</li></ul>
+<p>VERIFIED; no key is minted yet — initialising the vault is the operator&#x27;s own terminal keystroke.</p>
+<ul><li><strong>One live OCR capture read the screen.</strong> The result is a character count only — the text itself is</li></ul>
+<p>never written anywhere but a temp file that is deleted, and never leaves the machine.</p>
+<ul><li><strong>A hotkey binds at runtime.</strong> It persists across a compositor restart only by one line of</li></ul>
+<p>configuration, not written by default.</p>
 <h2>What has not been established</h2>
 <ul><li><strong>No intent has ever been applied.</strong> There is no accept path below the host. Every claim about</li></ul>
 <p>effects is therefore NO_SIGNAL, and the surface prints that rather than implying otherwise.</p>
-<ul><li><strong>A local agent serves the identical bytes at loopback.</strong> <code>http://127.0.0.1:8560</code> mirrors the same</li></ul>
-<p>signed root as the primary — VERIFIED by <code>closure_verify</code>, 28/28 files. It holds an Ed25519 device key in a WayneVault-compatible vault: the machinery is VERIFIED; no key is minted yet, since initialising the vault is the operator&#x27;s own terminal keystroke. One live capture read the screen by OCR and reported a character count, never the text. A hotkey binds at runtime — VERIFIED bound — and persists across a compositor restart only by one line of configuration, not written by default. Local admission, a satellite accept path, a second factor, and metered spend remain NO_SIGNAL: nothing here is applied without the primary&#x27;s own admission.</p>
+<ul><li><strong>Local admission, a satellite accept path, a second factor, and metered spend remain NO_SIGNAL.</strong></li></ul>
+<p>Nothing here is applied without the primary&#x27;s own admission.</p>
 <ul><li><strong>No model answers inside the desktop.</strong> Generation intents are refused at the spend door by design,</li></ul>
 <p>because this release admits no metered spend at all.</p>
 <ul><li><strong>No second factor.</strong> An intent classified for the largest lane must declare a human key, and the</li></ul>
