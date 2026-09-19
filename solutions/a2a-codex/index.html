@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>a2a-codex — P2P Agent-to-Agent for ChatGPT Desktop | Catalytic Computing</title>
+<meta name="description" content="A local proxy that gives ChatGPT Desktop and Codex CLI a peer-to-peer A2A layer over Iroh QUIC, with no central queue.">
+<meta property="og:title" content="a2a-codex — P2P Agent-to-Agent for ChatGPT Desktop">
+<meta property="og:description" content="A local proxy that gives ChatGPT Desktop and Codex CLI a peer-to-peer A2A layer over Iroh QUIC, with no central queue.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://waynecolt.com/solutions/a2a-codex/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://waynecolt.com/solutions/a2a-codex/">
+<style>@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=IBM+Plex+Mono:wght@400;500;700&display=swap');
+:root{--stock:#E8E0D4;--stock-lt:#F0EBE3;--void:#0A0A0C;--optic:#E8450A;--cyan:#00B8D4;--magenta:#C2185B;--chrome:#9E9E9E;--terminal:#00C853;--line:rgba(10,10,12,0.10);--line-med:rgba(10,10,12,0.18)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--stock);color:var(--void);font-family:'IBM Plex Mono',monospace;font-size:14px;line-height:1.65;-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;top:0;left:0;right:0;height:4px;z-index:300;background:linear-gradient(90deg,var(--cyan) 0%,var(--cyan) 16.66%,var(--magenta) 16.66%,var(--magenta) 33.33%,var(--optic) 33.33%,var(--optic) 50%,var(--void) 50%,var(--void) 66.66%,var(--terminal) 66.66%,var(--terminal) 83.33%,var(--chrome) 83.33%,var(--chrome) 100%)}
+a{color:inherit}
+.hdr{display:flex;justify-content:space-between;align-items:center;padding:18px 40px;border-bottom:1px solid var(--line)}
+.hdr-id{font-size:10px;letter-spacing:.18em;color:var(--optic)}
+.hdr a{font-size:10px;color:var(--chrome);text-decoration:none;letter-spacing:.12em;text-transform:uppercase}
+.hdr a:hover{color:var(--void)}
+main{max-width:760px;margin:0 auto;padding:56px 24px 100px}
+.crumb{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--chrome);margin-bottom:18px}
+.crumb a{color:var(--optic);text-decoration:none}
+.type-badge{display:inline-block;font-size:8px;letter-spacing:.18em;text-transform:uppercase;padding:3px 8px;border:1px solid rgba(232,69,10,0.4);color:var(--optic);background:rgba(232,69,10,0.06);margin-bottom:16px}
+h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(30px,5vw,44px);line-height:1.05;letter-spacing:-.02em;margin-bottom:8px}
+.byline{font-size:11px;color:var(--chrome);letter-spacing:.06em;margin:10px 0 8px}
+h2{font-family:'Space Grotesk',sans-serif;font-size:24px;color:var(--void);font-weight:700;margin-top:48px;margin-bottom:18px}
+h3{font-family:'Space Grotesk',sans-serif;font-size:16px;margin:30px 0 12px}
+p{margin:0 0 16px} strong{font-weight:700} em{color:#4a4a52}
+a{color:var(--optic)}
+code{font-family:'IBM Plex Mono',monospace;background:var(--stock-lt);padding:1px 5px;border:1px solid var(--line);font-size:12.5px}
+hr{border:0;border-top:1px solid var(--line);margin:36px 0}
+table{border-collapse:collapse;width:100%;margin:18px 0;font-size:12.5px}
+th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+th{background:var(--stock-lt);font-family:'Space Grotesk',sans-serif}
+ul,ol{margin:0 0 16px 22px}li{margin-bottom:6px}
+.foot{border-top:1px solid var(--line);margin-top:50px;padding-top:18px;font-size:11px;color:var(--chrome)}
+.foot a{color:var(--optic)}</style>
+</head>
+<body>
+<header class="hdr"><div class="hdr-id">● CATALYTIC COMPUTING</div><a href="/solutions/">← Solutions</a></header>
+<main>
+<div class="crumb"><a href="/">waynecolt.com</a> / <a href="/solutions/">solutions</a> / a2a-codex</div>
+<div class="type-badge">NOTE</div>
+<h1>a2a-codex — P2P Agent-to-Agent for ChatGPT Desktop</h1>
+<div class="byline">By WayneColt · 2026-09-19</div>
+<hr />
+<h1>a2a-codex — P2P Agent-to-Agent for ChatGPT Desktop</h1>
+<p>OpenAI has not shipped native peer-to-peer Agent-to-Agent sharing inside ChatGPT Desktop. a2a-codex is an independent, open-source implementation of the published Linux Foundation A2A 1.0 JSON-RPC data model, wired to Codex through a localhost proxy.</p>
+<p>A daemon on <code>127.0.0.1:10100</code> patches <code>~/.codex/config.toml</code>, injects three tools (<code>a2a_discover</code>, <code>a2a_send_task</code>, <code>a2a_check_inbox</code>), intercepts those calls, and moves tasks over Iroh QUIC tickets — public-key addressing and hole-punching. There is no central routing database.</p>
+<p>Inbound tasks default to <code>input-required</code>. The local human is asked only when the remote agent cannot finish from context.</p>
+<h2>Source</h2>
+<ul><li>GitHub: <a href="https://github.com/wayneColt/a2a-codex">github.com/wayneColt/a2a-codex</a></li><li>License: Apache-2.0 OR MIT</li><li>Install: <code>curl -fsSL https://raw.githubusercontent.com/wayneColt/a2a-codex/main/install.sh | sh</code></li></ul>
+<p>Not affiliated with OpenAI or the Linux Foundation.</p>
+<div class="foot">© 2026 WayneColt · Catalytic Computing · <a href="/">waynecolt.com</a> · <a href="/solutions/">All solutions</a></div>
+</main>
+<div class="color-bar-bottom" style="display:flex;height:4px">
+  <span style="flex:1;background:#00B8D4"></span><span style="flex:1;background:#C2185B"></span><span style="flex:1;background:#E8450A"></span><span style="flex:1;background:#0A0A0C"></span><span style="flex:1;background:#00C853"></span><span style="flex:1;background:#9E9E9E"></span>
+</div>
+</body>
+</html>

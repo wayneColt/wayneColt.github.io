@@ -55,6 +55,14 @@
       "date": "2026-09-15",
       "type": "article",
       "path": "/solutions/wayne-desktop/"
+    },
+    {
+      "slug": "a2a-codex",
+      "title": "a2a-codex \u2014 P2P Agent-to-Agent for ChatGPT Desktop",
+      "description": "A local proxy that gives ChatGPT Desktop and Codex CLI a peer-to-peer A2A layer over Iroh QUIC, with no central queue.",
+      "date": "2026-09-19",
+      "type": "note",
+      "path": "/solutions/a2a-codex/"
     }
   ]
 }
