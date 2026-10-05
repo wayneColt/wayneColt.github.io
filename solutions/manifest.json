@@ -11,7 +11,7 @@
     {
       "slug": "forced-consolidation",
       "title": "Forced Consolidation: How a Federal Definition Rewrite Reshapes the Texas Hemp Market",
-      "description": "A corridor operator's empirical read: the same PE capital is running Texas hemp consolidation and behavioral-health consolidation on the same I-35 labor shed \u2014 with statistics, court records, and the Bradford Health bridge as public-record evidence.",
+      "description": "A corridor operator's empirical read: the same PE capital is running Texas hemp consolidation and behavioral-health consolidation on the same I-35 labor shed — with statistics, court records, and the Bradford Health bridge as public-record evidence.",
       "date": "2026-06-12",
       "type": "paper",
       "path": "/solutions/forced-consolidation/"
@@ -19,7 +19,7 @@
     {
       "slug": "digworld-empty-malls-toolbelt",
       "title": "The Dead Anchor and the Toolbelt Generation",
-      "description": "A franchise-diligence read on experiential trades entertainment in empty mall anchor boxes \u2014 the real tailwinds, the honest gaps, and a fried-chicken cautionary tale about reading revenue without the debt behind it.",
+      "description": "A franchise-diligence read on experiential trades entertainment in empty mall anchor boxes — the real tailwinds, the honest gaps, and a fried-chicken cautionary tale about reading revenue without the debt behind it.",
       "date": "2026-06-14",
       "type": "article",
       "path": "/solutions/digworld-empty-malls-toolbelt/"
@@ -27,7 +27,7 @@
     {
       "slug": "the-number-that-was-never-measured",
       "title": "The Number That Was Never Measured",
-      "description": "A learned estimator cannot tell \"the instrument reported zero\" from \"the instrument reported nothing\" \u2014 measured across two neural codecs, a classical control that killed the first version of the claim, and a hidden-mask drift test where ensemble uncertainty scores below chance.",
+      "description": "A learned estimator cannot tell \"the instrument reported zero\" from \"the instrument reported nothing\" — measured across two neural codecs, a classical control that killed the first version of the claim, and a hidden-mask drift test where ensemble uncertainty scores below chance.",
       "date": "2026-08-24",
       "type": "paper",
       "path": "/solutions/the-number-that-was-never-measured/"
@@ -58,11 +58,19 @@
     },
     {
       "slug": "a2a-codex",
-      "title": "a2a-codex \u2014 P2P Agent-to-Agent for ChatGPT Desktop",
+      "title": "a2a-codex — P2P Agent-to-Agent for ChatGPT Desktop",
       "description": "A local proxy that gives ChatGPT Desktop and Codex CLI a peer-to-peer A2A layer over Iroh QUIC, with no central queue.",
       "date": "2026-09-19",
       "type": "note",
       "path": "/solutions/a2a-codex/"
+    },
+    {
+      "slug": "smb-os-desktop",
+      "title": "SMB OS Desktop: business intelligence that runs on your computer, and answers to you",
+      "description": "For multi-location franchise owners: agents prepare the morning numbers, payroll check, bank reconciliation and royalty rollup on your own computer, and anything that moves money waits for your typed APPROVE, once, with a hash-chained receipt.",
+      "date": "2026-10-05",
+      "type": "article",
+      "path": "/solutions/smb-os-desktop/"
     }
   ]
 }
