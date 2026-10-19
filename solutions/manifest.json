@@ -71,6 +71,14 @@
       "date": "2026-10-05",
       "type": "article",
       "path": "/solutions/smb-os-desktop/"
+    },
+    {
+      "slug": "wheel-steered-reply-composer",
+      "title": "Wheel-steered reply composer",
+      "description": "An inbound message becomes a reply you steer with a wheel and commit with one press; nothing leaves until a gate says so. A dated placement with its hash, falsifier and resolve-by date (2028-04-30).",
+      "date": "2026-10-18",
+      "type": "note",
+      "path": "/solutions/wheel-steered-reply-composer/"
     }
   ]
 }

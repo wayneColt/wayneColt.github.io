@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wheel-steered reply composer | Catalytic Computing</title>
+<meta name="description" content="An inbound message becomes a reply you steer with a wheel and commit with one press; nothing leaves until a gate says so. A dated placement with its hash, falsifier and resolve-by date.">
+<meta property="og:title" content="Wheel-steered reply composer">
+<meta property="og:description" content="Scrub template, tone, cadence and decision with a wheel; press once; the draft goes to the gate, not the wire. Dated, hashed, falsifiable. Resolves by 2028-04-30.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://waynecolt.com/solutions/wheel-steered-reply-composer/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://waynecolt.com/solutions/wheel-steered-reply-composer/">
+<style>@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=IBM+Plex+Mono:wght@400;500;700&display=swap');
+:root{--stock:#E8E0D4;--stock-lt:#F0EBE3;--void:#0A0A0C;--optic:#E8450A;--cyan:#00B8D4;--magenta:#C2185B;--chrome:#9E9E9E;--terminal:#00C853;--line:rgba(10,10,12,0.10);--line-med:rgba(10,10,12,0.18)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--stock);color:var(--void);font-family:'IBM Plex Mono',monospace;font-size:14px;line-height:1.65;-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;top:0;left:0;right:0;height:4px;z-index:300;background:linear-gradient(90deg,var(--cyan) 0%,var(--cyan) 16.66%,var(--magenta) 16.66%,var(--magenta) 33.33%,var(--optic) 33.33%,var(--optic) 50%,var(--void) 50%,var(--void) 66.66%,var(--terminal) 66.66%,var(--terminal) 83.33%,var(--chrome) 83.33%,var(--chrome) 100%)}
+a{color:inherit}
+.hdr{display:flex;justify-content:space-between;align-items:center;padding:18px 40px;border-bottom:1px solid var(--line)}
+.hdr-id{font-size:10px;letter-spacing:.18em;color:var(--optic)}
+.hdr a{font-size:10px;color:var(--chrome);text-decoration:none;letter-spacing:.12em;text-transform:uppercase}
+.hdr a:hover{color:var(--void)}
+main{max-width:760px;margin:0 auto;padding:56px 24px 100px}
+.receipt-line{font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:.04em;color:var(--void);background:var(--stock-lt);border:1px solid var(--line-med);border-left:3px solid var(--optic);padding:8px 12px;margin-bottom:28px;overflow-wrap:anywhere}
+.receipt-line .lbl{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--optic);margin-right:10px}
+.crumb{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--chrome);margin-bottom:18px}
+.crumb a{color:var(--optic);text-decoration:none}
+.type-badge{display:inline-block;font-size:8px;letter-spacing:.18em;text-transform:uppercase;padding:3px 8px;border:1px solid rgba(232,69,10,0.4);color:var(--optic);background:rgba(232,69,10,0.06);margin-bottom:16px}
+h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(30px,5vw,44px);line-height:1.05;letter-spacing:-.02em;margin-bottom:8px}
+.tag{font-size:12px;letter-spacing:.06em;color:var(--optic);margin:6px 0 10px}
+.byline{font-size:11px;color:var(--chrome);letter-spacing:.06em;margin:10px 0 8px}
+h2{font-family:'Space Grotesk',sans-serif;font-size:24px;color:var(--void);font-weight:700;margin-top:48px;margin-bottom:18px}
+h3{font-family:'Space Grotesk',sans-serif;font-size:16px;margin:30px 0 12px}
+p{margin:0 0 16px} strong{font-weight:700} em{color:#4a4a52}
+a{color:var(--optic)}
+code{font-family:'IBM Plex Mono',monospace;background:var(--stock-lt);padding:1px 5px;border:1px solid var(--line);font-size:12.5px}
+hr{border:0;border-top:1px solid var(--line);margin:36px 0}
+table{border-collapse:collapse;width:100%;margin:18px 0;font-size:12.5px}
+th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+th{background:var(--stock-lt);font-family:'Space Grotesk',sans-serif;white-space:nowrap}
+ul,ol{margin:0 0 16px 22px}li{margin-bottom:6px}
+.wire{border:1px solid var(--line);border-left:3px solid var(--optic);padding:14px 16px;margin:0 0 14px;background:var(--stock-lt)}
+.wire .k{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--optic);margin-bottom:6px}
+.foot{border-top:1px solid var(--line);margin-top:50px;padding-top:18px;font-size:11px;color:var(--chrome)}
+.foot a{color:var(--optic)}
+@media(max-width:768px){.hdr{padding:12px 20px}main{padding:36px 16px 80px}}</style>
+</head>
+<body>
+<header class="hdr"><div class="hdr-id">● CATALYTIC COMPUTING</div><a href="/solutions/">← Solutions</a></header>
+<main>
+<div class="receipt-line"><span class="lbl">Breadcrumb receipt</span>{{hash}} {{committed_at}}</div>
+<div class="crumb"><a href="/">waynecolt.com</a> / <a href="/solutions/">solutions</a> / wheel-steered-reply-composer</div>
+<div class="type-badge">LEAF · DATED PLACEMENT</div>
+<h1>Wheel-steered reply composer</h1>
+<p class="tag">The protocol between the wheel and the gate.</p>
+<div class="byline">By WayneColt · 2026-10-18 · resolves by 2028-04-30 · fabricated:false</div>
+<hr />
+<p><em>An inbound message becomes a reply you steer with a wheel and commit with one press. Nothing leaves until a gate says so.</em></p>
+
+<h2>The mechanism</h2>
+<p>When a message arrives, the protocol pre-renders every reply it would be willing to send for it: three templates, three decisions under each, five tone bands, three cadences. That is 135 drafts, cached against the message before a hand touches anything. Composing is a scrub, not a typing session.</p>
+<p>A wheel or a rocker moves one parameter at a time. One detent is one step, with a hard stop at each end so the hand knows where it is without the eyes. A long press moves to the next parameter. If there is a screen, it shows one monochrome line: <code>AXIS: [TONE] · TONE: Direct Executive (72%) · DRAFTING</code>.</p>
+<p>One press on the centre commits. The draft goes to the approval gate, not to the wire. Routine replies pass; a new contact, or anything carrying a deadline, escalates to a person. The device shows the gate's verdict and never says &ldquo;sent&rdquo; on its own authority.</p>
+<p>No keyboard. No free dictation. The protocol is the product; the wheel is a peripheral. The kit that carries it is called Squishy.</p>
+
+<h2>Where the market is</h2>
+<p>Three physical-control communicators converged in one month (pages read 2026-10-18). Sidephone ships a $249 phone with a magnetic tile bay; founders units have shipped since January 2026. Sprout Pi is an open board that revives a classic click-wheel music player and drives its original wheel and screen; it showed as &ldquo;coming soon&rdquo; on 2026-10-15, with no price and no date. Wink is a handset with a swappable bottom bus; reservations opened 2026-10-15.</p><!-- firewall:allow=market-names: product names only, verified facts only, no logos, no trade dress, no unverified specs -->
+<p>Each one funds a chassis, a wheel or a bus. None of them ships the composition step: the part between the wheel and the gate. This page is where their users land when they go looking for it.</p>
+
+<h2>The cast</h2>
+<table>
+<tbody>
+<tr><th>Statement</th><td>Within 18 months, a shipping handheld, phone accessory or phone-side mode offers a wheel-steered reply composer for inbound messages: the user scrubs a small set of structured parameters (template, tone, cadence, decision) with a physical wheel or rocker and commits with one press, and the send step is held behind an approval gate instead of a keyboard or free dictation.</td></tr>
+<tr><th>Falsifier</th><td>By 2028-04-30, no vendor product page, published driver, firmware release or shipping accessory offers a structured reply composer steered by a physical wheel or rocker with a one-press commit behind an approval gate; every physical-control communicator that ships still composes replies only by keyboard, canned presets or free dictation.</td></tr>
+<tr><th>Resolves by</th><td>2028-04-30</td></tr>
+<tr><th>Gap</th><td>approval &mdash; the send step waits on a person; a platform vendor cannot absorb that by shipping a bigger model</td></tr>
+<tr><th>Horizon</th><td>18 months &middot; 3 independent sources &middot; artifact not ready &middot; gate decision: PLACE_VOCABULARY</td></tr>
+<tr><th>Vocabulary</th><td>Theirs: <em>wheel-steered reply composer</em>. Ours: the commit surface; scrub template &times; tone &times; cadence &times; decision; one press commits through the gate.</td></tr>
+</tbody>
+</table>
+<p>The probability is the operator's number, not this page's. The hash on the first line is the sha256 of the committed fields, probability included; it changes with that number and is never edited after commit. A changed statement is a new cast with a new hash, and the old one still resolves.</p>
+
+<h2>Three wires</h2>
+<div class="wire"><div class="k">Wire 0 · now · software only</div>The protocol runs on infrastructure already in service: a compose call returns the rendered draft for four indices; a commit call fires it through the gate. This is the whole value. It needs no new hardware.</div>
+<div class="wire"><div class="k">Wire 1 · now · the phone already in the pocket</div>A volume rocker scrubs, a long press switches parameters, one button commits. One number is measured: how often a reply is committed without looking at the screen. That number decides whether a wheel earns a shell.</div>
+<div class="wire"><div class="k">Wire 2 · when the open click-wheel board lands</div>A prototype for a hand, not a product. The board scans the real wheel and draws the monochrome line; a small compute module runs the thin client. The shell, the wheel and the driver are the market's. The protocol is ours.</div>
+<div class="wire"><div class="k">Wire 3 · only if Wire 2 earns it</div>The same composer as an accessory on someone else's phone.</div>
+
+<h2>What this page does not claim</h2>
+<ul>
+<li><strong>That a device exists.</strong> There is a kit: a laser-cut plate, a 24-detent encoder with a push switch, a small microcontroller board. Until a working mechanism commits through the real gate, every picture of it is a concept demonstration and every mention of it says so.</li>
+<li><strong>Any hardware specification.</strong> No battery, radio, chipset, latency or signal figure. The prototype's screen carried a latency line; it was a literal in the source and has been removed.</li>
+<li><strong>Anything about the three products above</strong> beyond what their own pages state. The unverified figures that circulate about them are not repeated here.</li>
+<li><strong>That &ldquo;reply sent&rdquo; means sent.</strong> It means committed to the gate. The gate decides.</li>
+</ul>
+<p>Next scheduled check of this page: 2026-11-17.</p>
+
+<div class="foot">&copy; 2026 WayneColt &middot; Catalytic Computing &middot; <a href="/">waynecolt.com</a> &middot; <a href="/solutions/">All solutions</a> &middot; fabricated:false</div>
+</main>
+<div class="color-bar-bottom" style="display:flex;height:4px">
+  <span style="flex:1;background:#00B8D4"></span><span style="flex:1;background:#C2185B"></span><span style="flex:1;background:#E8450A"></span><span style="flex:1;background:#0A0A0C"></span><span style="flex:1;background:#00C853"></span><span style="flex:1;background:#9E9E9E"></span>
+</div>
+</body>
+</html>
